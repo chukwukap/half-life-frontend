@@ -36,15 +36,15 @@ export const NavItems = ({ className, isMobile }: NavItemsProps) => {
   const pathname = usePathname();
 
   return (
-    <nav className={cn("flex gap-6", className)}>
+    <nav className={cn("flex items-center space-x-1", className)}>
       {routes.map((route) => (
         <Link
           key={route.href}
           href={route.href}
           className={cn(
-            "text-sm transition-colors hover:text-primary",
+            "px-3 py-2 text-sm transition-colors hover:text-primary relative",
             pathname === route.href
-              ? "text-primary font-medium"
+              ? "text-primary font-medium after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:bg-primary"
               : "text-muted-foreground",
             isMobile && "text-base w-full p-3"
           )}

@@ -13,8 +13,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 export const UserNav = () => {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="relative h-8 w-8 rounded-full">
-        <Avatar>
+      <DropdownMenuTrigger className="focus:outline-none">
+        <Avatar className="h-8 w-8 border border-border">
           <AvatarImage src="/avatars/01.png" alt="User avatar" />
           <AvatarFallback>HF</AvatarFallback>
         </Avatar>
