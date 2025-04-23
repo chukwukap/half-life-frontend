@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import { EmptyPositions } from "./empty-positions";
 
 /**
  * Position information interface
@@ -33,8 +35,9 @@ const Position = ({
   isProfit,
 }: PositionProps) => {
   return (
-    <div className="bg-white dark:bg-card rounded-xl p-4 mb-2">
-      <div className="flex items-center justify-between mb-3">
+    <div className="bg-white dark:bg-card rounded-xl p-4 mb-3">
+      {/* Position header */}
+      <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
           <div className="w-7 h-7 rounded-full bg-amber-100 flex items-center justify-center">
             <span className="text-amber-800 text-xs font-semibold">
@@ -58,7 +61,8 @@ const Position = ({
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 mb-3">
+      {/* Position details */}
+      <div className="grid grid-cols-2 gap-4 mb-4">
         <div>
           <p className="text-xs text-muted-foreground">Entry price</p>
           <p className="text-sm font-medium">${entryPrice}</p>
@@ -84,6 +88,7 @@ const Position = ({
         </div>
       </div>
 
+      {/* Position actions */}
       <div className="flex gap-2 mt-2">
         <Button className="w-full bg-blue-50 text-blue-600 hover:bg-blue-100 dark:bg-blue-900/20 dark:text-blue-400 dark:hover:bg-blue-900/30">
           Modify
@@ -100,9 +105,66 @@ const Position = ({
 };
 
 /**
+ * Positions pagination component
+ */
+const PositionsPagination = () => {
+  return (
+    <div className="flex items-center justify-between pt-2">
+      <button className="w-8 h-8 flex items-center justify-center text-muted-foreground hover:text-foreground rounded-full hover:bg-gray-100 dark:hover:bg-gray-800">
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M15 18L9 12L15 6"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </button>
+      <div className="flex items-center gap-1">
+        {[1, 2, 3, 4, 5, 6].map((i) => (
+          <div
+            key={i}
+            className={`h-1.5 w-1.5 rounded-full ${
+              i === 1 ? "bg-blue-500" : "bg-gray-200 dark:bg-gray-700"
+            }`}
+          />
+        ))}
+      </div>
+      <button className="w-8 h-8 flex items-center justify-center text-muted-foreground hover:text-foreground rounded-full hover:bg-gray-100 dark:hover:bg-gray-800">
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M9 6L15 12L9 18"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </button>
+    </div>
+  );
+};
+
+/**
  * Positions card component showing a list of user's positions
  */
 export const PositionsCard = () => {
+  // For demo purposes, we allow toggling between having positions and not
+  const [hasPositions, setHasPositions] = useState(true);
+
   const positions = [
     {
       token: "WIF",
@@ -115,7 +177,6 @@ export const PositionsCard = () => {
       pnlPercent: "+12.10%",
       isProfit: true,
     },
-    // Add more positions if needed
   ];
 
   return (
@@ -123,7 +184,15 @@ export const PositionsCard = () => {
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
           <div className="w-5 h-5 rounded-full bg-blue-500 flex items-center justify-center">
-            <span className="text-white text-xs">📊</span>
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M21 22H3V2h4v8l2-2 2 2V2h10v20z" fill="white" />
+            </svg>
           </div>
           <h3 className="font-medium">My Positions</h3>
         </div>
@@ -135,22 +204,24 @@ export const PositionsCard = () => {
         </Link>
       </div>
 
-      {positions.map((position, index) => (
-        <Position key={index} {...position} />
-      ))}
+      {/* Toggle button for demo purposes only */}
+      <button
+        onClick={() => setHasPositions(!hasPositions)}
+        className="text-xs bg-gray-100 px-2 py-1 rounded mb-3 hidden"
+      >
+        Toggle Demo State
+      </button>
 
-      <div className="flex items-center justify-center mt-2">
-        <div className="flex gap-1">
-          {[...Array(6)].map((_, i) => (
-            <div
-              key={i}
-              className={`h-1.5 w-1.5 rounded-full ${
-                i === 0 ? "bg-blue-500" : "bg-gray-200 dark:bg-gray-700"
-              }`}
-            />
+      {hasPositions ? (
+        <>
+          {positions.map((position, index) => (
+            <Position key={index} {...position} />
           ))}
-        </div>
-      </div>
+          <PositionsPagination />
+        </>
+      ) : (
+        <EmptyPositions />
+      )}
     </div>
   );
 };

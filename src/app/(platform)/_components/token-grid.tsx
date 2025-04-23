@@ -14,7 +14,7 @@ interface TokenData {
   change: string;
   lifeIndex: number;
   lifeIndexPercent: number;
-  icon?: React.ReactNode;
+  iconSrc?: string;
 }
 
 /**
@@ -46,11 +46,15 @@ const TokenCard = ({ token }: { token: TokenData }) => {
     <div className="bg-white dark:bg-card rounded-xl p-4 overflow-hidden">
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
-          <div className="relative w-7 h-7 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center">
-            {token.icon ? (
-              token.icon
+          <div className="relative w-8 h-8 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center">
+            {token.iconSrc ? (
+              <img
+                src={token.iconSrc}
+                alt={token.name}
+                className="w-full h-full object-cover"
+              />
             ) : (
-              <span className="text-xs font-medium">
+              <span className="text-xs font-semibold">
                 {token.name.substring(0, 2)}
               </span>
             )}
@@ -68,7 +72,7 @@ const TokenCard = ({ token }: { token: TokenData }) => {
           >
             {token.change}
           </span>
-          <div className="flex items-center">
+          <div className="flex items-center justify-end">
             <p className="text-xs font-medium mr-1">{token.price}</p>
             <span className="text-xs text-blue-500 font-bold">ᴸᴵ</span>
           </div>
@@ -138,7 +142,7 @@ export const TokenGrid = () => {
       change: "+8.1%",
       lifeIndex: 80,
       lifeIndexPercent: 80,
-      icon: <span>🐶</span>,
+      iconSrc: "/assets/img/tokens/doge.png",
     },
     {
       id: "wif",
@@ -148,7 +152,7 @@ export const TokenGrid = () => {
       change: "+8.1%",
       lifeIndex: 43,
       lifeIndexPercent: 43,
-      icon: <span>🐕</span>,
+      iconSrc: "/assets/img/tokens/wif.png",
     },
     {
       id: "floki",
@@ -158,7 +162,7 @@ export const TokenGrid = () => {
       change: "+8.1%",
       lifeIndex: 24,
       lifeIndexPercent: 24,
-      icon: <span>🦊</span>,
+      iconSrc: "/assets/img/tokens/floki.png",
     },
     {
       id: "bonk",
@@ -168,7 +172,7 @@ export const TokenGrid = () => {
       change: "+8.1%",
       lifeIndex: 80,
       lifeIndexPercent: 80,
-      icon: <span>🐕</span>,
+      iconSrc: "/assets/img/tokens/bonk.png",
     },
     {
       id: "pepe",
@@ -178,7 +182,7 @@ export const TokenGrid = () => {
       change: "+10.3%",
       lifeIndex: 60,
       lifeIndexPercent: 60,
-      icon: <span>🐸</span>,
+      iconSrc: "/assets/img/tokens/pepe.png",
     },
     {
       id: "cat",
@@ -188,7 +192,7 @@ export const TokenGrid = () => {
       change: "+7.0%",
       lifeIndex: 33,
       lifeIndexPercent: 33,
-      icon: <span>🐱</span>,
+      iconSrc: "/assets/img/tokens/cat.png",
     },
   ];
 
@@ -198,14 +202,53 @@ export const TokenGrid = () => {
         <TabButton
           isActive={activeTab === "gainers"}
           onClick={() => setActiveTab("gainers")}
-          icon={<span>📈</span>}
+          icon={
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M3 17L9 11L13 15L21 7"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M14 7H21V14"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          }
         >
           Top gainers
         </TabButton>
         <TabButton
           isActive={activeTab === "favorites"}
           onClick={() => setActiveTab("favorites")}
-          icon={<span>⭐</span>}
+          icon={
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          }
         >
           Favourites
         </TabButton>

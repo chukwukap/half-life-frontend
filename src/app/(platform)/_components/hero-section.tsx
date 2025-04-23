@@ -29,8 +29,14 @@ export const HeroSection = () => {
             stroke="white"
             strokeWidth="1"
           />
-          <circle cx="200" cy="150" r="40" fill="rgba(255,255,255,0.1)" />
-          <circle cx="500" cy="250" r="80" fill="rgba(255,255,255,0.05)" />
+          <circle cx="200" cy="150" r="90" fill="rgba(255,255,255,0.1)" />
+          <circle cx="500" cy="250" r="150" fill="rgba(255,255,255,0.05)" />
+          <path
+            d="M200,100 L300,200 L100,300"
+            stroke="rgba(255,255,255,0.2)"
+            strokeWidth="1"
+            fill="none"
+          />
           <polygon
             points="650,50 700,120 600,120"
             fill="rgba(255,255,255,0.1)"
@@ -39,6 +45,7 @@ export const HeroSection = () => {
       </div>
 
       <div className="absolute inset-0 flex flex-col justify-center items-start p-8 md:p-10">
+        {/* Token info */}
         <div className="flex items-center gap-2 mb-6">
           <div className="bg-white/20 backdrop-blur-sm rounded-full p-2">
             <div className="w-6 h-6 rounded-full bg-blue-400 flex items-center justify-center">
@@ -48,7 +55,8 @@ export const HeroSection = () => {
           <span className="text-white font-medium">levETH</span>
         </div>
 
-        <div className="flex items-center gap-2 mb-4">
+        {/* Progress indicator */}
+        <div className="flex items-center gap-1.5 mb-6">
           {Array.from({ length: 15 }).map((_, i) => (
             <div
               key={i}
@@ -59,7 +67,11 @@ export const HeroSection = () => {
           ))}
         </div>
 
-        <Button className="bg-blue-500 hover:bg-blue-600 text-white rounded-lg px-8 py-2">
+        {/* Action button */}
+        <Button
+          variant="default"
+          className="bg-blue-500 hover:bg-blue-600 text-white px-8"
+        >
           Trade
         </Button>
       </div>
