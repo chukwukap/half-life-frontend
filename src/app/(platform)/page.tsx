@@ -1,9 +1,7 @@
-import { HeroSection } from "./_components/hero-section";
-import { PositionsCard } from "./_components/positions-card";
-import { TokenGrid } from "./_components/token-grid";
-import { DepositCard } from "./_components/deposit-card";
-import { PortfolioValueCard } from "./_components/portfolio-value-card";
-import { TrendingSection } from "./_components/trending-section";
+import { HeroSection } from "./_components/home/hero-section";
+import { PositionsCard } from "./_components/home/positions-card";
+import { TokenGrid } from "./_components/home/token-grid";
+import { DepositCard } from "./_components/home/deposit-card";
 
 /**
  * Main home page of the platform
@@ -12,10 +10,6 @@ import { TrendingSection } from "./_components/trending-section";
 export default function Home() {
   return (
     <div className="py-6">
-      {/* Mobile-specific components */}
-      <PortfolioValueCard />
-      <TrendingSection />
-
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Main content area - 2/3 width on desktop */}
         <div className="lg:col-span-2 space-y-6">

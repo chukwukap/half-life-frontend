@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { EmptyPositions } from "./home/empty-positions";
+import { EmptyPositions } from "./empty-positions";
 
 /**
  * Position information interface
