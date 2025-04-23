@@ -7,7 +7,11 @@ import Link from "next/link";
  * Empty state component when there are no positions
  * Shows a message and a call to action to browse tokens
  */
-export const EmptyPositions = () => {
+export const EmptyPositions = ({
+  onAddPosition,
+}: {
+  onAddPosition?: () => void;
+}) => {
   return (
     <div className="py-6 px-4 bg-blue-50/50 dark:bg-blue-900/5 rounded-xl text-center">
       <p className="font-medium mb-1">You have no active positions</p>
@@ -16,7 +20,10 @@ export const EmptyPositions = () => {
         action.
       </p>
       <Link href="/tokens">
-        <Button className="bg-blue-500 hover:bg-blue-600 text-white">
+        <Button
+          className="bg-blue-500 hover:bg-blue-600 text-white"
+          onClick={onAddPosition}
+        >
           Browse tokens
         </Button>
       </Link>

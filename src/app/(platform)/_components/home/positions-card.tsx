@@ -35,7 +35,7 @@ const Position = ({
   isProfit,
 }: PositionProps) => {
   return (
-    <div className="bg-white dark:bg-card rounded-xl p-4 mb-3">
+    <div className="bg-white dark:bg-card rounded-xl p-4 mb-3 shadow-sm">
       {/* Position header */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
@@ -88,14 +88,18 @@ const Position = ({
         </div>
       </div>
 
-      {/* Position actions */}
+      {/* Position actions - fixed width buttons to prevent overflow */}
       <div className="flex gap-2 mt-2">
-        <Button className="w-full bg-blue-50 text-blue-600 hover:bg-blue-100 dark:bg-blue-900/20 dark:text-blue-400 dark:hover:bg-blue-900/30">
+        <Button
+          className="flex-1 min-w-0 text-xs sm:text-sm bg-blue-50 text-blue-600 hover:bg-blue-100 dark:bg-blue-900/20 dark:text-blue-400 dark:hover:bg-blue-900/30"
+          title="Modify position"
+        >
           Modify
         </Button>
         <Button
           variant="destructive"
-          className="w-full bg-red-50 text-red-600 hover:bg-red-100 dark:bg-red-900/20 dark:text-red-400 dark:hover:bg-red-900/30"
+          className="flex-1 min-w-0 text-xs sm:text-sm bg-red-50 text-red-600 hover:bg-red-100 dark:bg-red-900/20 dark:text-red-400 dark:hover:bg-red-900/30"
+          title="Close position"
         >
           Close Position
         </Button>
@@ -180,7 +184,7 @@ export const PositionsCard = () => {
   ];
 
   return (
-    <div className="bg-background dark:bg-background/5 rounded-xl p-4 mb-6">
+    <div className="bg-background dark:bg-background/5 rounded-xl p-4 shadow-sm border border-gray-100 dark:border-gray-800">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
           <div className="w-5 h-5 rounded-full bg-blue-500 flex items-center justify-center">
@@ -194,33 +198,25 @@ export const PositionsCard = () => {
               <path d="M21 22H3V2h4v8l2-2 2 2V2h10v20z" fill="white" />
             </svg>
           </div>
-          <h3 className="font-medium">My Positions</h3>
+          <h3 className="font-medium text-sm">My Positions</h3>
         </div>
         <Link
-          href="/portfolio"
-          className="text-sm text-blue-500 hover:underline"
+          href="#"
+          className="text-xs font-medium text-blue-500 hover:text-blue-600"
         >
           See all
         </Link>
       </div>
 
-      {/* Toggle button for demo purposes only */}
-      <button
-        onClick={() => setHasPositions(!hasPositions)}
-        className="text-xs bg-gray-100 px-2 py-1 rounded mb-3 hidden"
-      >
-        Toggle Demo State
-      </button>
-
       {hasPositions ? (
-        <>
-          {positions.map((position, index) => (
-            <Position key={index} {...position} />
+        <div>
+          {positions.map((position) => (
+            <Position key={position.token} {...position} />
           ))}
           <PositionsPagination />
-        </>
+        </div>
       ) : (
-        <EmptyPositions />
+        <EmptyPositions onAddPosition={() => setHasPositions(true)} />
       )}
     </div>
   );

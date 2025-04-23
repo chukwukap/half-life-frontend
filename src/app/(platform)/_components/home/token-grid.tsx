@@ -175,7 +175,37 @@ export const TokenGrid = () => {
       iconSrc: "/assets/img/tokens/bonk.png",
     },
     {
+      id: "wif2",
+      name: "WIF",
+      fullName: "dogwifhat",
+      price: "3.21",
+      change: "+8.1%",
+      lifeIndex: 43,
+      lifeIndexPercent: 43,
+      iconSrc: "/assets/img/tokens/wif.png",
+    },
+    {
       id: "pepe",
+      name: "PEPE",
+      fullName: "Pepe Coin",
+      price: "1.75",
+      change: "+10.3%",
+      lifeIndex: 60,
+      lifeIndexPercent: 60,
+      iconSrc: "/assets/img/tokens/pepe.png",
+    },
+    {
+      id: "pepe2",
+      name: "PEPE",
+      fullName: "Pepe Coin",
+      price: "1.75",
+      change: "+10.3%",
+      lifeIndex: 60,
+      lifeIndexPercent: 60,
+      iconSrc: "/assets/img/tokens/pepe.png",
+    },
+    {
+      id: "pepe3",
       name: "PEPE",
       fullName: "Pepe Coin",
       price: "1.75",
@@ -197,56 +227,47 @@ export const TokenGrid = () => {
   ];
 
   return (
-    <div className="mb-6">
-      <div className="flex gap-2 mb-4">
+    <div className="rounded-xl border border-gray-100 dark:border-gray-800 p-4 shadow-sm bg-background">
+      <div className="flex items-center mb-4 -ml-2">
         <TabButton
           isActive={activeTab === "gainers"}
           onClick={() => setActiveTab("gainers")}
           icon={
             <svg
+              xmlns="http://www.w3.org/2000/svg"
               width="16"
               height="16"
               viewBox="0 0 24 24"
               fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             >
-              <path
-                d="M3 17L9 11L13 15L21 7"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M14 7H21V14"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
+              <path d="m22 7-8.5 8.5-5-5L2 17" />
+              <path d="M16 7h6v6" />
             </svg>
           }
         >
           Top gainers
         </TabButton>
+
         <TabButton
           isActive={activeTab === "favorites"}
           onClick={() => setActiveTab("favorites")}
           icon={
             <svg
+              xmlns="http://www.w3.org/2000/svg"
               width="16"
               height="16"
               viewBox="0 0 24 24"
               fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             >
-              <path
-                d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
+              <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
             </svg>
           }
         >
@@ -254,8 +275,8 @@ export const TokenGrid = () => {
         </TabButton>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {tokens.map((token) => (
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        {tokens.slice(0, 9).map((token) => (
           <TokenCard key={token.id} token={token} />
         ))}
       </div>
