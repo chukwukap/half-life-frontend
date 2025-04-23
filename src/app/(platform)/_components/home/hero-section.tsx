@@ -9,7 +9,7 @@ import Image from "next/image";
  */
 export const HeroSection = () => {
   return (
-    <div className="relative w-full rounded-xl overflow-hidden bg-gradient-to-br from-indigo-500 via-indigo-600 to-purple-700 h-72">
+    <div className="relative w-full rounded-xl overflow-hidden bg-gradient-to-br from-indigo-500 via-indigo-600 to-purple-700 h-full min-h-[300px]">
       {/* Background pattern overlay */}
       <div className="absolute inset-0">
         <Image

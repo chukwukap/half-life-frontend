@@ -36,23 +36,23 @@ const Position = ({
   isProfit,
 }: PositionProps) => {
   return (
-    <div className="bg-white dark:bg-card rounded-xl p-5 mb-3 shadow-sm">
+    <div className="bg-white dark:bg-card rounded-xl p-4 mb-2 shadow-sm">
       {/* Position header with token info and profit/strategy */}
-      <div className="flex items-center justify-between mb-5">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center">
-            <span className="text-amber-800 text-sm font-semibold">
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center">
+            <span className="text-amber-800 text-xs font-semibold">
               {token.substring(0, 2)}
             </span>
           </div>
           <div>
-            <h4 className="font-semibold text-base">{token}</h4>
-            <p className="text-sm text-gray-500">{tokenInfo}</p>
+            <h4 className="font-medium text-sm">{token}</h4>
+            <p className="text-xs text-gray-500">{tokenInfo}</p>
           </div>
         </div>
         <div className="text-right">
           <span
-            className={`text-base font-semibold ${
+            className={`text-sm font-semibold ${
               isProfit ? "text-green-500" : "text-red-500"
             }`}
           >
@@ -65,23 +65,23 @@ const Position = ({
       </div>
 
       {/* Position details in a cleaner 2x2 grid */}
-      <div className="grid grid-cols-2 gap-6 mb-5">
+      <div className="grid grid-cols-2 gap-4 mb-3 text-sm">
         <div>
-          <p className="text-sm text-gray-500">Entry price</p>
-          <p className="text-base font-semibold">${entryPrice}</p>
+          <p className="text-xs text-gray-500">Entry price</p>
+          <p className="font-medium">${entryPrice}</p>
         </div>
         <div>
-          <p className="text-sm text-gray-500">Current price</p>
-          <p className="text-base font-semibold">${currentPrice}</p>
+          <p className="text-xs text-gray-500">Current price</p>
+          <p className="font-medium">${currentPrice}</p>
         </div>
         <div>
-          <p className="text-sm text-gray-500">Liquidation price</p>
-          <p className="text-base font-semibold">${liquidationPrice}</p>
+          <p className="text-xs text-gray-500">Liquidation price</p>
+          <p className="font-medium">${liquidationPrice}</p>
         </div>
         <div>
-          <p className="text-sm text-gray-500">Funding rate</p>
+          <p className="text-xs text-gray-500">Funding rate</p>
           <p
-            className={`text-base font-semibold ${
+            className={`font-medium ${
               isProfit ? "text-green-500" : "text-red-500"
             }`}
           >
@@ -92,9 +92,9 @@ const Position = ({
       </div>
 
       {/* Position actions - styled buttons matching the design */}
-      <div className="flex flex-col gap-3 mt-3">
+      <div className="flex gap-2">
         <Button
-          className="w-full py-3 bg-blue-50 text-blue-600 hover:bg-blue-100 dark:bg-blue-900/20 dark:text-blue-400 dark:hover:bg-blue-900/30 rounded-xl font-medium"
+          className="flex-1 py-1.5 text-xs bg-blue-50 text-blue-600 hover:bg-blue-100 dark:bg-blue-900/20 dark:text-blue-400 dark:hover:bg-blue-900/30 rounded-lg font-medium"
           title="Modify position"
           onClick={() => console.log(`Modifying position for ${token}`)}
         >
@@ -102,7 +102,7 @@ const Position = ({
         </Button>
         <Button
           variant="destructive"
-          className="w-full py-3 bg-red-50 text-red-600 hover:bg-red-100 dark:bg-red-900/20 dark:text-red-400 dark:hover:bg-red-900/30 rounded-xl font-medium"
+          className="flex-1 py-1.5 text-xs bg-red-50 text-red-600 hover:bg-red-100 dark:bg-red-900/20 dark:text-red-400 dark:hover:bg-red-900/30 rounded-lg font-medium"
           title="Close position"
           onClick={() => console.log(`Closing position for ${token}`)}
         >
@@ -220,7 +220,7 @@ export const PositionsCard = () => {
   ];
 
   return (
-    <div className="bg-background dark:bg-background/5 rounded-xl p-4 shadow-sm border border-gray-100 dark:border-gray-800">
+    <div className="bg-background dark:bg-background/5 rounded-xl p-4 shadow-sm border border-gray-100 dark:border-gray-800 h-full flex flex-col">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
           <div className="w-5 h-5 rounded-full bg-blue-500 flex items-center justify-center">
@@ -245,11 +245,13 @@ export const PositionsCard = () => {
       </div>
 
       {hasPositions ? (
-        <div>
+        <div className="flex-1 flex flex-col">
           {positions.map((position) => (
             <Position key={position.token} {...position} />
           ))}
-          <PositionsPagination />
+          <div className="mt-auto">
+            <PositionsPagination />
+          </div>
         </div>
       ) : (
         <EmptyPositions onAddPosition={() => setHasPositions(true)} />
