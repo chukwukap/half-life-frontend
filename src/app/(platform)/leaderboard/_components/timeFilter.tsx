@@ -9,32 +9,32 @@ const TimeFilter: FC = () => {
 
   return (
     <div className="mb-6">
-      <div className="inline-flex rounded-lg overflow-hidden">
+      <div className="inline-flex bg-gray-100 rounded-full overflow-hidden p-1">
         <button
-          className={`px-6 py-2 text-sm font-medium ${
+          className={`px-6 py-2 rounded-full text-sm font-medium transition-colors ${
             activePeriod === "all"
-              ? "bg-blue-600 text-white"
-              : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+              ? "bg-white text-gray-900 shadow-sm"
+              : "text-gray-500 hover:text-gray-700"
           }`}
           onClick={() => setActivePeriod("all")}
         >
           All Time
         </button>
         <button
-          className={`px-6 py-2 text-sm font-medium ${
+          className={`px-6 py-2 rounded-full text-sm font-medium transition-colors ${
             activePeriod === "monthly"
-              ? "bg-blue-600 text-white"
-              : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+              ? "bg-white text-gray-900 shadow-sm"
+              : "text-gray-500 hover:text-gray-700"
           }`}
           onClick={() => setActivePeriod("monthly")}
         >
           Monthly
         </button>
         <button
-          className={`px-6 py-2 text-sm font-medium ${
+          className={`px-6 py-2 rounded-full text-sm font-medium transition-colors ${
             activePeriod === "weekly"
-              ? "bg-blue-600 text-white"
-              : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+              ? "bg-white text-gray-900 shadow-sm"
+              : "text-gray-500 hover:text-gray-700"
           }`}
           onClick={() => setActivePeriod("weekly")}
         >

@@ -18,7 +18,7 @@ interface Trader {
 const leaderboardData: Trader[] = [
   {
     id: "1",
-    name: "Basaltic_kite",
+    name: "Bastille_btc",
     avatar: "/avatars/trader1.png",
     totalProfit: "$50,361",
     winRate: "90%",
@@ -27,7 +27,7 @@ const leaderboardData: Trader[] = [
   },
   {
     id: "2",
-    name: "Tx_the_gamer",
+    name: "Te_the_gamer",
     avatar: "/avatars/trader2.png",
     totalProfit: "$47,548",
     winRate: "89%",
@@ -41,14 +41,14 @@ const leaderboardData: Trader[] = [
     totalProfit: "$45,934",
     winRate: "87%",
     totalTrades: 144,
-    bestToken: "SUSHI",
+    bestToken: "SUCHIR",
   },
   {
     id: "4",
     name: "Quantum_Coder",
     avatar: "/avatars/trader4.png",
     totalProfit: "$43,109",
-    winRate: "85%",
+    winRate: "86%",
     totalTrades: 141,
     bestToken: "MELANIA",
   },
@@ -95,7 +95,7 @@ const leaderboardData: Trader[] = [
     totalProfit: "$30,037",
     winRate: "78%",
     totalTrades: 126,
-    bestToken: "PXOPE",
+    bestToken: "PWOPE",
   },
   {
     id: "10",
@@ -113,59 +113,78 @@ const leaderboardData: Trader[] = [
     totalProfit: "$25,365",
     winRate: "75%",
     totalTrades: 120,
-    bestToken: "SOL",
+    bestToken: "1SOL",
   },
 ];
 
 const LeaderboardTable: FC = () => {
   return (
     <div className="bg-white rounded-3xl shadow-sm overflow-hidden">
-      {/* Table header */}
-      <div className="grid grid-cols-6 py-4 px-6 border-b border-gray-100">
-        <div className="text-gray-500 text-sm font-medium">Rank</div>
-        <div className="text-gray-500 text-sm font-medium">Trader</div>
-        <div className="text-gray-500 text-sm font-medium">Total Profit</div>
-        <div className="text-gray-500 text-sm font-medium">Win Rate</div>
-        <div className="text-gray-500 text-sm font-medium">Total trades</div>
-        <div className="text-gray-500 text-sm font-medium">Best Token</div>
-      </div>
+      <table className="w-full">
+        <thead>
+          <tr className="border-b border-gray-100">
+            <th className="text-gray-500 text-sm font-medium text-left py-4 px-6">
+              Rank
+            </th>
+            <th className="text-gray-500 text-sm font-medium text-left py-4 px-6">
+              Trader
+            </th>
+            <th className="text-gray-500 text-sm font-medium text-left py-4 px-6">
+              Total Profit
+            </th>
+            <th className="text-gray-500 text-sm font-medium text-left py-4 px-6">
+              Win Rate
+            </th>
+            <th className="text-gray-500 text-sm font-medium text-left py-4 px-6">
+              Total trades
+            </th>
+            <th className="text-gray-500 text-sm font-medium text-left py-4 px-6">
+              Best Token
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {leaderboardData.map((trader, index) => (
+            <tr
+              key={trader.id}
+              className="border-b border-gray-100 hover:bg-gray-50"
+            >
+              {/* Rank */}
+              <td className="text-sm py-5 px-6">{index + 1}</td>
 
-      {/* Table rows */}
-      {leaderboardData.map((trader, index) => (
-        <div
-          key={trader.id}
-          className="grid grid-cols-6 py-5 px-6 items-center border-b border-gray-100 hover:bg-gray-50"
-        >
-          {/* Rank */}
-          <div className="text-sm">{index + 1}</div>
+              {/* Trader */}
+              <td className="py-5 px-6">
+                <div className="flex items-center">
+                  <div className="relative w-8 h-8 mr-3">
+                    <Image
+                      src={trader.avatar}
+                      alt={trader.name}
+                      width={32}
+                      height={32}
+                      className="rounded-full"
+                    />
+                  </div>
+                  <span className="font-medium text-sm">{trader.name}</span>
+                </div>
+              </td>
 
-          {/* Trader */}
-          <div className="flex items-center">
-            <div className="relative w-8 h-8 mr-3">
-              <Image
-                src={trader.avatar}
-                alt={trader.name}
-                width={32}
-                height={32}
-                className="rounded-full"
-              />
-            </div>
-            <span className="font-medium text-sm">{trader.name}</span>
-          </div>
+              {/* Total Profit */}
+              <td className="text-green-500 font-medium py-5 px-6">
+                {trader.totalProfit}
+              </td>
 
-          {/* Total Profit */}
-          <div className="text-green-500 font-medium">{trader.totalProfit}</div>
+              {/* Win Rate */}
+              <td className="font-medium py-5 px-6">{trader.winRate}</td>
 
-          {/* Win Rate */}
-          <div className="font-medium">{trader.winRate}</div>
+              {/* Total trades */}
+              <td className="font-medium py-5 px-6">{trader.totalTrades}</td>
 
-          {/* Total trades */}
-          <div className="font-medium">{trader.totalTrades}</div>
-
-          {/* Best Token */}
-          <div className="font-medium">{trader.bestToken}</div>
-        </div>
-      ))}
+              {/* Best Token */}
+              <td className="font-medium py-5 px-6">{trader.bestToken}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };

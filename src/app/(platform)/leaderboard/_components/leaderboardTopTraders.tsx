@@ -7,7 +7,7 @@ import { TraderCard } from "./";
 const topTraders = [
   {
     id: "1",
-    name: "Basaltic_kite",
+    name: "Bastille_btc",
     avatar: "/avatars/trader1.png",
     totalProfit: "$50,361",
     winRate: "90%",
@@ -16,7 +16,7 @@ const topTraders = [
   },
   {
     id: "2",
-    name: "Tx_the_gamer",
+    name: "Te_the_gamer",
     avatar: "/avatars/trader2.png",
     totalProfit: "$47,548",
     winRate: "89%",
@@ -35,17 +35,31 @@ const topTraders = [
 ];
 
 const LeaderboardTopTraders: FC = () => {
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-      {topTraders.map((trader, index) => {
-        const rankLabels = ["#1 Rank", "#2 Rank", "#3 Rank"];
+  const rankInfo = [
+    {
+      label: "Top Trader",
+      color: "text-amber-500",
+    },
+    {
+      label: "Runner Up",
+      color: "text-indigo-600",
+    },
+    {
+      label: "Third Place",
+      color: "text-orange-500",
+    },
+  ];
 
-        return (
-          <div key={trader.id} className="bg-white p-6 rounded-3xl shadow-sm">
-            <TraderCard rank={rankLabels[index]} trader={trader} />
-          </div>
-        );
-      })}
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+      {topTraders.map((trader, index) => (
+        <div
+          key={trader.id}
+          className="bg-white p-6 rounded-3xl shadow-sm border border-gray-100"
+        >
+          <TraderCard rank={rankInfo[index]} trader={trader} />
+        </div>
+      ))}
     </div>
   );
 };
