@@ -10,6 +10,13 @@ const TokenExplorer: FC = () => {
   const [isSearchPopupOpen, setIsSearchPopupOpen] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
+  // Example search terms that match our test states
+  const testSearchTerms = {
+    cat: "Shows cat tokens",
+    error: "Shows server error state",
+    other: "Shows no results state",
+  };
+
   // Close the popup when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -51,6 +58,12 @@ const TokenExplorer: FC = () => {
     setSearchQuery(query);
   };
 
+  // Handle clicking on a search suggestion
+  const handleSuggestionClick = (term: string) => {
+    setSearchQuery(term);
+    setIsSearchPopupOpen(true);
+  };
+
   return (
     <>
       <div className="bg-blue-600 text-white rounded-xl p-10 w-full">
@@ -78,6 +91,21 @@ const TokenExplorer: FC = () => {
           />
           <SearchIcon className="absolute left-4 top-3.5 h-5 w-5 text-gray-400 pointer-events-none" />
         </form>
+
+        {/* Quick search suggestions */}
+        <div className="mt-4 flex flex-wrap gap-2">
+          <p className="text-blue-100 mr-2">Try:</p>
+          {Object.entries(testSearchTerms).map(([term, description]) => (
+            <button
+              key={term}
+              onClick={() => handleSuggestionClick(term)}
+              className="px-3 py-1 bg-blue-500 hover:bg-blue-400 rounded-full text-sm transition-colors"
+              title={description}
+            >
+              {term}
+            </button>
+          ))}
+        </div>
       </div>
 
       <SearchPopup
