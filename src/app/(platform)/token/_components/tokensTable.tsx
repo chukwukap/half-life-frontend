@@ -18,7 +18,7 @@ export interface TokenData {
   logoUrl: string;
 }
 
-// Sample token data (matching the Figma design)
+// Sample token data (matching the Figma design exactly)
 const tokens: TokenData[] = [
   {
     id: "pepe",
@@ -29,29 +29,29 @@ const tokens: TokenData[] = [
     marketCap: "$390.00M",
     volume: "$125.00M",
     lifeIndex: 85.4,
-    logoUrl: "/tokens/pepe.png",
+    logoUrl: "/tokens/pepe.svg",
   },
   {
     id: "wif",
     name: "WIF",
     symbol: "dogwifhat",
-    price: 0.0000204,
+    price: 0.00000204,
     change24h: -5.32,
     marketCap: "$210.00M",
     volume: "$87.00M",
     lifeIndex: 72.1,
-    logoUrl: "/tokens/wif.png",
+    logoUrl: "/tokens/placeholder.svg",
   },
   {
     id: "floki",
     name: "FLOKI",
     symbol: "Floki Inu",
-    price: 0.0000285,
+    price: 0.00000285,
     change24h: 3.47,
     marketCap: "$1.68B",
     volume: "$320.00M",
     lifeIndex: 68.7,
-    logoUrl: "/tokens/floki.png",
+    logoUrl: "/tokens/floki.svg",
   },
   {
     id: "doge",
@@ -62,7 +62,7 @@ const tokens: TokenData[] = [
     marketCap: "$217.0B",
     volume: "$980.00M",
     lifeIndex: 91.2,
-    logoUrl: "/tokens/doge.png",
+    logoUrl: "/tokens/doge.svg",
   },
   {
     id: "mog",
@@ -73,7 +73,7 @@ const tokens: TokenData[] = [
     marketCap: "$105.00M",
     volume: "$42.00M",
     lifeIndex: 45.8,
-    logoUrl: "/tokens/mog.png",
+    logoUrl: "/tokens/placeholder.svg",
   },
   {
     id: "tama",
@@ -84,7 +84,7 @@ const tokens: TokenData[] = [
     marketCap: "$450.00M",
     volume: "$90.00M",
     lifeIndex: 67.3,
-    logoUrl: "/tokens/tama.png",
+    logoUrl: "/tokens/placeholder.svg",
   },
   {
     id: "kishu",
@@ -95,7 +95,7 @@ const tokens: TokenData[] = [
     marketCap: "$320.50M",
     volume: "$150.00M",
     lifeIndex: 82.8,
-    logoUrl: "/tokens/kishu.png",
+    logoUrl: "/tokens/placeholder.svg",
   },
   {
     id: "akita",
@@ -106,29 +106,29 @@ const tokens: TokenData[] = [
     marketCap: "$210B",
     volume: "$75.00M",
     lifeIndex: 79.5,
-    logoUrl: "/tokens/akita.png",
+    logoUrl: "/tokens/placeholder.svg",
   },
   {
     id: "husky",
     name: "HUSKY",
     symbol: "Husky",
-    price: 0.0000012,
+    price: 0.00000012,
     change24h: 7.8,
     marketCap: "$30.25B",
     volume: "$300.00M",
     lifeIndex: 90.0,
-    logoUrl: "/tokens/husky.png",
+    logoUrl: "/tokens/placeholder.svg",
   },
   {
     id: "shiba",
-    name: "SHIBA",
-    symbol: "Shiba Coin",
+    name: "SHIBBY",
+    symbol: "Shibby Coin",
     price: 0.32,
     change24h: -4.15,
     marketCap: "$175.00M",
     volume: "$500.00M",
     lifeIndex: 54.6,
-    logoUrl: "/tokens/shiba.png",
+    logoUrl: "/tokens/placeholder.svg",
   },
   {
     id: "pug",
@@ -139,7 +139,7 @@ const tokens: TokenData[] = [
     marketCap: "$890.00M",
     volume: "$200.00M",
     lifeIndex: 62.4,
-    logoUrl: "/tokens/pug.png",
+    logoUrl: "/tokens/placeholder.svg",
   },
 ];
 
@@ -157,28 +157,14 @@ const formatPrice = (price: number): string => {
   }
 };
 
-// Get color based on life index value
-const getLifeIndexColor = (value: number): string => {
-  if (value >= 80) return "bg-green-500";
-  if (value >= 60) return "bg-emerald-500";
-  if (value >= 40) return "bg-yellow-500";
-  return "bg-red-500";
-};
-
 const TokenRow: FC<TokenRowProps> = ({ token }) => {
-  const [hovered, setHovered] = useState(false);
-
   return (
-    <tr
-      className="border-b border-gray-100 hover:bg-gray-50 transition-colors"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
+    <tr className="border-b border-gray-100 hover:bg-gray-50 transition-colors cursor-pointer">
       <td className="py-4 px-3">
         <Link href={`/token/${token.id}`} className="flex items-center gap-3">
           <div className="relative w-10 h-10 rounded-full overflow-hidden bg-gray-100">
             <Image
-              src={token.logoUrl || "/tokens/placeholder.svg"}
+              src={token.logoUrl}
               alt={token.name}
               width={40}
               height={40}
@@ -306,6 +292,20 @@ const TokensTable: FC = () => {
       }
 
       if (typeof aValue === "string" && typeof bValue === "string") {
+        // Handle market cap and volume special cases by removing the $ and converting to numbers
+        if (key === "marketCap" || key === "volume") {
+          const aNum = parseFloat(aValue.replace(/[^0-9.]/g, ""));
+          const bNum = parseFloat(bValue.replace(/[^0-9.]/g, ""));
+
+          // Handle M and B suffixes
+          const aMultiplier = aValue.includes("B") ? 1000 : 1;
+          const bMultiplier = bValue.includes("B") ? 1000 : 1;
+
+          return newDirection === "asc"
+            ? aNum * aMultiplier - bNum * bMultiplier
+            : bNum * bMultiplier - aNum * aMultiplier;
+        }
+
         return newDirection === "asc"
           ? aValue.localeCompare(bValue)
           : bValue.localeCompare(aValue);
