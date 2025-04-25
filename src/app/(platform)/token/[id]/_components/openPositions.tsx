@@ -18,6 +18,7 @@ const OpenPositions: FC<OpenPositionsProps> = ({ positionValue }) => {
     type: "Long 5x",
     entryPrice: "$0.00008",
     currentPrice: "$0.00009",
+    liquidationPrice: "$0.00008",
     fundingRate: "+0.0125%",
     pnl: positionValue,
   };
@@ -54,29 +55,31 @@ const OpenPositions: FC<OpenPositionsProps> = ({ positionValue }) => {
       </div>
 
       {/* Position details */}
-      <div className="grid grid-cols-2 gap-x-4 gap-y-2 p-4">
-        <div>
-          <p className="text-xs text-gray-500 mb-1">Entry price</p>
-          <p className="text-sm font-medium">{position.entryPrice}</p>
-        </div>
-        <div>
-          <p className="text-xs text-gray-500 mb-1">Current price</p>
-          <p className="text-sm font-medium">{position.currentPrice}</p>
-        </div>
-        <div>
-          <p className="text-xs text-gray-500 mb-1">Liquidation price</p>
-          <p className="text-sm font-medium">{position.entryPrice}</p>
-        </div>
-        <div>
-          <p className="text-xs text-gray-500 mb-1">Funding rate</p>
-          <p className="text-sm font-medium text-green-500">
-            {position.fundingRate}
-          </p>
+      <div className="px-4 pt-4 pb-2">
+        <div className="grid grid-cols-2 gap-x-4 gap-y-3">
+          <div>
+            <p className="text-xs text-gray-500 mb-1">Entry price</p>
+            <p className="text-sm font-medium">{position.entryPrice}</p>
+          </div>
+          <div>
+            <p className="text-xs text-gray-500 mb-1">Current price</p>
+            <p className="text-sm font-medium">{position.currentPrice}</p>
+          </div>
+          <div>
+            <p className="text-xs text-gray-500 mb-1">Liquidation price</p>
+            <p className="text-sm font-medium">{position.liquidationPrice}</p>
+          </div>
+          <div>
+            <p className="text-xs text-gray-500 mb-1">Funding rate</p>
+            <p className="text-sm font-medium text-green-500">
+              {position.fundingRate}
+            </p>
+          </div>
         </div>
       </div>
 
       {/* Action buttons */}
-      <div className="p-4 flex flex-col gap-2">
+      <div className="p-4 grid grid-cols-1 gap-2">
         <button className="w-full py-2 px-4 bg-blue-100 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-200 transition-colors">
           Modify
         </button>

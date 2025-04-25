@@ -94,52 +94,16 @@ const TokenDetailPage: FC = () => {
         </div>
       </div>
 
-      {/* Price chart section */}
-      <div className="mb-8">
-        <TokenChart />
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          {/* Prediction placement section */}
-          <div className="mb-8">
-            <div className="flex items-center mb-4">
-              <div className="flex items-center">
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="mr-2"
-                >
-                  <path
-                    d="M10 18.3333C14.6024 18.3333 18.3334 14.6024 18.3334 10C18.3334 5.39763 14.6024 1.66667 10 1.66667C5.39765 1.66667 1.66669 5.39763 1.66669 10C1.66669 14.6024 5.39765 18.3333 10 18.3333Z"
-                    stroke="#374151"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M5 10H15"
-                    stroke="#374151"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-                <span className="font-medium text-sm">Place prediction</span>
-              </div>
-            </div>
-            <PredictionPlacement
-              entryPrice={tokenData.entryPrice}
-              liquidationPrice={tokenData.liquidationPrice}
-              available={tokenData.available}
-            />
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+        {/* Left column - Chart and Stats */}
+        <div className="lg:col-span-3">
+          {/* Price chart section */}
+          <div className="mb-6">
+            <TokenChart />
           </div>
 
-          {/* Stats section */}
-          <div className="grid grid-cols-1 gap-6 mb-8">
+          {/* Stats section in two columns */}
+          <div className="grid grid-cols-2 gap-6 mb-6">
             <MarketStats
               marketCap={tokenData.marketCap}
               volume24h={tokenData.volume24h}
@@ -149,37 +113,9 @@ const TokenDetailPage: FC = () => {
               communityScore={tokenData.communityScore}
             />
           </div>
-        </div>
-
-        <div>
-          {/* Open positions section */}
-          <div className="mb-8">
-            <div className="flex items-center mb-4">
-              <div className="flex items-center">
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="mr-2"
-                >
-                  <path
-                    d="M16.6667 5.00001L7.50004 14.1667L3.33337 10"
-                    stroke="#374151"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-                <span className="font-medium text-sm">Open Positions</span>
-              </div>
-            </div>
-            <OpenPositions positionValue={tokenData.positionValue} />
-          </div>
 
           {/* Leaderboard section */}
-          <div className="mb-8">
+          <div className="mb-6">
             <div className="flex items-center mb-4">
               <div className="flex items-center">
                 <svg
@@ -217,9 +153,75 @@ const TokenDetailPage: FC = () => {
             </div>
             <Leaderboard />
           </div>
+        </div>
+
+        {/* Right column - Trading and Positions */}
+        <div className="lg:col-span-2">
+          {/* Prediction placement section */}
+          <div className="mb-6">
+            <div className="flex items-center mb-4">
+              <div className="flex items-center">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="mr-2"
+                >
+                  <path
+                    d="M10 18.3333C14.6024 18.3333 18.3334 14.6024 18.3334 10C18.3334 5.39763 14.6024 1.66667 10 1.66667C5.39765 1.66667 1.66669 5.39763 1.66669 10C1.66669 14.6024 5.39765 18.3333 10 18.3333Z"
+                    stroke="#374151"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M5 10H15"
+                    stroke="#374151"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                <span className="font-medium text-sm">Place prediction</span>
+              </div>
+            </div>
+            <PredictionPlacement
+              entryPrice={tokenData.entryPrice}
+              liquidationPrice={tokenData.liquidationPrice}
+              available={tokenData.available}
+            />
+          </div>
+
+          {/* Open positions section */}
+          <div className="mb-6">
+            <div className="flex items-center mb-4">
+              <div className="flex items-center">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="mr-2"
+                >
+                  <path
+                    d="M16.6667 5.00001L7.50004 14.1667L3.33337 10"
+                    stroke="#374151"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                <span className="font-medium text-sm">Open Positions</span>
+              </div>
+            </div>
+            <OpenPositions positionValue={tokenData.positionValue} />
+          </div>
 
           {/* Vitality score section */}
-          <div className="mb-8">
+          <div className="mb-6">
             <div className="flex items-center mb-4">
               <div className="flex items-center">
                 <svg

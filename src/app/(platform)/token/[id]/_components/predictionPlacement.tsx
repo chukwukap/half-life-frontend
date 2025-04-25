@@ -38,16 +38,9 @@ const PredictionPlacement: FC<PredictionPlacementProps> = ({
   };
 
   return (
-    <div className="border border-gray-200 rounded-lg p-4">
-      {/* Section header */}
-      <div className="flex items-center mb-4">
-        <div className="flex items-center space-x-1">
-          <span className="text-gray-500 text-sm">Place prediction</span>
-        </div>
-      </div>
-
+    <div className="border border-gray-200 rounded-lg">
       {/* Direction toggle */}
-      <div className="mb-6">
+      <div className="p-4 pb-0">
         <div className="bg-gray-100 rounded-full p-1 flex">
           <button
             className={`flex-1 py-2 px-4 rounded-full transition-colors text-sm font-medium ${
@@ -71,7 +64,7 @@ const PredictionPlacement: FC<PredictionPlacementProps> = ({
       </div>
 
       {/* Amount input */}
-      <div className="mb-6">
+      <div className="p-4">
         <label className="block text-xs text-gray-500 mb-2">Amount (USD)</label>
         <div className="relative">
           <input
@@ -88,35 +81,43 @@ const PredictionPlacement: FC<PredictionPlacementProps> = ({
             Max
           </button>
         </div>
-        <div className="flex justify-between items-center mt-2">
-          <p className="text-xs text-gray-600">Available: ${available}</p>
+        <div className="flex bg-blue-50 rounded-md p-2 mt-2">
+          <p className="text-xs text-blue-700">Available: ${available}</p>
+          <button
+            className="ml-auto text-xs text-blue-600 font-medium"
+            onClick={handleMaxAmount}
+          >
+            Max
+          </button>
         </div>
       </div>
 
       {/* Leverage control */}
-      <div className="mb-6">
-        <div className="text-xs text-gray-500 mb-2">Leverage</div>
-        <div className="flex items-center justify-center">
-          <button
-            onClick={() => adjustLeverage(false)}
-            className="w-8 h-8 bg-white border border-gray-200 text-gray-500 rounded-full flex items-center justify-center hover:bg-gray-50"
-          >
-            <Minus size={16} />
-          </button>
-          <span className="mx-8 font-bold text-blue-600 text-lg">
-            {leverage}×
-          </span>
-          <button
-            onClick={() => adjustLeverage(true)}
-            className="w-8 h-8 bg-white border border-gray-200 text-gray-500 rounded-full flex items-center justify-center hover:bg-gray-50"
-          >
-            <Plus size={16} />
-          </button>
+      <div className="px-4 py-3 border-t border-b border-gray-100">
+        <div className="flex justify-between items-center mb-2">
+          <span className="text-xs text-gray-500">Leverage</span>
+          <div className="flex items-center">
+            <button
+              onClick={() => adjustLeverage(false)}
+              className="w-7 h-7 bg-white border border-gray-200 text-gray-500 rounded-full flex items-center justify-center hover:bg-gray-50"
+              disabled={leverage <= 1}
+            >
+              <Minus size={14} />
+            </button>
+            <span className="mx-3 font-bold text-blue-600">{leverage}×</span>
+            <button
+              onClick={() => adjustLeverage(true)}
+              className="w-7 h-7 bg-white border border-gray-200 text-gray-500 rounded-full flex items-center justify-center hover:bg-gray-50"
+              disabled={leverage >= 10}
+            >
+              <Plus size={14} />
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Price details */}
-      <div className="mb-6">
+      <div className="p-4">
         <div className="grid grid-cols-2 gap-4">
           <div>
             <p className="text-xs text-gray-500 mb-1">Entry price</p>
@@ -127,12 +128,12 @@ const PredictionPlacement: FC<PredictionPlacementProps> = ({
             <p className="text-sm font-medium">${liquidationPrice}</p>
           </div>
         </div>
-      </div>
 
-      {/* Submit button */}
-      <button className="w-full py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors text-sm">
-        Open Position
-      </button>
+        {/* Submit button */}
+        <button className="w-full py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors text-sm mt-4">
+          Open Position
+        </button>
+      </div>
     </div>
   );
 };
