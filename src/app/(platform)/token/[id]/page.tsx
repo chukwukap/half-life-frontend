@@ -1,160 +1,183 @@
 "use client";
 
-import { useParams } from "next/navigation";
-import { useState, useEffect } from "react";
+import { FC } from "react";
 import Image from "next/image";
-import { Token } from "../_components/tokenList";
+import Link from "next/link";
+import { ArrowLeft, Star } from "lucide-react";
 
-// Mock data for demonstration
-const mockTokens: Record<string, Token> = {
-  bitcoin: {
-    id: "bitcoin",
-    name: "Bitcoin",
-    symbol: "BTC",
-    price: 47832.65,
-    change24h: 2.34,
-    imageUrl: "https://cryptologos.cc/logos/bitcoin-btc-logo.png",
-  },
-  ethereum: {
-    id: "ethereum",
-    name: "Ethereum",
-    symbol: "ETH",
-    price: 3235.18,
-    change24h: -1.27,
-    imageUrl: "https://cryptologos.cc/logos/ethereum-eth-logo.png",
-  },
-  cardano: {
-    id: "cardano",
-    name: "Cardano",
-    symbol: "ADA",
-    price: 0.45,
-    change24h: 3.16,
-    imageUrl: "https://cryptologos.cc/logos/cardano-ada-logo.png",
-  },
-  solana: {
-    id: "solana",
-    name: "Solana",
-    symbol: "SOL",
-    price: 138.72,
-    change24h: 5.89,
-    imageUrl: "https://cryptologos.cc/logos/solana-sol-logo.png",
-  },
+// Components for the token detail page
+import TokenChart from "./_components/tokenChart";
+import MarketStats from "./_components/marketStats";
+import CommunityStats from "./_components/communityStats";
+import PredictionPlacement from "./_components/predictionPlacement";
+import OpenPositions from "./_components/openPositions";
+import Leaderboard from "./_components/leaderboard";
+import VitalityScore from "./_components/vitalityScore";
+
+// Mock token data
+const tokenData = {
+  id: "wif",
+  name: "WIF",
+  fullName: "dogwifhat",
+  logoUrl: "/tokens/wif.svg",
+  openTraders: 547260,
+  volume: "3,807,383",
+  funding: "0.0934%",
+  countdown: "00:59:20",
+  entryPrice: "0.000008",
+  liquidationPrice: "0.000008",
+  leverage: 1,
+  available: "5,321.78",
+  positionValue: "+12.10%",
+  marketCap: "$390.00M",
+  volume24h: "$125.00M",
+  socialScore: "8.7/10",
+  communityScore: "7.2/10",
+  vitalityScore: 80,
 };
 
-export default function TokenDetailPage() {
-  const params = useParams();
-  const tokenId = params.id as string;
-  const [token, setToken] = useState<Token | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    // In a real app, this would be an API call
-    const fetchToken = () => {
-      setLoading(true);
-      try {
-        // Simulate API delay
-        setTimeout(() => {
-          const fetchedToken = mockTokens[tokenId];
-          setToken(fetchedToken || null);
-          setLoading(false);
-        }, 500);
-      } catch (error) {
-        console.error("Failed to fetch token details:", error);
-        setLoading(false);
-      }
-    };
-
-    fetchToken();
-  }, [tokenId]);
-
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center min-h-[60vh]">
-        Loading...
-      </div>
-    );
-  }
-
-  if (!token) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <h1 className="text-2xl font-bold text-red-500">Token not found</h1>
-        <p className="mt-2">The token you are looking for does not exist.</p>
-      </div>
-    );
-  }
-
+const TokenDetailPage: FC = () => {
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
-        <div className="p-6">
-          <div className="flex items-center mb-6">
-            <div className="relative w-16 h-16 mr-4">
-              <Image
-                src={token.imageUrl}
-                alt={token.name}
-                fill
-                className="rounded-full object-contain"
-              />
-            </div>
-            <div>
-              <h1 className="text-3xl font-bold">{token.name}</h1>
-              <p className="text-gray-500 dark:text-gray-400">{token.symbol}</p>
-            </div>
-          </div>
+    <div className="container mx-auto px-4 py-6 max-w-screen-xl">
+      {/* Back navigation */}
+      <div className="mb-4">
+        <Link
+          href="/token"
+          className="flex items-center text-blue-600 hover:underline"
+        >
+          <ArrowLeft className="h-4 w-4 mr-2" />
+          back to tokens
+        </Link>
+      </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-            <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
-              <h2 className="text-lg font-semibold mb-2">Price</h2>
-              <p className="text-2xl font-bold">
-                ${token.price.toLocaleString()}
-              </p>
-              <p
-                className={`text-sm font-medium ${
-                  token.change24h >= 0 ? "text-green-500" : "text-red-500"
-                }`}
-              >
-                {token.change24h >= 0 ? "+" : ""}
-                {token.change24h}% (24h)
-              </p>
-            </div>
+      {/* Token header */}
+      <div className="flex items-center gap-4 mb-8">
+        <div className="relative w-16 h-16">
+          <Image
+            src={tokenData.logoUrl}
+            alt={tokenData.name}
+            width={64}
+            height={64}
+            className="rounded-full"
+          />
+        </div>
+        <div>
+          <h1 className="text-2xl font-bold">{tokenData.name}</h1>
+          <p className="text-gray-500">{tokenData.fullName}</p>
+        </div>
+        <button className="ml-auto bg-blue-50 text-blue-600 p-2 rounded-full hover:bg-blue-100 transition-colors">
+          <Star className="h-5 w-5" />
+        </button>
+      </div>
 
-            <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
-              <h2 className="text-lg font-semibold mb-2">Market Data</h2>
-              <p className="text-sm">Market data will be displayed here</p>
-            </div>
+      {/* Token stats */}
+      <div className="grid grid-cols-4 gap-6 mb-8">
+        <div>
+          <p className="text-gray-500 text-sm mb-1">Open traders</p>
+          <p className="text-lg font-semibold">{tokenData.openTraders}</p>
+        </div>
+        <div>
+          <p className="text-gray-500 text-sm mb-1">Volume</p>
+          <p className="text-lg font-semibold">${tokenData.volume}</p>
+        </div>
+        <div>
+          <p className="text-gray-500 text-sm mb-1">Funding</p>
+          <p className="text-lg font-semibold text-green-500">
+            {tokenData.funding}
+          </p>
+        </div>
+        <div>
+          <p className="text-gray-500 text-sm mb-1">Countdown</p>
+          <p className="text-lg font-semibold">{tokenData.countdown}</p>
+        </div>
+      </div>
 
-            <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
-              <h2 className="text-lg font-semibold mb-2">About {token.name}</h2>
-              <p className="text-sm">Description will be displayed here</p>
-            </div>
+      {/* Price chart section */}
+      <div className="mb-8">
+        <TokenChart />
+      </div>
 
-            <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
-              <h2 className="text-lg font-semibold mb-2">Links & Resources</h2>
-              <ul className="space-y-1 text-sm">
-                <li>
-                  Website:{" "}
-                  <a href="#" className="text-blue-500 hover:underline">
-                    example.com
-                  </a>
-                </li>
-                <li>
-                  Explorer:{" "}
-                  <a href="#" className="text-blue-500 hover:underline">
-                    explorer.example.com
-                  </a>
-                </li>
-                <li>
-                  Forum:{" "}
-                  <a href="#" className="text-blue-500 hover:underline">
-                    forum.example.com
-                  </a>
-                </li>
-              </ul>
-            </div>
+      {/* Prediction placement section */}
+      <div className="mb-8">
+        <div className="flex items-center mb-4">
+          <div className="flex items-center">
+            <Image
+              src="/icons/prediction.svg"
+              alt="Place prediction"
+              width={24}
+              height={24}
+            />
+            <span className="ml-2 font-medium">Place prediction</span>
           </div>
         </div>
+        <PredictionPlacement
+          entryPrice={tokenData.entryPrice}
+          liquidationPrice={tokenData.liquidationPrice}
+          available={tokenData.available}
+        />
+      </div>
+
+      {/* Open positions section */}
+      <div className="mb-8">
+        <div className="flex items-center mb-4">
+          <div className="flex items-center">
+            <Image
+              src="/icons/positions.svg"
+              alt="Open Positions"
+              width={24}
+              height={24}
+            />
+            <span className="ml-2 font-medium">Open Positions</span>
+          </div>
+        </div>
+        <OpenPositions positionValue={tokenData.positionValue} />
+      </div>
+
+      {/* Stats section */}
+      <div className="grid grid-cols-2 gap-6 mb-8">
+        <MarketStats
+          marketCap={tokenData.marketCap}
+          volume24h={tokenData.volume24h}
+        />
+        <CommunityStats
+          socialScore={tokenData.socialScore}
+          communityScore={tokenData.communityScore}
+        />
+      </div>
+
+      {/* Leaderboard section */}
+      <div className="mb-8">
+        <div className="flex items-center mb-4">
+          <div className="flex items-center">
+            <Image
+              src="/icons/leaderboard.svg"
+              alt="Leaderboard"
+              width={24}
+              height={24}
+            />
+            <span className="ml-2 font-medium">Leaderboard</span>
+          </div>
+        </div>
+        <Leaderboard />
+      </div>
+
+      {/* Vitality score section */}
+      <div className="mb-8">
+        <div className="flex items-center mb-4">
+          <div className="flex items-center">
+            <Image
+              src="/icons/vitality.svg"
+              alt="Vitality Score"
+              width={24}
+              height={24}
+            />
+            <span className="ml-2 font-medium">Vitality Score</span>
+          </div>
+        </div>
+        <VitalityScore score={tokenData.vitalityScore} />
       </div>
     </div>
   );
-}
+};
+
+export default TokenDetailPage;
