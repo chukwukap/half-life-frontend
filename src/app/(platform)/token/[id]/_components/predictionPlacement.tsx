@@ -39,39 +39,46 @@ const PredictionPlacement: FC<PredictionPlacementProps> = ({
 
   return (
     <div className="border border-gray-200 rounded-lg p-4">
+      {/* Section header */}
+      <div className="flex items-center mb-4">
+        <div className="flex items-center space-x-1">
+          <span className="text-gray-500 text-sm">Place prediction</span>
+        </div>
+      </div>
+
       {/* Direction toggle */}
-      <div className="flex mb-6 bg-gray-100 p-1 rounded-full max-w-xs">
-        <button
-          className={`flex-1 py-2 px-4 rounded-full text-center transition-colors ${
-            direction === "long" ? "bg-green-500 text-white" : "text-gray-500"
-          }`}
-          onClick={() => setDirection("long")}
-        >
-          Long
-        </button>
-        <button
-          className={`flex-1 py-2 px-4 rounded-full text-center transition-colors ${
-            direction === "short"
-              ? "bg-gray-300 text-gray-800"
-              : "text-gray-500"
-          }`}
-          onClick={() => setDirection("short")}
-        >
-          Short
-        </button>
+      <div className="mb-6">
+        <div className="bg-gray-100 rounded-full p-1 flex">
+          <button
+            className={`flex-1 py-2 px-4 rounded-full transition-colors text-sm font-medium ${
+              direction === "long" ? "bg-green-500 text-white" : "text-gray-500"
+            }`}
+            onClick={() => setDirection("long")}
+          >
+            Long
+          </button>
+          <button
+            className={`flex-1 py-2 px-4 rounded-full transition-colors text-sm font-medium ${
+              direction === "short"
+                ? "bg-gray-300 text-gray-800"
+                : "text-gray-500"
+            }`}
+            onClick={() => setDirection("short")}
+          >
+            Short
+          </button>
+        </div>
       </div>
 
       {/* Amount input */}
       <div className="mb-6">
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          Amount (USD)
-        </label>
+        <label className="block text-xs text-gray-500 mb-2">Amount (USD)</label>
         <div className="relative">
           <input
             type="text"
             value={amount}
             onChange={handleAmountChange}
-            className="w-full py-2 px-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+            className="w-full py-3 px-3 border border-gray-200 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-sm"
             placeholder="Enter amount"
           />
           <button
@@ -81,47 +88,49 @@ const PredictionPlacement: FC<PredictionPlacementProps> = ({
             Max
           </button>
         </div>
-        <p className="mt-1 text-sm text-gray-500">Available: ${available}</p>
+        <div className="flex justify-between items-center mt-2">
+          <p className="text-xs text-gray-600">Available: ${available}</p>
+        </div>
       </div>
 
-      {/* Leverage slider */}
+      {/* Leverage control */}
       <div className="mb-6">
-        <div className="flex justify-between items-center mb-2">
-          <label className="block text-sm font-medium text-gray-700">
-            Leverage
-          </label>
-          <div className="flex items-center border border-gray-300 rounded-lg">
-            <button
-              className="p-1 hover:bg-gray-100"
-              onClick={() => adjustLeverage(false)}
-            >
-              <Minus size={16} />
-            </button>
-            <span className="px-3 font-bold">{leverage}×</span>
-            <button
-              className="p-1 hover:bg-gray-100"
-              onClick={() => adjustLeverage(true)}
-            >
-              <Plus size={16} />
-            </button>
-          </div>
+        <div className="text-xs text-gray-500 mb-2">Leverage</div>
+        <div className="flex items-center justify-center">
+          <button
+            onClick={() => adjustLeverage(false)}
+            className="w-8 h-8 bg-white border border-gray-200 text-gray-500 rounded-full flex items-center justify-center hover:bg-gray-50"
+          >
+            <Minus size={16} />
+          </button>
+          <span className="mx-8 font-bold text-blue-600 text-lg">
+            {leverage}×
+          </span>
+          <button
+            onClick={() => adjustLeverage(true)}
+            className="w-8 h-8 bg-white border border-gray-200 text-gray-500 rounded-full flex items-center justify-center hover:bg-gray-50"
+          >
+            <Plus size={16} />
+          </button>
         </div>
       </div>
 
       {/* Price details */}
-      <div className="grid grid-cols-2 gap-4 mb-6 text-sm">
-        <div>
-          <p className="text-gray-500 mb-1">Entry price</p>
-          <p className="font-medium">${entryPrice}</p>
-        </div>
-        <div>
-          <p className="text-gray-500 mb-1">Liquidation price</p>
-          <p className="font-medium">${liquidationPrice}</p>
+      <div className="mb-6">
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <p className="text-xs text-gray-500 mb-1">Entry price</p>
+            <p className="text-sm font-medium">${entryPrice}</p>
+          </div>
+          <div>
+            <p className="text-xs text-gray-500 mb-1">Liquidation price</p>
+            <p className="text-sm font-medium">${liquidationPrice}</p>
+          </div>
         </div>
       </div>
 
       {/* Submit button */}
-      <button className="w-full py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors">
+      <button className="w-full py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors text-sm">
         Open Position
       </button>
     </div>

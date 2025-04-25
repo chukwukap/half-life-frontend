@@ -40,22 +40,22 @@ const Leaderboard: FC = () => {
   return (
     <div className="border border-gray-200 rounded-lg overflow-hidden">
       {/* Table header */}
-      <div className="grid grid-cols-3 p-3 bg-gray-50 border-b text-sm font-medium text-gray-500">
+      <div className="grid grid-cols-3 px-4 py-3 bg-gray-50 border-b text-xs font-medium text-gray-500">
         <div>Rank</div>
         <div>Username</div>
         <div className="text-right">PnL</div>
       </div>
 
       {/* Table rows */}
-      <div className="divide-y">
-        {leaderboardData.slice(0, 10).map((entry) => (
+      <div className="divide-y divide-gray-100">
+        {leaderboardData.slice(0, 16).map((entry) => (
           <div
             key={entry.rank}
-            className="grid grid-cols-3 p-3 hover:bg-gray-50"
+            className="grid grid-cols-3 px-4 py-3 hover:bg-gray-50"
           >
-            <div className="text-gray-500">{entry.rank}</div>
-            <div className="font-medium">{entry.username}</div>
-            <div className="text-right text-green-500 font-medium">
+            <div className="text-gray-500 text-xs">{entry.rank}</div>
+            <div className="font-medium text-sm">{entry.username}</div>
+            <div className="text-right text-green-500 font-medium text-sm">
               {entry.pnl}
             </div>
           </div>
@@ -63,12 +63,13 @@ const Leaderboard: FC = () => {
       </div>
 
       {/* Pagination */}
-      <div className="p-3 border-t flex justify-center gap-2">
-        <button className="p-1 rounded-full hover:bg-gray-100">
-          <ChevronLeft size={18} />
+      <div className="p-3 border-t flex justify-center gap-1">
+        <button className="w-6 h-6 rounded-full hover:bg-gray-100 flex items-center justify-center">
+          <ChevronLeft size={16} className="text-gray-500" />
         </button>
-        <button className="p-1 rounded-full hover:bg-gray-100">
-          <ChevronRight size={18} />
+        <div className="w-1 h-1 rounded-full bg-blue-600 self-center"></div>
+        <button className="w-6 h-6 rounded-full hover:bg-gray-100 flex items-center justify-center">
+          <ChevronRight size={16} className="text-gray-500" />
         </button>
       </div>
     </div>

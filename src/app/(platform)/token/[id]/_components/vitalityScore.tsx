@@ -16,7 +16,7 @@ const VitalityScore: FC<VitalityScoreProps> = ({ score }) => {
     return (
       <div className="flex gap-[2px]">
         {Array.from({ length: totalIndicators }).map((_, index) => {
-          let color = "bg-gray-200";
+          let color = "bg-gray-100";
 
           if (index < filledIndicators) {
             // Determine color based on position
@@ -33,7 +33,7 @@ const VitalityScore: FC<VitalityScoreProps> = ({ score }) => {
           }
 
           return (
-            <div key={index} className={`h-3 flex-1 rounded-sm ${color}`} />
+            <div key={index} className={`h-2 flex-1 rounded-sm ${color}`} />
           );
         })}
       </div>
@@ -43,15 +43,15 @@ const VitalityScore: FC<VitalityScoreProps> = ({ score }) => {
   return (
     <div className="border border-gray-200 rounded-lg p-4">
       <div className="mb-4">
-        <p className="text-sm text-gray-500 mb-1">Life Index</p>
+        <p className="text-xs text-gray-500 mb-1">Life Index</p>
         <div className="flex justify-between items-center mb-2">
-          <div className="font-bold text-lg">{score}%</div>
-          <div className="text-gray-500 text-sm">80%</div>
+          <div className="font-medium">{score}%</div>
+          <div className="text-gray-500 text-xs">80%</div>
         </div>
         {renderScoreIndicators()}
       </div>
 
-      <p className="text-sm text-gray-600">
+      <p className="text-xs text-gray-500 leading-relaxed">
         The vitality score indicates the token&apos;s overall health based on
         market metrics, social activity, and community engagement.
       </p>
