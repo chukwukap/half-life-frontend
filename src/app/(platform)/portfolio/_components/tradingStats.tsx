@@ -2,42 +2,6 @@
 
 import { FC } from "react";
 
-// Trading stat item component
-interface StatItemProps {
-  label: string;
-  value: string;
-  icon?: React.ReactNode;
-}
-
-const StatItem: FC<StatItemProps> = ({ label, value, icon }) => {
-  return (
-    <div className="flex items-start">
-      <div className="bg-blue-50 p-2 rounded-lg mr-3">
-        {icon || (
-          <svg
-            className="h-5 w-5 text-blue-600"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        )}
-      </div>
-      <div>
-        <div className="text-gray-500 text-xs mb-1">{label}</div>
-        <div className="text-xl font-bold">{value}</div>
-      </div>
-    </div>
-  );
-};
-
 const TradingStats: FC = () => {
   // Mock data
   const stats = {
@@ -46,6 +10,54 @@ const TradingStats: FC = () => {
     unrealizedPnl: "+$1,436.92",
     realizedPnl: "+$4,216.50",
   };
+
+  const StatItem: FC<{ label: string; value: string; isGreen?: boolean }> = ({
+    label,
+    value,
+    isGreen,
+  }) => (
+    <div className="flex items-center">
+      <div className="bg-blue-50 p-3 rounded-full flex items-center justify-center">
+        <svg
+          className="h-5 w-5 text-blue-600"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M12 2L6 8L12 14L18 8L12 2Z"
+            fill="#EBF2FF"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M2 8H22"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M6 8L12 21L18 8"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </div>
+      <div className="ml-3">
+        <div className="text-gray-500 text-xs mb-1">{label}</div>
+        <div
+          className={`text-xl font-semibold ${isGreen ? "text-green-500" : ""}`}
+        >
+          {value}
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <div className="bg-white rounded-3xl p-6 h-full border border-gray-100 shadow-sm">
@@ -57,21 +69,21 @@ const TradingStats: FC = () => {
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            d="M16 6L12 2L8 6"
+            d="M17 6L12 1L7 6"
             stroke="currentColor"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
           <path
-            d="M12 2V16"
+            d="M12 1V16"
             stroke="currentColor"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
           <path
-            d="M21 14L21 19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21L5 21C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19L3 14"
+            d="M3 12V19C3 19.5304 3.21071 20.0391 3.58579 20.4142C3.96086 20.7893 4.46957 21 5 21H19C19.5304 21 20.0391 20.7893 20.4142 20.4142C20.7893 20.0391 21 19.5304 21 19V12"
             stroke="currentColor"
             strokeWidth="2"
             strokeLinecap="round"
@@ -81,11 +93,19 @@ const TradingStats: FC = () => {
         <h2 className="text-blue-600 font-medium">Trading stats</h2>
       </div>
 
-      <div className="grid grid-cols-2 gap-6">
+      <div className="grid grid-cols-2 gap-y-8 gap-x-4">
         <StatItem label="Total Trades" value={stats.totalTrades} />
         <StatItem label="Win Rate" value={stats.winRate} />
-        <StatItem label="Unrealized PnL" value={stats.unrealizedPnl} />
-        <StatItem label="Realized PnL" value={stats.realizedPnl} />
+        <StatItem
+          label="Unrealized PnL"
+          value={stats.unrealizedPnl}
+          isGreen={true}
+        />
+        <StatItem
+          label="Realized PnL"
+          value={stats.realizedPnl}
+          isGreen={true}
+        />
       </div>
     </div>
   );
