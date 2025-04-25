@@ -1,6 +1,7 @@
 import "./globals.css";
 import { fontClasses } from "@/lib/fonts";
 import type { Metadata } from "next";
+import AppProviders from "@/components/providers/appProviders";
 
 export const metadata: Metadata = {
   title: {
@@ -17,25 +18,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                // Check for stored theme preference or get from system preference
-                const theme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-                
-                // Apply the theme class to document
-                document.documentElement.classList.toggle('dark', theme === 'dark');
-              })();
-            `,
-          }}
-        />
-      </head>
       <body
         className={`${fontClasses.inter} ${fontClasses.roboto} antialiased min-h-screen flex flex-col`}
       >
-        {children}
+        <AppProviders>{children}</AppProviders>
       </body>
     </html>
   );
