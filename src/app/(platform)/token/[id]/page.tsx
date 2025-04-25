@@ -51,46 +51,52 @@ const TokenDetailPage: FC = () => {
       </div>
 
       {/* Token header */}
-      <div className="flex items-center mb-8">
-        <div className="relative w-12 h-12 mr-4">
-          <Image
-            src={tokenData.logoUrl}
-            alt={tokenData.name}
-            width={48}
-            height={48}
-            className="rounded-full"
-          />
-        </div>
-        <div>
-          <h1 className="text-2xl font-bold">{tokenData.name}</h1>
-          <p className="text-gray-500 text-sm">{tokenData.fullName}</p>
-        </div>
-        <button className="ml-auto bg-blue-50 text-blue-600 p-2 rounded-full hover:bg-blue-100 transition-colors">
-          <Star className="h-5 w-5" />
-        </button>
-      </div>
+      <div className="bg-white rounded-3xl p-6 mb-8 shadow-sm">
+        <div className="flex items-center">
+          <div className="flex items-center">
+            <div className="relative w-12 h-12 mr-4">
+              <Image
+                src={tokenData.logoUrl}
+                alt={tokenData.name}
+                width={48}
+                height={48}
+                className="rounded-full"
+              />
+            </div>
+            <div>
+              <h1 className="text-2xl font-bold">{tokenData.name}</h1>
+              <p className="text-gray-500 text-sm">{tokenData.fullName}</p>
+            </div>
+            <button className="ml-4 bg-blue-50 text-blue-600 p-2 rounded-full hover:bg-blue-100 transition-colors">
+              <Star className="h-5 w-5" />
+            </button>
+          </div>
 
-      {/* Token stats grid */}
-      <div className="grid grid-cols-4 gap-6 mb-8">
-        <div>
-          <p className="text-gray-500 text-xs mb-1">Open traders</p>
-          <p className="text-base font-medium">
-            {tokenData.openTraders.toLocaleString()}
-          </p>
-        </div>
-        <div>
-          <p className="text-gray-500 text-xs mb-1">Volume</p>
-          <p className="text-base font-medium">{tokenData.volume}</p>
-        </div>
-        <div>
-          <p className="text-gray-500 text-xs mb-1">Funding</p>
-          <p className="text-base font-medium text-green-500">
-            {tokenData.funding}
-          </p>
-        </div>
-        <div>
-          <p className="text-gray-500 text-xs mb-1">Countdown</p>
-          <p className="text-base font-medium">{tokenData.countdown}</p>
+          <div className="flex ml-auto space-x-12">
+            <div>
+              <p className="text-gray-500 text-xs mb-1">Open trades</p>
+              <div className="flex items-center">
+                <div className="w-4 h-4 rounded-full bg-green-100 border-2 border-green-500 mr-2"></div>
+                <p className="text-base font-medium">
+                  ${tokenData.openTraders.toLocaleString()}
+                </p>
+              </div>
+            </div>
+            <div>
+              <p className="text-gray-500 text-xs mb-1">Volume</p>
+              <p className="text-base font-medium">{tokenData.volume}</p>
+            </div>
+            <div>
+              <p className="text-gray-500 text-xs mb-1">Funding</p>
+              <p className="text-base font-medium text-green-500">
+                {tokenData.funding}
+              </p>
+            </div>
+            <div>
+              <p className="text-gray-500 text-xs mb-1">Cooldown</p>
+              <p className="text-base font-medium">{tokenData.countdown}</p>
+            </div>
+          </div>
         </div>
       </div>
 
