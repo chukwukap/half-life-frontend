@@ -202,27 +202,6 @@ const TokenDetailPage: FC = () => {
 
           {/* Open positions section */}
           <div className="mb-6">
-            <div className="flex items-center mb-4">
-              <div className="flex items-center">
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="mr-2"
-                >
-                  <path
-                    d="M16.6667 5.00001L7.50004 14.1667L3.33337 10"
-                    stroke="#374151"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-                <span className="font-medium text-sm">Open Positions</span>
-              </div>
-            </div>
             <OpenPositions positionValue={tokenData.positionValue} />
           </div>
 
