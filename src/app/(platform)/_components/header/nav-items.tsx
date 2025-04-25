@@ -11,7 +11,7 @@ const routes = [
   },
   {
     label: "Tokens",
-    href: "/tokens",
+    href: "/token",
   },
   {
     label: "Social",
