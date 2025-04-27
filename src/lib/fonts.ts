@@ -1,64 +1,64 @@
 import { Inter, Roboto, Poppins, Open_Sans } from "next/font/google";
 
 /**
- * Inter font configuration
+ * Primary font configuration
  * A modern, highly readable font designed for screens
  */
-export const inter = Inter({
+export const primaryFont = Inter({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-inter",
+  variable: "--font-primary",
 });
 
 /**
- * Roboto font configuration
+ * Secondary font configuration
  * A clean, modern sans-serif font
  */
-export const roboto = Roboto({
+export const secondaryFont = Roboto({
   weight: ["400", "500", "700"],
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-roboto",
+  variable: "--font-secondary",
 });
 
 /**
- * Poppins font configuration
+ * Heading font configuration
  * A geometric sans-serif font with a modern touch
  */
-export const poppins = Poppins({
+export const headingFont = Poppins({
   weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-poppins",
+  variable: "--font-heading",
 });
 
 /**
- * Open Sans font configuration
+ * Body font configuration
  * A humanist sans-serif typeface
  */
-export const openSans = Open_Sans({
+export const bodyFont = Open_Sans({
   weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-open-sans",
+  variable: "--font-body",
 });
 
 /**
  * Font class names for use in className prop
  */
 export const fontClasses = {
-  inter: inter.variable,
-  roboto: roboto.variable,
-  poppins: poppins.variable,
-  openSans: openSans.variable,
+  primary: primaryFont.variable,
+  secondary: secondaryFont.variable,
+  heading: headingFont.variable,
+  body: bodyFont.variable,
 };
 
 /**
  * Font family names for use in CSS
  */
 export const fontFamilies = {
-  inter: "var(--font-inter)",
-  roboto: "var(--font-roboto)",
-  poppins: "var(--font-poppins)",
-  openSans: "var(--font-open-sans)",
+  primary: "var(--font-primary)",
+  secondary: "var(--font-secondary)",
+  heading: "var(--font-heading)",
+  body: "var(--font-body)",
 };
