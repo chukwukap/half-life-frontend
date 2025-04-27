@@ -126,14 +126,14 @@ export const TokenGrid = () => {
           </TabsList>
         </div>
 
-        {/* Token cards grid - 3 columns for desktop, 2 for tablet, 1 for mobile */}
+        {/* Token cards grid - with consistent aspect ratio */}
         <TabsContent value="gainers" className="mt-0">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-fr">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {tokens.slice(0, 9).map((token) => (
               <Link
                 href={`/token/${token.id}`}
                 key={token.id}
-                className="h-full"
+                className="block h-full"
               >
                 <TokenCard token={token} />
               </Link>
@@ -142,12 +142,12 @@ export const TokenGrid = () => {
         </TabsContent>
 
         <TabsContent value="favourites" className="mt-0">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-fr">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {tokens.slice(0, 3).map((token) => (
               <Link
                 href={`/token/${token.id}`}
                 key={token.id}
-                className="h-full"
+                className="block h-full"
               >
                 <TokenCard token={token} />
               </Link>
