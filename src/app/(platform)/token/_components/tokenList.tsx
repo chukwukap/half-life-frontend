@@ -50,7 +50,7 @@ const mockTokens: Token[] = [
 ];
 
 export function TokenList() {
-  const [tokens, setTokens] = useState<Token[]>(mockTokens);
+  const [tokens] = useState<Token[]>(mockTokens);
   const [selectedToken, setSelectedToken] = useState<Token | null>(null);
   const router = useRouter();
 
