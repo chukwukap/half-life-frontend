@@ -1,15 +1,10 @@
-import {
-  Roboto,
-  Poppins,
-  Open_Sans,
-  Schibsted_Grotesk,
-} from "next/font/google";
+import { Roboto, Poppins, Open_Sans, Host_Grotesk } from "next/font/google";
 
 /**
  * Primary font configuration
  * A modern, highly readable font designed for screens
  */
-export const primaryFont = Schibsted_Grotesk({
+export const primaryFont = Host_Grotesk({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-primary",

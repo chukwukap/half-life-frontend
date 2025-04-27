@@ -50,7 +50,7 @@ export const NavItems = ({ className, isMobile }: NavItemsProps) => {
           className={cn(
             "px-3 py-2 text-sm transition-colors hover:text-primary relative",
             pathname === route.href
-              ? "text-primary font-medium after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:bg-primary"
+              ? "text-primary font-extrabold after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:bg-primary"
               : "text-muted-foreground",
             isMobile &&
               "text-base w-full p-3 hover:bg-accent rounded-md flex items-center justify-center"

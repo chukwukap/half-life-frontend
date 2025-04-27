@@ -15,7 +15,7 @@ export const UserNav = () => {
     <DropdownMenu>
       <DropdownMenuTrigger className="focus:outline-none">
         <Avatar className="h-8 w-8 border border-border">
-          <AvatarImage src="/avatars/01.png" alt="User avatar" />
+          <AvatarImage src="/assets/img/defiCTO.png" alt="User avatar" />
           <AvatarFallback>HF</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
