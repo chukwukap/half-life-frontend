@@ -151,7 +151,7 @@ export const PositionsCard = () => {
       fundingRate: "+0.01%",
       pnlPercent: "+5.20%",
       isProfit: true,
-      logoSrc: "/wif.png",
+      logoSrc: "/btc.png",
     },
   ];
 
