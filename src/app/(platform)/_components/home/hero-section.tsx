@@ -7,7 +7,7 @@ import { FireIcon } from "@/components/icons";
 /**
  * Hero section component displaying featured token information
  * Based on Figma design with purple gradient background
- * Shows token branding (levETH), progress dots, and Trade CTA
+ * Shows token branding (levETH), progress dots, and Trade CTA at bottom left
  */
 export const HeroSection = () => {
   return (
@@ -15,7 +15,7 @@ export const HeroSection = () => {
       {/* Background pattern overlay - abstract shapes */}
       <div className="absolute inset-0">
         <Image
-          src="/assets/img/hero-bg.png"
+          src="/assets/img/sample-bg.png"
           alt="Hero background"
           fill
           priority
@@ -23,23 +23,21 @@ export const HeroSection = () => {
         />
       </div>
 
-      {/* Content container with proper spacing */}
-      <div className="absolute inset-0 flex flex-col justify-center items-start p-8 md:p-10">
-        {/* Token card - mimicking the design in the image */}
-        <div className="bg-white rounded-2xl p-4 w-full max-w-[400px] mb-6 flex items-center justify-between shadow-lg">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 flex items-center justify-center">
-              <FireIcon className="w-6 h-6" />
-            </div>
-            <span className="text-black font-bold text-2xl">levETH</span>
+      {/* Content container with white card positioned at bottom left */}
+      <div className="absolute inset-0 flex items-end justify-start p-8 md:p-10">
+        <div className="bg-white rounded-2xl py-3 px-4 w-full max-w-[410px] flex items-center justify-between shadow-lg">
+          {/* Token logo and name */}
+          <div className="flex items-center gap-2">
+            <FireIcon className="w-7 h-7" />
+            <span className="text-black font-bold text-xl">levETH</span>
           </div>
 
           {/* Progress dots */}
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-[2px] mx-2">
             {Array.from({ length: 20 }).map((_, i) => (
               <div
                 key={i}
-                className={`h-1.5 w-1.5 rounded-full transition-all duration-300 ${
+                className={`h-1.5 w-1.5 rounded-full ${
                   i < 16 ? "bg-green-500" : "bg-gray-300"
                 }`}
               />
@@ -50,9 +48,9 @@ export const HeroSection = () => {
           <Button
             variant="default"
             className="bg-blue-600 hover:bg-blue-700 
-                     text-white font-medium text-base 
-                     px-6 py-2 h-10 rounded-full
-                     shadow-md transition-all"
+                     text-white font-medium 
+                     px-6 min-w-[90px] h-10 rounded-full
+                     shadow-sm"
           >
             Trade
           </Button>
