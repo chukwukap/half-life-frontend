@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
-import { EmptyPositions } from "./empty-positions";
-import { FireIcon } from "@/components/icons";
+import { useState, useEffect } from "react";
+import { CaretLeftIcon, CaretRightIcon, FireIcon } from "@/components/icons";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 /**
  * Position information interface
@@ -22,10 +22,8 @@ interface PositionProps {
   isProfit: boolean;
   logoSrc?: string;
 }
-
 /**
- * Component displaying a single position
- * Styled to match the design in the provided image
+ * Component displaying a single position with token info, prices, and actions
  */
 const Position = ({
   token,
@@ -40,70 +38,71 @@ const Position = ({
   logoSrc,
 }: PositionProps) => {
   return (
-    <div className="bg-white dark:bg-card rounded-2xl p-4 mb-4 shadow-sm">
-      {/* Position header with token info and profit/strategy */}
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-2">
+    <div className="bg-white rounded-3xl p-6">
+      {/* Token info and strategy header */}
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center gap-3">
           {logoSrc ? (
-            <img src={logoSrc} alt={token} className="w-10 h-10 rounded-full" />
+            <Image
+              src={logoSrc}
+              alt={token}
+              width={32}
+              height={32}
+              className="w-8 h-8 rounded-full"
+            />
           ) : (
-            <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center">
-              <span className="text-amber-800 text-xs font-semibold">
+            <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
+              <span className="text-gray-500 text-sm font-medium">
                 {token.substring(0, 2)}
               </span>
             </div>
           )}
           <div>
-            <h4 className="font-bold text-base">{token}</h4>
-            <p className="text-sm text-muted-foreground">{tokenInfo}</p>
+            <h3 className="font-semibold text-base">{token}</h3>
+            <p className="text-gray-500 text-sm">{tokenInfo}</p>
           </div>
         </div>
+
         <div className="text-right">
-          <div className="px-3 py-1 bg-green-100 text-green-700 text-sm rounded-full inline-block">
+          <div className="inline-block px-3 py-1 bg-emerald-100/50 text-emerald-600 rounded-full text-sm">
             {strategy}
           </div>
-          <div
-            className={cn(
-              "text-base font-bold mt-1",
-              isProfit ? "text-green-500" : "text-red-500"
-            )}
+          <p
+            className={`text-lg font-bold mt-1 ${
+              isProfit ? "text-emerald-500" : "text-red-500"
+            }`}
           >
             {pnlPercent}
-          </div>
-        </div>
-      </div>
-
-      {/* Position details in a 2x2 grid */}
-      <div className="grid grid-cols-2 gap-6 mb-6">
-        <div>
-          <p className="text-muted-foreground text-sm mb-1">Entry price</p>
-          <p className="font-bold text-xl">${entryPrice}</p>
-        </div>
-        <div>
-          <p className="text-muted-foreground text-sm mb-1">Current price</p>
-          <p className="font-bold text-xl">${currentPrice}</p>
-        </div>
-        <div>
-          <p className="text-muted-foreground text-sm mb-1">
-            Liquidation price
           </p>
-          <p className="font-bold text-xl">${liquidationPrice}</p>
-        </div>
-        <div>
-          <p className="text-muted-foreground text-sm mb-1">Funding rate</p>
-          <p className="font-bold text-xl">{fundingRate}</p>
         </div>
       </div>
 
-      {/* Position actions - styled buttons matching the design */}
-      <div className="flex gap-2">
-        <Button className="flex-1 py-2 px-4 bg-blue-50 hover:bg-blue-100 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400 dark:hover:bg-blue-900/30 rounded-xl font-medium text-base">
+      {/* Price details grid */}
+      <div className="grid grid-cols-2 gap-x-8 gap-y-4 mb-6">
+        <div>
+          <p className="text-gray-500 text-xs mb-1">Entry price</p>
+          <p className="font-medium text-sm">${entryPrice}</p>
+        </div>
+        <div>
+          <p className="text-gray-500 text-xs mb-1">Current price</p>
+          <p className="font-medium text-sm">${currentPrice}</p>
+        </div>
+        <div>
+          <p className="text-gray-500 text-xs mb-1">Liquidation price</p>
+          <p className="font-medium text-sm">${liquidationPrice}</p>
+        </div>
+        <div>
+          <p className="text-gray-500 text-xs mb-1">Funding rate</p>
+          <p className="font-medium text-sm">{fundingRate}</p>
+        </div>
+      </div>
+
+      {/* Action buttons - Matching design with light blue and light red backgrounds */}
+      <div className="flex gap-3">
+        <Button className="flex-1 bg-[#EEF4FF] hover:bg-[#E5EDFF] text-[#2D63E2] font-medium rounded-xl py-2.5 text-sm">
           Modify
         </Button>
-        <Button
-          variant="destructive"
-          className="flex-1 py-2 px-4 bg-red-50 hover:bg-red-100 text-red-600 dark:bg-red-900/20 dark:text-red-400 dark:hover:bg-red-900/30 rounded-xl font-medium text-base"
-        >
+        <Button className="flex-1 bg-[#FEE4E2] hover:bg-[#FED7D5] text-[#D92D20] font-medium rounded-xl py-2.5 text-sm">
           Close Position
         </Button>
       </div>
@@ -112,98 +111,12 @@ const Position = ({
 };
 
 /**
- * Positions pagination component
- * Styled to match the design with dot indicators and navigation arrows
- */
-const PositionsPagination = () => {
-  // State to track current page
-  const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = 6;
-
-  // Handle pagination navigation
-  const goToPrevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
-
-  const goToNextPage = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
-
-  return (
-    <div className="flex items-center justify-center pt-6 pb-2">
-      <button
-        className="w-10 h-10 flex items-center justify-center text-muted-foreground rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
-        onClick={goToPrevPage}
-        disabled={currentPage === 1}
-      >
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M15 18L9 12L15 6"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </button>
-      <div className="flex items-center gap-1 mx-6">
-        {Array.from({ length: totalPages }).map((_, i) => (
-          <div
-            key={i}
-            className={`h-2 w-2 rounded-full cursor-pointer ${
-              i + 1 === currentPage
-                ? "bg-blue-500"
-                : "bg-gray-200 dark:bg-gray-700"
-            }`}
-            onClick={() => setCurrentPage(i + 1)}
-          />
-        ))}
-      </div>
-      <button
-        className="w-10 h-10 flex items-center justify-center text-muted-foreground rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
-        onClick={goToNextPage}
-        disabled={currentPage === totalPages}
-      >
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M9 6L15 12L9 18"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </button>
-    </div>
-  );
-};
-
-/**
  * Positions card component showing a list of user's positions
- * Enhanced with state management for positions and pagination
+ * Enhanced with state management for positions and carousel functionality
  */
 export const PositionsCard = () => {
-  // State for toggling between having positions and not
-  const [hasPositions, setHasPositions] = useState(true);
-
   // Sample position data
-  const positions = [
+  const positions: PositionProps[] = [
     {
       token: "WIF",
       tokenInfo: "dogwifhat",
@@ -214,44 +127,185 @@ export const PositionsCard = () => {
       fundingRate: "+0.0125%",
       pnlPercent: "+12.10%",
       isProfit: true,
-      logoSrc: "https://via.placeholder.com/40", // Replace with actual logo
+      logoSrc: "/wif.png",
+    },
+    {
+      token: "TROL",
+      tokenInfo: "trololol",
+      strategy: "Long 10x",
+      entryPrice: "0.133",
+      currentPrice: "0.923",
+      liquidationPrice: "0.113",
+      fundingRate: "-0.0125%",
+      pnlPercent: "-12.10%",
+      isProfit: false,
+      logoSrc: "/trol.png",
+    },
+    {
+      token: "BTC",
+      tokenInfo: "Bitcoin",
+      strategy: "Short 2x",
+      entryPrice: "42000",
+      currentPrice: "41000",
+      liquidationPrice: "45000",
+      fundingRate: "+0.01%",
+      pnlPercent: "+5.20%",
+      isProfit: true,
+      logoSrc: "/wif.png",
     },
   ];
 
-  // Toggle between states for demo purposes
-  const togglePositions = () => {
-    setHasPositions(!hasPositions);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [visiblePositions, setVisiblePositions] = useState<PositionProps[]>([]);
+  const positionsPerPage = 1;
+
+  useEffect(() => {
+    updateVisiblePositions();
+  }, [currentIndex]);
+
+  const updateVisiblePositions = () => {
+    const start = currentIndex;
+    const end = start + positionsPerPage;
+    setVisiblePositions(positions.slice(start, end));
   };
 
+  const nextSlide = () => {
+    if (currentIndex + positionsPerPage < positions.length) {
+      setCurrentIndex((prev) => prev + positionsPerPage);
+    }
+  };
+
+  const prevSlide = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex((prev) => prev - positionsPerPage);
+    }
+  };
+
+  const goToSlide = (index: number) => {
+    const slideIndex = index * positionsPerPage;
+    if (slideIndex < positions.length) {
+      setCurrentIndex(slideIndex);
+    }
+  };
+
+  const totalSlides = Math.ceil(positions.length / positionsPerPage);
+
+  if (positions.length === 0) {
+    return (
+      <div className="bg-background border-border rounded-2xl p-4 shadow-sm border h-full">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <FireIcon className="text-primary" />
+            <h3 className="font-semibold text-lg">My Positions</h3>
+          </div>
+        </div>
+        <EmptyPositions onAddPosition={() => {}} />
+      </div>
+    );
+  }
+
   return (
-    <div className="bg-background dark:bg-background/5 rounded-2xl p-4 shadow-sm border border-gray-100 dark:border-gray-800 h-full flex flex-col">
-      <div className="flex items-center justify-between mb-4">
+    <div className="bg-background border-border rounded-2xl p-4 shadow-sm border h-full flex flex-col">
+      <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <FireIcon className="text-primary" />
           <h3 className="font-semibold text-lg">My Positions</h3>
         </div>
         <Link
           href="/portfolio"
-          className="text-sm font-medium text-blue-600 hover:text-blue-700 bg-blue-50 px-4 py-2 rounded-full"
+          className="text-sm font-medium text-primary hover:text-primary/90 bg-primary/10 px-4 py-2 rounded-full"
         >
           See all
         </Link>
       </div>
 
-      {hasPositions ? (
-        <div className="flex-1">
-          <div className="space-y-4">
-            {positions.map((position, index) => (
-              <Position key={index} {...position} />
+      <div className="flex-1">
+        <div className="space-y-4">
+          {visiblePositions.map((position, index) => (
+            <Position key={`${position.token}-${index}`} {...position} />
+          ))}
+        </div>
+
+        {/* Carousel Navigation */}
+        <div className="flex items-center justify-center">
+          <button
+            className={cn(
+              "w-8 h-8 flex items-center justify-center rounded-full transition-colors",
+              currentIndex === 0
+                ? "text-muted"
+                : "text-muted-foreground hover:bg-muted"
+            )}
+            onClick={prevSlide}
+            disabled={currentIndex === 0}
+          >
+            <CaretLeftIcon className="w-5 h-5" />
+          </button>
+
+          <div className="flex items-center gap-2 mx-6">
+            {Array.from({ length: totalSlides }).map((_, idx) => (
+              <button
+                key={idx}
+                className={cn(
+                  "h-2 w-2 rounded-full transition-colors",
+                  currentIndex / positionsPerPage === idx
+                    ? "bg-primary"
+                    : "bg-muted hover:bg-muted-foreground"
+                )}
+                onClick={() => goToSlide(idx)}
+              />
             ))}
           </div>
-          <PositionsPagination />
+
+          <button
+            className={cn(
+              "w-8 h-8 flex items-center justify-center rounded-full transition-colors",
+              currentIndex + positionsPerPage >= positions.length
+                ? "text-muted"
+                : "text-muted-foreground hover:bg-muted"
+            )}
+            onClick={nextSlide}
+            disabled={currentIndex + positionsPerPage >= positions.length}
+          >
+            <CaretRightIcon className="w-5 h-5" />
+          </button>
         </div>
-      ) : (
-        <div className="flex-1 flex items-center justify-center">
-          <EmptyPositions onAddPosition={togglePositions} />
+      </div>
+    </div>
+  );
+};
+
+/**
+ * EmptyPositions component displays when user has no active trading positions
+ * Shows illustration, message and CTA to browse tokens
+ */
+const EmptyPositions = ({ onAddPosition }: { onAddPosition?: () => void }) => {
+  return (
+    <div className="w-full flex flex-col items-center justify-center py-10 px-4">
+      <div className="w-full h-64 bg-blue-50 dark:bg-blue-900/5 rounded-2xl mb-6 flex items-center justify-center">
+        <div className="w-48 h-48 bg-blue-100 dark:bg-blue-900/10 rounded-full flex items-center justify-center">
+          <div className="w-32 h-32 bg-blue-200 dark:bg-blue-900/20 rounded-full flex items-center justify-center">
+            <div className="w-16 h-16 bg-blue-300 dark:bg-blue-900/30 rounded-full" />
+          </div>
         </div>
-      )}
+      </div>
+
+      <h3 className="font-bold text-xl text-center mb-2">
+        You have no active positions
+      </h3>
+
+      <p className="text-center text-muted-foreground mb-6 max-w-xs">
+        Pick a hype token and bet on its rise or collapse. Don&apos;t miss the
+        action
+      </p>
+
+      <Link href="/token">
+        <Button
+          className="bg-primary hover:bg-primary/90 text-white font-medium text-base px-8 py-3 h-12 rounded-xl"
+          onClick={onAddPosition}
+        >
+          Browse tokens
+        </Button>
+      </Link>
     </div>
   );
 };

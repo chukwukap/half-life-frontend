@@ -2,56 +2,61 @@
 
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { FireIcon } from "@/components/icons";
 
 /**
- * Hero section displaying the featured token with a gradient background
- * and decorative elements for visual appeal
+ * Hero section component displaying featured token information
+ * Based on Figma design with purple gradient background
+ * Shows token branding (levETH), progress dots, and Trade CTA
  */
 export const HeroSection = () => {
   return (
-    <div className="relative w-full rounded-xl overflow-hidden bg-gradient-to-br from-indigo-500 via-indigo-600 to-purple-700 h-full min-h-[300px]">
-      {/* Background pattern overlay */}
+    <div className="relative w-full rounded-2xl overflow-hidden bg-gradient-to-r from-indigo-800 to-indigo-600 h-full min-h-[300px] shadow-lg">
+      {/* Background pattern overlay - abstract shapes */}
       <div className="absolute inset-0">
         <Image
-          src="/assets/img/sample-bg.png"
+          src="/assets/img/hero-bg.png"
           alt="Hero background"
           fill
           priority
-          className="object-cover opacity-30"
+          className="object-cover opacity-90"
         />
       </div>
 
-      {/* Content container */}
-      <div className="absolute inset-0 flex flex-col justify-center items-start p-8">
-        {/* Token info */}
-        <div className="flex items-center gap-2 mb-6">
-          <div className="bg-white/20 backdrop-blur-sm rounded-full p-2">
-            <div className="w-6 h-6 rounded-full bg-blue-400 flex items-center justify-center">
-              <span className="text-white text-xs">Ξ</span>
+      {/* Content container with proper spacing */}
+      <div className="absolute inset-0 flex flex-col justify-center items-start p-8 md:p-10">
+        {/* Token card - mimicking the design in the image */}
+        <div className="bg-white rounded-2xl p-4 w-full max-w-[400px] mb-6 flex items-center justify-between shadow-lg">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 flex items-center justify-center">
+              <FireIcon className="w-6 h-6" />
             </div>
+            <span className="text-black font-bold text-2xl">levETH</span>
           </div>
-          <span className="text-white font-medium">levETH</span>
-        </div>
 
-        {/* Progress indicator */}
-        <div className="flex items-center gap-1.5 mb-6">
-          {Array.from({ length: 15 }).map((_, i) => (
-            <div
-              key={i}
-              className={`h-1.5 w-1.5 rounded-full ${
-                i < 10 ? "bg-green-400" : "bg-white/40"
-              }`}
-            />
-          ))}
-        </div>
+          {/* Progress dots */}
+          <div className="flex items-center gap-1">
+            {Array.from({ length: 20 }).map((_, i) => (
+              <div
+                key={i}
+                className={`h-1.5 w-1.5 rounded-full transition-all duration-300 ${
+                  i < 16 ? "bg-green-500" : "bg-gray-300"
+                }`}
+              />
+            ))}
+          </div>
 
-        {/* Action button */}
-        <Button
-          variant="default"
-          className="bg-blue-500 hover:bg-blue-600 text-white px-8 rounded-md"
-        >
-          Trade
-        </Button>
+          {/* Trade button */}
+          <Button
+            variant="default"
+            className="bg-blue-600 hover:bg-blue-700 
+                     text-white font-medium text-base 
+                     px-6 py-2 h-10 rounded-full
+                     shadow-md transition-all"
+          >
+            Trade
+          </Button>
+        </div>
       </div>
     </div>
   );
