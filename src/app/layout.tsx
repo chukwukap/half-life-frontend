@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${fontClasses.inter} ${fontClasses.roboto} antialiased min-h-screen flex flex-col`}
+        className={`${fontClasses.primary} ${fontClasses.secondary} ${fontClasses.heading} ${fontClasses.body} antialiased min-h-screen flex flex-col font-primary`}
       >
         <AppProviders>{children}</AppProviders>
       </body>

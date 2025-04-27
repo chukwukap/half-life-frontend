@@ -1,10 +1,15 @@
-import { Inter, Roboto, Poppins, Open_Sans } from "next/font/google";
+import {
+  Roboto,
+  Poppins,
+  Open_Sans,
+  Schibsted_Grotesk,
+} from "next/font/google";
 
 /**
  * Primary font configuration
  * A modern, highly readable font designed for screens
  */
-export const primaryFont = Inter({
+export const primaryFont = Schibsted_Grotesk({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-primary",
