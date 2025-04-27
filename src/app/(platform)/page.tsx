@@ -1,6 +1,7 @@
 import { HeroSection, TrendingToken } from "./_components/home/hero-section";
 import { PositionsCard } from "./_components/home/positions-card";
 import { TokenGrid } from "./_components/home/token-grid";
+import { DepositCard } from "./_components/home/deposit-card";
 import { FireIcon } from "@/components/icons";
 
 /**
@@ -41,27 +42,9 @@ export default function Home() {
           <TokenGrid />
         </div>
 
-        {/* Deposit card - takes 4/12 columns and has a fixed height to match design */}
+        {/* Deposit card - takes 4/12 columns on desktop */}
         <div className="md:col-span-4 h-full">
-          <div className="bg-indigo-900 rounded-2xl text-white p-6 h-[360px] flex flex-col">
-            <h2 className="text-2xl font-bold mb-3">Deposit on Half-Life</h2>
-            <p className="text-white/80 mb-auto">
-              Deposit assets into Half-Life to activate your account, earn
-              trading power, gain exposure to token lifespan dynamics
-            </p>
-
-            <div className="flex flex-col items-start mt-6">
-              <button className="bg-white text-indigo-900 rounded-full py-2 px-6 font-medium flex items-center gap-2 mb-4">
-                <span className="text-indigo-600 text-lg">⊕</span>
-                Deposit
-              </button>
-              <div className="flex gap-1 mt-1">
-                <span className="w-1.5 h-1.5 bg-white rounded-full"></span>
-                <span className="w-1.5 h-1.5 bg-white/40 rounded-full"></span>
-                <span className="w-1.5 h-1.5 bg-white/40 rounded-full"></span>
-              </div>
-            </div>
-          </div>
+          <DepositCard />
         </div>
       </div>
     </main>
