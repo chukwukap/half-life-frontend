@@ -4,6 +4,8 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { EmptyPositions } from "./empty-positions";
+import { FireIcon } from "@/components/icons";
+import { cn } from "@/lib/utils";
 
 /**
  * Position information interface
@@ -15,14 +17,15 @@ interface PositionProps {
   entryPrice: string;
   currentPrice: string;
   liquidationPrice: string;
-  pnl: string;
+  fundingRate: string;
   pnlPercent: string;
   isProfit: boolean;
+  logoSrc?: string;
 }
 
 /**
  * Component displaying a single position
- * Styled to match the design in the provided image with cleaner UI
+ * Styled to match the design in the provided image
  */
 const Position = ({
   token,
@@ -31,80 +34,75 @@ const Position = ({
   entryPrice,
   currentPrice,
   liquidationPrice,
-  pnl,
+  fundingRate,
   pnlPercent,
   isProfit,
+  logoSrc,
 }: PositionProps) => {
   return (
-    <div className="bg-white dark:bg-card rounded-xl p-4 mb-2 shadow-sm">
+    <div className="bg-white dark:bg-card rounded-2xl p-4 mb-4 shadow-sm">
       {/* Position header with token info and profit/strategy */}
-      <div className="flex items-center justify-between mb-3">
+      <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center">
-            <span className="text-amber-800 text-xs font-semibold">
-              {token.substring(0, 2)}
-            </span>
-          </div>
+          {logoSrc ? (
+            <img src={logoSrc} alt={token} className="w-10 h-10 rounded-full" />
+          ) : (
+            <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center">
+              <span className="text-amber-800 text-xs font-semibold">
+                {token.substring(0, 2)}
+              </span>
+            </div>
+          )}
           <div>
-            <h4 className="font-medium text-sm">{token}</h4>
-            <p className="text-xs text-gray-500">{tokenInfo}</p>
+            <h4 className="font-bold text-base">{token}</h4>
+            <p className="text-sm text-muted-foreground">{tokenInfo}</p>
           </div>
         </div>
         <div className="text-right">
-          <span
-            className={`text-sm font-semibold ${
+          <div className="px-3 py-1 bg-green-100 text-green-700 text-sm rounded-full inline-block">
+            {strategy}
+          </div>
+          <div
+            className={cn(
+              "text-base font-bold mt-1",
               isProfit ? "text-green-500" : "text-red-500"
-            }`}
+            )}
           >
             {pnlPercent}
-          </span>
-          <div className="mt-1 px-2 py-0.5 bg-green-100 text-green-700 text-xs rounded-full inline-block">
-            {strategy}
           </div>
         </div>
       </div>
 
-      {/* Position details in a cleaner 2x2 grid */}
-      <div className="grid grid-cols-2 gap-4 mb-3 text-sm">
+      {/* Position details in a 2x2 grid */}
+      <div className="grid grid-cols-2 gap-6 mb-6">
         <div>
-          <p className="text-xs text-gray-500">Entry price</p>
-          <p className="font-medium">${entryPrice}</p>
+          <p className="text-muted-foreground text-sm mb-1">Entry price</p>
+          <p className="font-bold text-xl">${entryPrice}</p>
         </div>
         <div>
-          <p className="text-xs text-gray-500">Current price</p>
-          <p className="font-medium">${currentPrice}</p>
+          <p className="text-muted-foreground text-sm mb-1">Current price</p>
+          <p className="font-bold text-xl">${currentPrice}</p>
         </div>
         <div>
-          <p className="text-xs text-gray-500">Liquidation price</p>
-          <p className="font-medium">${liquidationPrice}</p>
-        </div>
-        <div>
-          <p className="text-xs text-gray-500">Funding rate</p>
-          <p
-            className={`font-medium ${
-              isProfit ? "text-green-500" : "text-red-500"
-            }`}
-          >
-            {isProfit ? "+" : ""}
-            {pnl}
+          <p className="text-muted-foreground text-sm mb-1">
+            Liquidation price
           </p>
+          <p className="font-bold text-xl">${liquidationPrice}</p>
+        </div>
+        <div>
+          <p className="text-muted-foreground text-sm mb-1">Funding rate</p>
+          <p className="font-bold text-xl">{fundingRate}</p>
         </div>
       </div>
 
       {/* Position actions - styled buttons matching the design */}
       <div className="flex gap-2">
-        <Button
-          className="flex-1 py-1.5 text-xs bg-blue-50 text-blue-600 hover:bg-blue-100 dark:bg-blue-900/20 dark:text-blue-400 dark:hover:bg-blue-900/30 rounded-lg font-medium"
-          title="Modify position"
-          onClick={() => console.log(`Modifying position for ${token}`)}
-        >
+        <Button className="flex-1 py-2 px-4 bg-blue-50 hover:bg-blue-100 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400 dark:hover:bg-blue-900/30 rounded-xl font-medium text-base">
           Modify
         </Button>
         <Button
           variant="destructive"
-          className="flex-1 py-1.5 text-xs bg-red-50 text-red-600 hover:bg-red-100 dark:bg-red-900/20 dark:text-red-400 dark:hover:bg-red-900/30 rounded-lg font-medium"
-          title="Close position"
-          onClick={() => console.log(`Closing position for ${token}`)}
+          className="flex-1 py-2 px-4 bg-red-50 hover:bg-red-100 text-red-600 dark:bg-red-900/20 dark:text-red-400 dark:hover:bg-red-900/30 rounded-xl font-medium text-base"
         >
           Close Position
         </Button>
@@ -136,15 +134,15 @@ const PositionsPagination = () => {
   };
 
   return (
-    <div className="flex items-center justify-between pt-4">
+    <div className="flex items-center justify-center pt-6 pb-2">
       <button
-        className="w-8 h-8 flex items-center justify-center text-muted-foreground hover:text-foreground rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
+        className="w-10 h-10 flex items-center justify-center text-muted-foreground rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
         onClick={goToPrevPage}
         disabled={currentPage === 1}
       >
         <svg
-          width="16"
-          height="16"
+          width="24"
+          height="24"
           viewBox="0 0 24 24"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -158,11 +156,11 @@ const PositionsPagination = () => {
           />
         </svg>
       </button>
-      <div className="flex items-center gap-1">
+      <div className="flex items-center gap-1 mx-6">
         {Array.from({ length: totalPages }).map((_, i) => (
           <div
             key={i}
-            className={`h-1.5 w-1.5 rounded-full cursor-pointer ${
+            className={`h-2 w-2 rounded-full cursor-pointer ${
               i + 1 === currentPage
                 ? "bg-blue-500"
                 : "bg-gray-200 dark:bg-gray-700"
@@ -172,13 +170,13 @@ const PositionsPagination = () => {
         ))}
       </div>
       <button
-        className="w-8 h-8 flex items-center justify-center text-muted-foreground hover:text-foreground rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
+        className="w-10 h-10 flex items-center justify-center text-muted-foreground rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
         onClick={goToNextPage}
         disabled={currentPage === totalPages}
       >
         <svg
-          width="16"
-          height="16"
+          width="24"
+          height="24"
           viewBox="0 0 24 24"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -213,48 +211,46 @@ export const PositionsCard = () => {
       entryPrice: "0.00008",
       currentPrice: "0.00009",
       liquidationPrice: "0.00007",
-      pnl: "0.0125%",
+      fundingRate: "+0.0125%",
       pnlPercent: "+12.10%",
       isProfit: true,
+      logoSrc: "https://via.placeholder.com/40", // Replace with actual logo
     },
   ];
 
+  // Toggle between states for demo purposes
+  const togglePositions = () => {
+    setHasPositions(!hasPositions);
+  };
+
   return (
-    <div className="bg-background dark:bg-background/5 rounded-xl p-4 shadow-sm border border-gray-100 dark:border-gray-800 h-full flex flex-col">
+    <div className="bg-background dark:bg-background/5 rounded-2xl p-4 shadow-sm border border-gray-100 dark:border-gray-800 h-full flex flex-col">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <div className="w-5 h-5 rounded-full bg-blue-500 flex items-center justify-center">
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M21 22H3V2h4v8l2-2 2 2V2h10v20z" fill="white" />
-            </svg>
-          </div>
-          <h3 className="font-medium text-sm">My Positions</h3>
+          <FireIcon className="text-primary" />
+          <h3 className="font-semibold text-lg">My Positions</h3>
         </div>
         <Link
-          href="#"
-          className="text-xs font-medium text-blue-500 hover:text-blue-600"
+          href="/portfolio"
+          className="text-sm font-medium text-blue-600 hover:text-blue-700 bg-blue-50 px-4 py-2 rounded-full"
         >
           See all
         </Link>
       </div>
 
       {hasPositions ? (
-        <div className="flex-1 flex flex-col">
-          {positions.map((position) => (
-            <Position key={position.token} {...position} />
-          ))}
-          <div className="mt-auto">
-            <PositionsPagination />
+        <div className="flex-1">
+          <div className="space-y-4">
+            {positions.map((position, index) => (
+              <Position key={index} {...position} />
+            ))}
           </div>
+          <PositionsPagination />
         </div>
       ) : (
-        <EmptyPositions onAddPosition={() => setHasPositions(true)} />
+        <div className="flex-1 flex items-center justify-center">
+          <EmptyPositions onAddPosition={togglePositions} />
+        </div>
       )}
     </div>
   );
