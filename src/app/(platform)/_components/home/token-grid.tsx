@@ -1,111 +1,15 @@
 "use client";
 
-import { cn } from "@/lib/utils";
-import Image from "next/image";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { TokenCard, TokenData } from "./token-card";
+import { TrendingUpIcon, FavoriteIcon } from "@/components/icons";
+import Link from "next/link";
 
 /**
- * Token information interface
- */
-interface TokenData {
-  id: string;
-  name: string;
-  fullName: string;
-  price: string;
-  change: string;
-  lifeIndex: number;
-  lifeIndexPercent: number;
-  iconSrc?: string;
-}
-
-/**
- * Single token card component
- * Displays token information, price, and life index matching the design
- */
-const TokenCard = ({ token }: { token: TokenData }) => {
-  // Different colors based on token type
-  const getTokenColor = (tokenName: string) => {
-    switch (tokenName) {
-      case "DOGE":
-      case "BONK":
-        return "bg-green-500";
-      case "WIF":
-      case "CAT":
-        return "bg-amber-500";
-      case "FLOKI":
-      case "PEPE":
-        return "bg-red-500";
-      default:
-        return "bg-blue-500";
-    }
-  };
-
-  return (
-    <div className="bg-white dark:bg-card rounded-xl p-5 overflow-hidden border border-gray-100 dark:border-gray-800">
-      {/* Token header with icon, name and price */}
-      <div className="flex items-center justify-between mb-3">
-        <div className="flex items-center gap-3">
-          <div className="relative w-12 h-12 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center">
-            {token.iconSrc ? (
-              <Image
-                src={token.iconSrc}
-                width={48}
-                height={48}
-                alt={token.name}
-                className="w-full h-full object-cover"
-              />
-            ) : (
-              <span className="text-sm font-semibold">
-                {token.name.substring(0, 2)}
-              </span>
-            )}
-          </div>
-          <div>
-            <h4 className="font-bold text-lg">{token.name}</h4>
-            <p className="text-sm text-gray-500">{token.fullName}</p>
-          </div>
-        </div>
-        <div className="text-right">
-          <div className="bg-green-50 text-green-600 px-3 py-1 rounded-full text-sm font-medium inline-block">
-            {token.change}
-          </div>
-        </div>
-      </div>
-
-      {/* Price with LI superscript */}
-      <div className="flex items-end gap-1 mb-6">
-        <span className="text-3xl font-bold">{token.price}</span>
-        <span className="text-xs text-blue-600 font-bold mb-1.5">ᴸᴵ</span>
-      </div>
-
-      {/* Life index progress bar */}
-      <div className="space-y-2">
-        <div className="flex justify-between text-sm text-gray-500">
-          <span>Life Index</span>
-          <span>{token.lifeIndexPercent}%</span>
-        </div>
-        <div className="flex gap-[2px]">
-          {[...Array(20)].map((_, i) => (
-            <div
-              key={i}
-              className={cn(
-                "h-2 w-full rounded-full",
-                i < (token.lifeIndexPercent * 20) / 100
-                  ? getTokenColor(token.name)
-                  : "bg-gray-200 dark:bg-gray-700"
-              )}
-            />
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-/**
- * Token grid component with shadcn Tabs for filtering
+ * Token grid component that exactly matches the Figma design
  */
 export const TokenGrid = () => {
+  // Token data with exact values from the Figma design
   const tokens: TokenData[] = [
     {
       id: "doge",
@@ -115,7 +19,7 @@ export const TokenGrid = () => {
       change: "+8.1%",
       lifeIndex: 80,
       lifeIndexPercent: 80,
-      iconSrc: "/assets/img/sample-user.png",
+      iconColor: "bg-yellow-100",
     },
     {
       id: "wif",
@@ -125,7 +29,7 @@ export const TokenGrid = () => {
       change: "+8.1%",
       lifeIndex: 43,
       lifeIndexPercent: 43,
-      iconSrc: "/assets/img/sample-user.png",
+      iconColor: "bg-amber-100",
     },
     {
       id: "floki",
@@ -135,7 +39,7 @@ export const TokenGrid = () => {
       change: "+8.1%",
       lifeIndex: 24,
       lifeIndexPercent: 24,
-      iconSrc: "/assets/img/sample-user.png",
+      iconColor: "bg-purple-100",
     },
     {
       id: "bonk",
@@ -145,7 +49,7 @@ export const TokenGrid = () => {
       change: "+8.1%",
       lifeIndex: 80,
       lifeIndexPercent: 80,
-      iconSrc: "/assets/img/sample-user.png",
+      iconColor: "bg-yellow-100",
     },
     {
       id: "wif2",
@@ -155,7 +59,7 @@ export const TokenGrid = () => {
       change: "+8.1%",
       lifeIndex: 43,
       lifeIndexPercent: 43,
-      iconSrc: "/assets/img/sample-user.png",
+      iconColor: "bg-amber-100",
     },
     {
       id: "cat",
@@ -165,7 +69,7 @@ export const TokenGrid = () => {
       change: "+7.0%",
       lifeIndex: 33,
       lifeIndexPercent: 33,
-      iconSrc: "/assets/img/sample-user.png",
+      iconColor: "bg-amber-100",
     },
     {
       id: "pepe",
@@ -175,7 +79,7 @@ export const TokenGrid = () => {
       change: "+10.3%",
       lifeIndex: 60,
       lifeIndexPercent: 60,
-      iconSrc: "/assets/img/sample-user.png",
+      iconColor: "bg-red-100",
     },
     {
       id: "pepe2",
@@ -185,7 +89,7 @@ export const TokenGrid = () => {
       change: "+10.3%",
       lifeIndex: 60,
       lifeIndexPercent: 60,
-      iconSrc: "/assets/img/sample-user.png",
+      iconColor: "bg-red-100",
     },
     {
       id: "pepe3",
@@ -195,7 +99,7 @@ export const TokenGrid = () => {
       change: "+10.3%",
       lifeIndex: 60,
       lifeIndexPercent: 60,
-      iconSrc: "/assets/img/sample-user.png",
+      iconColor: "bg-red-100",
     },
   ];
 
@@ -205,59 +109,44 @@ export const TokenGrid = () => {
         <TabsList className="bg-transparent w-auto p-0 h-auto gap-4">
           <TabsTrigger
             value="gainers"
-            className="rounded-full data-[state=active]:bg-gray-100 data-[state=active]:shadow-none px-4 py-2 flex gap-2 items-center border border-transparent data-[state=active]:border-gray-200"
+            className="bg-white text-blue-600 data-[state=active]:shadow-sm px-5 py-2.5 rounded-full flex gap-2 items-center border border-gray-100"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="text-blue-500"
-            >
-              <path d="m22 7-8.5 8.5-5-5L2 17" />
-              <path d="M16 7h6v6" />
-            </svg>
-            <span>Top gainers</span>
+            <TrendingUpIcon className="text-blue-600" />
+            <span className="font-medium">Top gainers</span>
           </TabsTrigger>
           <TabsTrigger
             value="favourites"
-            className="rounded-full data-[state=active]:bg-gray-100 data-[state=active]:shadow-none px-4 py-2 flex gap-2 items-center border border-transparent data-[state=active]:border-gray-200"
+            className="bg-transparent hover:bg-gray-50 data-[state=active]:bg-white data-[state=active]:shadow-sm px-5 py-2.5 rounded-full flex gap-2 items-center data-[state=active]:border border-gray-100"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="text-gray-400"
-            >
-              <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
-            </svg>
-            <span>Favourites</span>
+            <FavoriteIcon className="text-gray-500" />
+            <span className="text-gray-600 font-medium">Favourites</span>
           </TabsTrigger>
         </TabsList>
 
-        <TabsContent value="gainers" className="mt-6 pt-2">
+        <TabsContent value="gainers" className="mt-5">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {tokens.slice(0, 9).map((token) => (
-              <TokenCard key={token.id} token={token} />
+              <Link
+                href={`/token/${token.id}`}
+                key={token.id}
+                className="block"
+              >
+                <TokenCard token={token} />
+              </Link>
             ))}
           </div>
         </TabsContent>
 
-        <TabsContent value="favourites" className="mt-6 pt-2">
+        <TabsContent value="favourites" className="mt-5">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {tokens.slice(0, 3).map((token) => (
-              <TokenCard key={token.id} token={token} />
+              <Link
+                href={`/token/${token.id}`}
+                key={token.id}
+                className="block"
+              >
+                <TokenCard token={token} />
+              </Link>
             ))}
           </div>
         </TabsContent>
