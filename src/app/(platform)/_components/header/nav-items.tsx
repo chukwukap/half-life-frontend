@@ -36,7 +36,13 @@ export const NavItems = ({ className, isMobile }: NavItemsProps) => {
   const pathname = usePathname();
 
   return (
-    <nav className={cn("flex items-center space-x-1", className)}>
+    <nav
+      className={cn(
+        "flex items-center",
+        isMobile ? "flex-col w-full space-y-2" : "space-x-1",
+        className
+      )}
+    >
       {routes.map((route) => (
         <Link
           key={route.href}
@@ -46,7 +52,8 @@ export const NavItems = ({ className, isMobile }: NavItemsProps) => {
             pathname === route.href
               ? "text-primary font-medium after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:bg-primary"
               : "text-muted-foreground",
-            isMobile && "text-base w-full p-3"
+            isMobile &&
+              "text-base w-full p-3 hover:bg-accent rounded-md flex items-center justify-center"
           )}
         >
           {route.label}

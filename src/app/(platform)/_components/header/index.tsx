@@ -4,7 +4,6 @@ import { Logo } from "./logo";
 import { MobileNav } from "./mobile-nav";
 import { NavItems } from "./nav-items";
 import { UserNav } from "./user-nav";
-import ThemeToggle from "@/components/themeToggle";
 
 export const Header = () => {
   return (
@@ -20,7 +19,6 @@ export const Header = () => {
           <NavItems />
         </div>
         <div className="flex items-center gap-4">
-          <ThemeToggle />
           <UserNav />
         </div>
       </div>
