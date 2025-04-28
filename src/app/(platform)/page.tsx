@@ -38,12 +38,12 @@ export default function Home() {
       {/* Bottom row with Token Grid and Deposit Card */}
       <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
         {/* Token grid section - takes 8/12 columns on desktop */}
-        <div className="md:col-span-8">
+        <div className="md:col-span-7">
           <TokenGrid />
         </div>
 
         {/* Deposit card - takes 4/12 columns on desktop */}
-        <div className="md:col-span-4 h-full">
+        <div className="md:col-span-5 h-full">
           <DepositCard />
         </div>
       </div>

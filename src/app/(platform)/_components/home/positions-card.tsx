@@ -98,11 +98,11 @@ const Position = ({
       </div>
 
       {/* Action buttons - Matching design with light blue and light red backgrounds */}
-      <div className="flex gap-3">
-        <Button className="flex-1 bg-[#EEF4FF] hover:bg-[#E5EDFF] text-[#2D63E2] font-medium rounded-xl py-2.5 text-sm">
+      <div className="flex flex-col gap-2">
+        <Button className="w-full bg-[#EEF4FF] hover:bg-[#E5EDFF] text-[#2D63E2] font-medium rounded-xl py-3 text-base">
           Modify
         </Button>
-        <Button className="flex-1 bg-[#FEE4E2] hover:bg-[#FED7D5] text-[#D92D20] font-medium rounded-xl py-2.5 text-sm">
+        <Button className="w-full bg-[#FEE4E2] hover:bg-[#FED7D5] text-[#D92D20] font-medium rounded-xl py-3 text-base">
           Close Position
         </Button>
       </div>
@@ -227,13 +227,13 @@ export const PositionsCard = () => {
         </div>
 
         {/* Carousel Navigation */}
-        <div className="flex items-center justify-center">
+        <div className="relative flex items-center justify-center mt-6 mb-2 px-12">
           <button
             className={cn(
-              "w-8 h-8 flex items-center justify-center rounded-full transition-colors",
+              "w-8 h-8 flex items-center justify-center rounded-full transition-colors absolute left-0",
               currentIndex === 0
-                ? "text-muted"
-                : "text-muted-foreground hover:bg-muted"
+                ? "text-gray-300"
+                : "text-gray-500 hover:bg-gray-100"
             )}
             onClick={prevSlide}
             disabled={currentIndex === 0}
@@ -241,7 +241,7 @@ export const PositionsCard = () => {
             <CaretLeftIcon className="w-5 h-5" />
           </button>
 
-          <div className="flex items-center gap-2 mx-6">
+          <div className="flex items-center gap-2">
             {Array.from({ length: totalSlides }).map((_, idx) => (
               <button
                 key={idx}
@@ -249,7 +249,7 @@ export const PositionsCard = () => {
                   "h-2 w-2 rounded-full transition-colors",
                   currentIndex / positionsPerPage === idx
                     ? "bg-primary"
-                    : "bg-muted hover:bg-muted-foreground"
+                    : "bg-gray-200 hover:bg-gray-300"
                 )}
                 onClick={() => goToSlide(idx)}
               />
@@ -258,10 +258,10 @@ export const PositionsCard = () => {
 
           <button
             className={cn(
-              "w-8 h-8 flex items-center justify-center rounded-full transition-colors",
+              "w-8 h-8 flex items-center justify-center rounded-full transition-colors absolute right-0",
               currentIndex + positionsPerPage >= positions.length
-                ? "text-muted"
-                : "text-muted-foreground hover:bg-muted"
+                ? "text-gray-300"
+                : "text-gray-500 hover:bg-gray-100"
             )}
             onClick={nextSlide}
             disabled={currentIndex + positionsPerPage >= positions.length}

@@ -1,5 +1,7 @@
 "use client";
 
+import { DepositIcon } from "@/components/icons";
+
 /**
  * Deposit card component to encourage users to deposit assets
  * Matches the design in the full page UI image
@@ -19,7 +21,7 @@ export const DepositCard = () => {
 
       <div className="flex flex-col items-start mt-4">
         <button className="bg-white text-indigo-900 rounded-full py-2 px-6 font-medium flex items-center gap-2 mb-4">
-          <span className="text-indigo-600 text-lg">⊕</span>
+          <DepositIcon />
           Deposit
         </button>
         <div className="flex gap-1">
