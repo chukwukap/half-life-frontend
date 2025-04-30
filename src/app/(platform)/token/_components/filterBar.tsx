@@ -1,7 +1,7 @@
 "use client";
 
-import { FC, useState } from "react";
-import { ChevronDownIcon, EyeIcon } from "lucide-react";
+import { FC, useState, useEffect, useRef } from "react";
+import { CoinsIcon, CaretDownIcon } from "@/components/icons";
 
 interface FilterOption {
   label: string;
@@ -18,6 +18,7 @@ interface FilterButtonProps {
   onToggle?: () => void;
   onSelect?: (value: string) => void;
   selectedValue?: string;
+  className?: string;
 }
 
 const FilterButton: FC<FilterButtonProps> = ({
@@ -29,15 +30,34 @@ const FilterButton: FC<FilterButtonProps> = ({
   onToggle,
   onSelect,
   selectedValue = "all",
+  className,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Handle click outside to close dropdown
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
-    <div className="relative">
+    <div className="relative" ref={dropdownRef}>
       <button
         className={`flex items-center gap-1 px-3 py-1.5 ${
           isActive ? "bg-blue-50 border-blue-300" : "bg-white border-gray-200"
-        } rounded-full border text-sm font-medium hover:shadow-sm transition-all`}
+        } rounded-full border text-sm font-medium hover:shadow-sm transition-all ${className}`}
         onClick={() => {
           if (isCheckbox && onToggle) {
             onToggle();
@@ -78,7 +98,7 @@ const FilterButton: FC<FilterButtonProps> = ({
           <span>{label}</span>
         )}
         {!isCheckbox && options.length > 0 && (
-          <ChevronDownIcon className="ml-1 h-4 w-4 text-gray-500" />
+          <CaretDownIcon className="ml-1 h-4 w-4 text-gray-500" />
         )}
       </button>
 
@@ -115,80 +135,85 @@ const FilterBar: FC = () => {
   const [positions, setPositions] = useState("all");
 
   return (
-    <div className="flex flex-col space-y-4 my-6">
+    <div className="flex flex-col space-y-4 my-6 font-bold">
       <div className="flex items-center">
         <div className="flex items-center gap-2 mr-3">
-          <EyeIcon className="h-5 w-5 text-blue-500" />
+          <CoinsIcon className="h-5 w-5 text-blue-500" />
           <span className="font-medium">Top tokens</span>
         </div>
       </div>
 
-      <div className="flex items-center gap-3 flex-wrap">
-        <FilterButton
-          label="Show dead tokens"
-          isCheckbox={true}
-          isActive={showDeadTokens}
-          onToggle={() => setShowDeadTokens(!showDeadTokens)}
-        />
+      <div className="flex gap-3 justify-between">
+        <div>
+          <FilterButton
+            label="Show dead tokens"
+            isCheckbox={true}
+            isActive={showDeadTokens}
+            className="border-none"
+            onToggle={() => setShowDeadTokens(!showDeadTokens)}
+          />
+        </div>
 
-        <FilterButton
-          label="Life Index"
-          options={[
-            { label: "All", value: "all" },
-            { label: ">80", value: "above_80" },
-            { label: ">50", value: "above_50" },
-          ]}
-          selectedValue={lifeIndex}
-          onSelect={setLifeIndex}
-        />
+        <div className="flex gap-3">
+          <FilterButton
+            label="Life Index"
+            options={[
+              { label: "All", value: "all" },
+              { label: ">80", value: "above_80" },
+              { label: ">50", value: "above_50" },
+            ]}
+            selectedValue={lifeIndex}
+            onSelect={setLifeIndex}
+          />
 
-        <FilterButton
-          label="Open Predictions"
-          options={[
-            { label: "All", value: "all" },
-            { label: "Yes", value: "yes" },
-            { label: "No", value: "no" },
-          ]}
-          selectedValue={predictions}
-          onSelect={setPredictions}
-        />
+          <FilterButton
+            label="Open Predictions"
+            options={[
+              { label: "All", value: "all" },
+              { label: "Yes", value: "yes" },
+              { label: "No", value: "no" },
+            ]}
+            selectedValue={predictions}
+            onSelect={setPredictions}
+          />
 
-        <FilterButton
-          label="Volume: >$5k"
-          options={[
-            { label: "All", value: "all" },
-            { label: ">$1k", value: "above_1k" },
-            { label: ">$5k", value: "above_5k" },
-            { label: ">$10k", value: "above_10k" },
-          ]}
-          selectedValue={volume}
-          onSelect={setVolume}
-          isActive={volume !== "all"}
-        />
+          <FilterButton
+            label="Volume: >$5k"
+            options={[
+              { label: "All", value: "all" },
+              { label: ">$1k", value: "above_1k" },
+              { label: ">$5k", value: "above_5k" },
+              { label: ">$10k", value: "above_10k" },
+            ]}
+            selectedValue={volume}
+            onSelect={setVolume}
+            isActive={volume !== "all"}
+          />
 
-        <FilterButton
-          label="Age: <24h"
-          options={[
-            { label: "All", value: "all" },
-            { label: "<12h", value: "below_12h" },
-            { label: "<24h", value: "below_24h" },
-            { label: "<48h", value: "below_48h" },
-          ]}
-          selectedValue={age}
-          onSelect={setAge}
-          isActive={age !== "all"}
-        />
+          <FilterButton
+            label="Age: <24h"
+            options={[
+              { label: "All", value: "all" },
+              { label: "<12h", value: "below_12h" },
+              { label: "<24h", value: "below_24h" },
+              { label: "<48h", value: "below_48h" },
+            ]}
+            selectedValue={age}
+            onSelect={setAge}
+            isActive={age !== "all"}
+          />
 
-        <FilterButton
-          label="All Positions"
-          options={[
-            { label: "All", value: "all" },
-            { label: "Long", value: "long" },
-            { label: "Short", value: "short" },
-          ]}
-          selectedValue={positions}
-          onSelect={setPositions}
-        />
+          <FilterButton
+            label="All Positions"
+            options={[
+              { label: "All", value: "all" },
+              { label: "Long", value: "long" },
+              { label: "Short", value: "short" },
+            ]}
+            selectedValue={positions}
+            onSelect={setPositions}
+          />
+        </div>
       </div>
     </div>
   );

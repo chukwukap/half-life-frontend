@@ -1,7 +1,7 @@
 "use client";
 
 import { FC, useState, useRef, useEffect } from "react";
-import { SearchIcon } from "lucide-react";
+import { SearchIcon } from "@/components/icons";
 import SearchPopup from "./searchPopup";
 
 const TokenExplorer: FC = () => {
@@ -66,7 +66,7 @@ const TokenExplorer: FC = () => {
 
   return (
     <>
-      <div className="bg-blue-600 text-white rounded-xl p-10 w-full">
+      <div className="bg-gradient-to-br from-blue-600 to-blue-800 text-white rounded-xl p-10 w-full">
         <h1 className="text-3xl font-bold mb-1">Token Explorer</h1>
         <p className="mb-2 text-blue-100">
           Track every token&apos;s lifespan in real time.
@@ -76,20 +76,24 @@ const TokenExplorer: FC = () => {
           counts.
         </p>
         <form onSubmit={handleSearch} className="relative w-full max-w-lg">
-          <input
-            ref={searchInputRef}
-            type="text"
-            placeholder="Enter token name or ticker"
-            className={`w-full rounded-full py-3 px-4 pl-11 text-black focus:outline-none ${
-              isFocused ? "ring-2 ring-blue-400" : ""
-            } shadow-sm cursor-pointer`}
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            onFocus={handleSearchFocus}
-            onClick={handleSearchFocus}
-            onBlur={() => setIsFocused(false)}
-          />
-          <SearchIcon className="absolute left-4 top-3.5 h-5 w-5 text-gray-400 pointer-events-none" />
+          <div className="relative flex items-center">
+            <div className="absolute left-4 top-1/2 -translate-y-1/2">
+              <SearchIcon className="fill-white" />
+            </div>
+            <input
+              ref={searchInputRef}
+              type="text"
+              placeholder="Enter token name or ticker"
+              className={`w-full h-12 rounded-full py-3 px-4 pl-11 text-white focus:outline-none focus:ring-2 focus:ring-white placeholder-white ${
+                isFocused ? "ring-2 ring-white" : ""
+              } shadow-lg cursor-pointer border-white border`}
+              // value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onFocus={handleSearchFocus}
+              onClick={handleSearchFocus}
+              onBlur={() => setIsFocused(false)}
+            />
+          </div>
         </form>
 
         {/* Quick search suggestions */}
@@ -99,7 +103,7 @@ const TokenExplorer: FC = () => {
             <button
               key={term}
               onClick={() => handleSuggestionClick(term)}
-              className="px-3 py-1 bg-blue-500 hover:bg-blue-400 rounded-full text-sm transition-colors"
+              className="px-3 py-1 bg-blue-500/30 hover:bg-blue-400/40 rounded-full text-sm transition-colors"
               title={description}
             >
               {term}
