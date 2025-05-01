@@ -1,10 +1,11 @@
 "use client";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { TokenCard, TokenData } from "./token-card";
+import { TokenCard } from "./token-card";
 import { TrendingUpIcon, FavoriteIcon } from "@/components/icons";
 import Link from "next/link";
 import mockTokens from "@/lib/mockData/tokens";
+import { TokenData } from "@/lib/types";
 
 /**
  * Token grid component that exactly matches the UI design
