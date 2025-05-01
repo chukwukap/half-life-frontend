@@ -1,7 +1,7 @@
 import { HeroSection, TrendingToken } from "./_components/home/hero-section";
 import { PositionsCard } from "./_components/home/positions-card";
 import { TokenGrid } from "./_components/home/token-grid";
-import { DepositCard } from "./_components/home/deposit-card";
+import { FeatureCards } from "./_components/home/feature-cards";
 import { FireIcon } from "@/components/icons";
 
 /**
@@ -44,7 +44,7 @@ export default function Home() {
 
         {/* Deposit card - takes 4/12 columns on desktop */}
         <div className="md:col-span-5 h-full">
-          <DepositCard />
+          <FeatureCards />
         </div>
       </div>
     </main>

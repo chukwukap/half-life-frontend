@@ -10,158 +10,12 @@ import {
   ArrowUpRightIcon,
   ArrowDownRightIcon,
 } from "@/components/icons";
-
-// Token data interface
-export interface TokenData {
-  id: string;
-  name: string;
-  symbol: string;
-  price: number;
-  change24h: number;
-  marketCap: string;
-  volume: string;
-  lifeIndex: number;
-  logoUrl: string;
-}
-
-// Sample token data (matching the Figma design exactly)
-const tokens: TokenData[] = [
-  {
-    id: "pepe",
-    name: "PEPE",
-    symbol: "Pepe",
-    price: 0.00000923,
-    change24h: 12.54,
-    marketCap: "$390.00M",
-    volume: "$125.00M",
-    lifeIndex: 85.4,
-    logoUrl: "/tokens/pepe.svg",
-  },
-  {
-    id: "wif",
-    name: "WIF",
-    symbol: "dogwifhat",
-    price: 0.0000204,
-    change24h: -5.32,
-    marketCap: "$210.00M",
-    volume: "$87.00M",
-    lifeIndex: 72.1,
-    logoUrl: "/tokens/placeholder.svg",
-  },
-  {
-    id: "floki",
-    name: "FLOKI",
-    symbol: "Floki Inu",
-    price: 0.00000285,
-    change24h: 3.47,
-    marketCap: "$1.68B",
-    volume: "$320.00M",
-    lifeIndex: 68.7,
-    logoUrl: "/tokens/floki.svg",
-  },
-  {
-    id: "doge",
-    name: "DOGE",
-    symbol: "Dogecoin",
-    price: 0.16,
-    change24h: 1.25,
-    marketCap: "$217.0B",
-    volume: "$980.00M",
-    lifeIndex: 91.2,
-    logoUrl: "/tokens/doge.svg",
-  },
-  {
-    id: "mog",
-    name: "MOG",
-    symbol: "MogCoin",
-    price: 0.00000842,
-    change24h: -10.64,
-    marketCap: "$105.00M",
-    volume: "$42.00M",
-    lifeIndex: 45.8,
-    logoUrl: "/tokens/placeholder.svg",
-  },
-  {
-    id: "tama",
-    name: "TAMA",
-    symbol: "Tamadoge",
-    price: 0.05,
-    change24h: 8.9,
-    marketCap: "$450.00M",
-    volume: "$90.00M",
-    lifeIndex: 67.3,
-    logoUrl: "/tokens/placeholder.svg",
-  },
-  {
-    id: "kishu",
-    name: "KISHU",
-    symbol: "Kishu Inu",
-    price: 0.00000349,
-    change24h: -0.75,
-    marketCap: "$320.50M",
-    volume: "$150.00M",
-    lifeIndex: 82.8,
-    logoUrl: "/tokens/placeholder.svg",
-  },
-  {
-    id: "akita",
-    name: "AKITA",
-    symbol: "Akita Inu",
-    price: 0.00000275,
-    change24h: 15.22,
-    marketCap: "$210B",
-    volume: "$75.00M",
-    lifeIndex: 79.5,
-    logoUrl: "/tokens/placeholder.svg",
-  },
-  {
-    id: "husky",
-    name: "HUSKY",
-    symbol: "Husky",
-    price: 0.00000012,
-    change24h: 7.8,
-    marketCap: "$30.25B",
-    volume: "$300.00M",
-    lifeIndex: 90.0,
-    logoUrl: "/tokens/placeholder.svg",
-  },
-  {
-    id: "shiba",
-    name: "SHIBBY",
-    symbol: "Shibby Coin",
-    price: 0.32,
-    change24h: -4.15,
-    marketCap: "$175.00M",
-    volume: "$500.00M",
-    lifeIndex: 54.6,
-    logoUrl: "/tokens/placeholder.svg",
-  },
-  {
-    id: "pug",
-    name: "PUG",
-    symbol: "Pug Coin",
-    price: 0.75,
-    change24h: 2.58,
-    marketCap: "$890.00M",
-    volume: "$200.00M",
-    lifeIndex: 62.4,
-    logoUrl: "/tokens/placeholder.svg",
-  },
-];
+import { TokenData } from "@/lib/types";
+import * as tokenMocks from "@/lib/mockData/tokens";
 
 interface TokenRowProps {
   token: TokenData;
 }
-
-const formatPrice = (price: number): string => {
-  if (price < 0.0001) {
-    return price.toFixed(8);
-  } else if (price < 1) {
-    return price.toFixed(8);
-  } else {
-    return price.toFixed(2);
-  }
-};
 
 const TokenRow: FC<TokenRowProps> = ({ token }) => {
   return (
@@ -170,8 +24,8 @@ const TokenRow: FC<TokenRowProps> = ({ token }) => {
         <Link href={`/token/${token.id}`} className="flex items-center gap-3">
           <div className="relative w-8 h-8 rounded-full overflow-hidden bg-gray-100">
             <Image
-              src={token.logoUrl}
-              alt={token.name}
+              src={token.iconSrc || ""}
+              alt={token.fullName}
               width={32}
               height={32}
               className="object-cover"
@@ -179,13 +33,13 @@ const TokenRow: FC<TokenRowProps> = ({ token }) => {
             />
           </div>
           <div>
-            <div className="font-semibold text-sm">{token.name}</div>
+            <div className="font-semibold text-sm">{token.fullName}</div>
             <div className="text-xs text-gray-500">{token.symbol}</div>
           </div>
         </Link>
       </td>
       <td className="py-4 px-3">
-        <div className="font-medium text-sm">${formatPrice(token.price)}</div>
+        <div className="font-medium text-sm">${token.price}</div>
       </td>
       <td className="py-4 px-3">
         <div
@@ -211,7 +65,7 @@ const TokenRow: FC<TokenRowProps> = ({ token }) => {
         <div className="font-medium text-sm">{token.marketCap}</div>
       </td>
       <td className="py-4 px-3">
-        <div className="font-medium text-sm">{token.volume}</div>
+        <div className="font-medium text-sm">{token.volume24h}</div>
       </td>
       <td className="py-4 px-3">
         <div
@@ -297,7 +151,7 @@ export const TokensTable: FC = () => {
     }));
   };
 
-  const sortedTokens = [...tokens].sort((a, b) => {
+  const sortedTokens = [...tokenMocks.mockTokens].sort((a, b) => {
     const aValue = a[sortConfig.key as keyof TokenData];
     const bValue = b[sortConfig.key as keyof TokenData];
 

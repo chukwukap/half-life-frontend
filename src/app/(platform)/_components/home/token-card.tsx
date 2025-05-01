@@ -1,22 +1,8 @@
 "use client";
 
+import { TokenData } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-
-/**
- * Token information interface
- */
-export interface TokenData {
-  id: string;
-  name: string;
-  fullName: string;
-  price: string;
-  change: string;
-  lifeIndex: number;
-  lifeIndexPercent: number;
-  iconSrc?: string;
-  iconColor?: string;
-}
 
 /**
  * Single token card component exactly matching the UI design
@@ -48,17 +34,17 @@ export const TokenCard = ({ token }: { token: TokenData }) => {
               src={token.iconSrc}
               width={24}
               height={24}
-              alt={token.name}
+              alt={token.fullName}
               className="w-full h-full object-cover"
             />
           ) : (
             <span className="text-sm font-semibold">
-              {token.name.substring(0, 1)}
+              {token.fullName.substring(0, 1)}
             </span>
           )}
         </div>
         <div>
-          <h3 className="font-bold text-sm">{token.name}</h3>
+          <h3 className="font-bold text-sm">{token.symbol}</h3>
           <p className="text-xs text-gray-500">{token.fullName}</p>
         </div>
       </div>
@@ -74,12 +60,13 @@ export const TokenCard = ({ token }: { token: TokenData }) => {
         <div
           className={cn(
             "px-3 py-1 rounded-full text-sm",
-            token.change.startsWith("+")
+            token.change24h > 0
               ? "bg-green-50 text-green-500"
               : "bg-red-50 text-red-500"
           )}
         >
-          {token.change}
+          {token.change24h > 0 ? "+" : ""}
+          {token.change24h}%
         </div>
       </div>
 
