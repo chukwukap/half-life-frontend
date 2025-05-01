@@ -256,7 +256,7 @@ const TableHeader: FC<TableHeaderProps> = ({
   sortable = false,
   sortKey,
   currentSort,
-  sortDirection = "asc",
+  // sortDirection = "asc",
   onSort,
 }) => {
   const isSorted = sortKey && currentSort === sortKey;
