@@ -52,15 +52,28 @@ const SLIDES = [
 
 /**
  * Feature carousel component that showcases different features and actions in Half-Life
- * Auto-advances through slides every 5 seconds
+ * Smoothly transitions between slides with a continuous loop effect
  */
 export const FeatureCarousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
-  // Auto-advance carousel every 5 seconds
+  // Auto-advance carousel every 5 seconds with smooth transition
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % SLIDES.length);
+      setIsTransitioning(true);
+      setCurrentSlide((prev) => {
+        // When reaching the last slide, smoothly reset to first
+        if (prev === SLIDES.length - 1) {
+          return 0;
+        }
+        return prev + 1;
+      });
+
+      // Reset transition after animation completes
+      setTimeout(() => {
+        setIsTransitioning(false);
+      }, 500);
     }, 5000);
 
     return () => clearInterval(timer);
@@ -70,7 +83,11 @@ export const FeatureCarousel = () => {
     <div className="relative w-full">
       <div className="overflow-hidden">
         <div
-          className="flex transition-transform duration-500 ease-in-out"
+          className={`flex ${
+            isTransitioning
+              ? "transition-transform duration-500 ease-in-out"
+              : ""
+          }`}
           style={{ transform: `translateX(-${currentSlide * 100}%)` }}
         >
           {SLIDES.map((slide, index) => (

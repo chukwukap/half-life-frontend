@@ -192,7 +192,7 @@ export const PositionsCard = () => {
 
   if (positions.length === 0) {
     return (
-      <div className="bg-background border-border rounded-2xl p-4 shadow-sm border h-full">
+      <div className="bg-background border-border rounded-2xl p-4 shadow-sm border ">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <FireIcon className="text-primary" />
@@ -205,7 +205,7 @@ export const PositionsCard = () => {
   }
 
   return (
-    <div className="bg-background border-border rounded-2xl p-4 shadow-sm border h-full flex flex-col">
+    <div className="bg-background border-border rounded-2xl p-4 shadow-sm border  flex flex-col">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <FireIcon className="text-primary" />
