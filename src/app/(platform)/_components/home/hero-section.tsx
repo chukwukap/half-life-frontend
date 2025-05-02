@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import TradingCard, { TokenData } from "./tradingCard";
+import TrendingCard, { TokenData } from "./trendingCard";
 
 interface HeroSectionProps {
   token?: TokenData;
@@ -23,7 +23,7 @@ export const HeroSection = ({
   },
 }: HeroSectionProps) => {
   return (
-    <section className="relative w-full rounded-[20px] overflow-hidden bg-gradient-to-br from-[#4A1FB8] to-[#7517F8] h-[320px]">
+    <section className="relative w-full rounded-[20px] overflow-hidden bg-gradient-to-br from-[#4A1FB8] to-[#7517F8] h-full">
       {/* Background pattern overlay */}
       <div className="absolute inset-0">
         <Image
@@ -37,7 +37,7 @@ export const HeroSection = ({
 
       {/* Content container with trading card */}
       <div className="absolute bottom-8 left-8">
-        <TradingCard token={token} />
+        <TrendingCard token={token} />
       </div>
     </section>
   );
