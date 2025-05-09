@@ -53,7 +53,7 @@ const IndexBar: React.FC<IndexBarProps> = ({
         <div
           key={i}
           className={cn(
-            "h-2 flex-1 rounded-full transition-colors duration-200",
+            "h-[10px] w-[6px] rounded-full transition-colors duration-200",
             i < filledBars ? getColor(value) : "bg-gray-200",
             barClassName
           )}

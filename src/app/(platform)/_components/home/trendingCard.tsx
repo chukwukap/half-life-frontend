@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
+import IndexBar from "../indexBar";
 
 /**
  * Interface for token data displayed in the trading card
@@ -25,10 +26,6 @@ interface TrendingCardProps {
  * and trade action button in a clean, modern design
  */
 const TrendingCard = ({ token }: TrendingCardProps) => {
-  // Calculate progress for the progress bar (25 segments to match design)
-  const totalDots = 15;
-  const filledDots = Math.floor((token.progress / 100) * totalDots);
-
   return (
     <div className="bg-white rounded-[20px] py-6 px-7 gap-4 w-full max-w-[640px] flex items-center justify-between shadow-sm">
       <div className="flex flex-col gap-4 justify-between w-full">
@@ -53,17 +50,14 @@ const TrendingCard = ({ token }: TrendingCardProps) => {
           </div>
         </div>
 
-        {/* Progress dots */}
-        <div className="flex items-center gap-[3px]">
-          {Array.from({ length: totalDots }).map((_, i) => (
-            <div
-              key={i}
-              className={`h-2 w-2 rounded-full ${
-                i < filledDots ? "bg-[#05CD99]" : "bg-[#E9EAEC]"
-              }`}
-            />
-          ))}
-        </div>
+        {/* Progress dots replaced with reusable IndexBar */}
+        {/* Security: Stateless, no user input, safe for all environments */}
+        <IndexBar
+          value={token.progress}
+          totalBars={15}
+          getColor={() => "bg-[#05CD99]"}
+          barClassName="w-2"
+        />
       </div>
       {/* Trade button */}
       <Link href={`/trade/${token.id}`}>

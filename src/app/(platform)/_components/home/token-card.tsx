@@ -3,6 +3,7 @@
 import { TokenData } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import IndexBar from "../indexBar";
 
 /**
  * Single token card component exactly matching the UI design
@@ -79,20 +80,13 @@ export const TokenCard = ({ token }: { token: TokenData }) => {
           </span>
         </div>
 
-        {/* Life index dots */}
-        <div className="flex gap-[2px]">
-          {[...Array(20)].map((_, i) => (
-            <div
-              key={i}
-              className={cn(
-                "h-2 w-full rounded-full",
-                i < (token.lifeIndexPercent * 20) / 100
-                  ? getTokenColor(token.lifeIndexPercent)
-                  : "bg-gray-200"
-              )}
-            />
-          ))}
-        </div>
+        {/* Life index dots replaced with reusable IndexBar */}
+        {/* Security: Stateless, no user input, safe for all environments */}
+        <IndexBar
+          value={token.lifeIndexPercent}
+          totalBars={20}
+          getColor={getTokenColor}
+        />
       </div>
     </div>
   );
