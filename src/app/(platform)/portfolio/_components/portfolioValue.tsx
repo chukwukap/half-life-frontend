@@ -7,15 +7,21 @@ const PortfolioValue: FC = () => {
   const portfolioValue = "$5,321.78";
 
   return (
-    <div className="bg-[#0D1C59] text-white rounded-3xl p-6 h-full flex flex-col justify-between">
+    <div className="bg-[#0D1C59] text-white rounded-[20px] p-8 h-full flex flex-col justify-between shadow-sm min-h-[180px]">
+      {/* Portfolio label and value */}
       <div>
-        <h2 className="text-gray-300 text-sm mb-1">Portfolio value</h2>
-        <div className="text-4xl font-bold">{portfolioValue}</div>
+        <h2 className="text-[#B6C2E2] text-[15px] font-medium mb-1 tracking-tight">
+          Portfolio value
+        </h2>
+        <div className="text-[32px] leading-[40px] font-bold tracking-tight">
+          {portfolioValue}
+        </div>
       </div>
 
-      <div className="flex space-x-4 mt-8">
+      {/* Action buttons */}
+      <div className="flex gap-4 mt-8">
         <button
-          className="flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white rounded-full px-4 py-3 flex-1 transition-colors"
+          className="flex items-center justify-center bg-[#335CFF] hover:bg-[#2347E2] text-white rounded-full px-6 h-[44px] font-semibold text-base min-w-[120px] transition-colors shadow-sm"
           onClick={() => console.log("Deposit clicked")}
         >
           <svg
@@ -42,7 +48,7 @@ const PortfolioValue: FC = () => {
           Deposit
         </button>
         <button
-          className="flex items-center justify-center bg-white hover:bg-gray-100 text-blue-600 rounded-full px-4 py-3 flex-1 transition-colors"
+          className="flex items-center justify-center bg-white hover:bg-gray-100 text-[#335CFF] rounded-full px-6 h-[44px] font-semibold text-base min-w-[120px] transition-colors shadow-sm"
           onClick={() => console.log("Withdraw clicked")}
         >
           <svg
