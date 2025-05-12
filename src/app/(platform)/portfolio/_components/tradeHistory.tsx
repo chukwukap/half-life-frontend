@@ -225,12 +225,11 @@ const TradeHistory: FC = () => {
   ];
 
   return (
-    <div className="bg-white rounded-[20px] overflow-hidden shadow-sm border border-gray-100">
-      {/* Trade History header */}
-      <div className="p-8 border-b border-gray-100">
+    <div className="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100">
+      <div className="p-6 border-b border-gray-100">
         <div className="flex items-center">
           <svg
-            className="h-5 w-5 text-[#335CFF] mr-2"
+            className="h-5 w-5 text-blue-600 mr-2"
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -250,98 +249,80 @@ const TradeHistory: FC = () => {
               strokeLinejoin="round"
             />
           </svg>
-          <h2 className="text-[#335CFF] font-semibold text-base tracking-tight">
-            Trade History
-          </h2>
+          <h2 className="text-blue-600 font-medium">Trade History</h2>
         </div>
       </div>
 
       <div className="overflow-x-auto">
         <table className="w-full">
           <thead>
-            <tr className="text-left text-[#7D8FB3] text-xs bg-[#F5F8FF]">
-              <th className="py-3 px-8 font-semibold">Token</th>
-              <th className="py-3 px-8 font-semibold">Open</th>
-              <th className="py-3 px-8 font-semibold">Type</th>
-              <th className="py-3 px-8 font-semibold">Size</th>
-              <th className="py-3 px-8 font-semibold">Leverage</th>
-              <th className="py-3 px-8 font-semibold">PnL</th>
-              <th className="py-3 px-8 font-semibold"></th>
+            <tr className="text-left text-gray-500 text-sm bg-gray-50">
+              <th className="py-3 px-6 font-medium">Token</th>
+              <th className="py-3 px-6 font-medium">Open</th>
+              <th className="py-3 px-6 font-medium">Type</th>
+              <th className="py-3 px-6 font-medium">Size</th>
+              <th className="py-3 px-6 font-medium">Leverage</th>
+              <th className="py-3 px-6 font-medium">PnL</th>
+              <th className="py-3 px-6 font-medium"></th>
             </tr>
           </thead>
           <tbody>
             {trades.map((trade) => (
               <tr
                 key={trade.id}
-                className="border-t border-gray-100 hover:bg-[#F5F8FF] transition-colors"
+                className="border-t border-gray-100 hover:bg-gray-50"
               >
-                <td className="py-4 px-8">
+                <td className="py-4 px-6">
                   <div className="flex items-center">
                     <div className="w-8 h-8 mr-3 relative">
-                      {/* Token logo or fallback */}
-                      {trade.token.logo ? (
-                        <img
-                          src={trade.token.logo}
-                          alt={trade.token.ticker}
-                          className="w-8 h-8 rounded-full object-cover border border-gray-200"
-                        />
-                      ) : (
-                        <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-xs font-bold text-[#0D1C59]">
-                          {trade.token.ticker.substring(0, 1)}
-                        </div>
-                      )}
+                      {/* Placeholder for token logo */}
+                      <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-xs">
+                        {trade.token.ticker.substring(0, 1)}
+                      </div>
                     </div>
                     <div>
-                      <div className="font-semibold text-[#0D1C59] text-sm">
-                        {trade.token.ticker}
-                      </div>
-                      <div className="text-[#7D8FB3] text-xs">
+                      <div className="font-medium">{trade.token.ticker}</div>
+                      <div className="text-gray-500 text-xs">
                         {trade.token.name}
                       </div>
                     </div>
                   </div>
                 </td>
-                <td className="py-4 px-8">
-                  <div className="font-semibold text-[#0D1C59] text-sm">
-                    {trade.openDate}
-                  </div>
-                  <div className="text-[#7D8FB3] text-xs">{trade.openTime}</div>
+                <td className="py-4 px-6">
+                  <div className="font-medium">{trade.openDate}</div>
+                  <div className="text-gray-500 text-xs">{trade.openTime}</div>
                 </td>
-                <td className="py-4 px-8">
+                <td className="py-4 px-6">
                   <span
-                    className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                    className={`px-3 py-1 rounded-full text-xs ${
                       trade.type === "Long"
-                        ? "bg-[#E6FBF4] text-[#05CD99]"
-                        : "bg-[#FEECEC] text-[#FF5A5A]"
+                        ? "bg-green-100 text-green-800"
+                        : "bg-red-100 text-red-800"
                     }`}
                   >
                     {trade.type}
                   </span>
                 </td>
-                <td className="py-4 px-8 text-[#0D1C59] text-sm font-semibold">
-                  {trade.size}
-                </td>
-                <td className="py-4 px-8 text-[#0D1C59] text-sm font-semibold">
-                  {trade.leverage}
-                </td>
-                <td className="py-4 px-8">
+                <td className="py-4 px-6">{trade.size}</td>
+                <td className="py-4 px-6">{trade.leverage}</td>
+                <td className="py-4 px-6">
                   <div
-                    className={`text-sm font-semibold ${
-                      trade.pnl.isPositive ? "text-[#05CD99]" : "text-[#FF5A5A]"
-                    }`}
+                    className={
+                      trade.pnl.isPositive ? "text-green-500" : "text-red-500"
+                    }
                   >
                     {trade.pnl.value}
                   </div>
                   <div
-                    className={`text-xs font-medium ${
-                      trade.pnl.isPositive ? "text-[#05CD99]" : "text-[#FF5A5A]"
+                    className={`text-xs ${
+                      trade.pnl.isPositive ? "text-green-500" : "text-red-500"
                     }`}
                   >
                     {trade.pnl.percentage}
                   </div>
                 </td>
-                <td className="py-4 px-8">
-                  <button className="px-4 py-1.5 bg-[#F5F8FF] text-[#335CFF] text-xs font-semibold rounded-full shadow-sm hover:bg-[#E6EDFF] transition-colors">
+                <td className="py-4 px-6">
+                  <button className="px-3 py-1 text-blue-600 text-sm font-medium">
                     View
                   </button>
                 </td>

@@ -17,18 +17,16 @@ const TimeFilter: FC = () => {
   ];
 
   return (
-    <div className="mb-8 flex overflow-x-auto">
-      <div className="flex gap-2">
+    <div className="mb-6 flex overflow-x-auto">
+      <div className="flex space-x-1">
         {timeRanges.map((range) => (
           <button
             key={range.value}
-            className={`px-5 py-2 text-sm font-semibold rounded-full transition-colors min-w-[48px] h-[38px] focus:outline-none focus:ring-2 focus:ring-[#335CFF] focus:ring-offset-2
-              ${
-                activeRange === range.value
-                  ? "bg-white text-[#335CFF] shadow-sm border border-[#E9EAEC]"
-                  : "bg-transparent text-[#7D8FB3] hover:bg-[#F5F8FF]"
-              }
-            `}
+            className={`px-4 py-2 text-sm font-medium rounded-full transition-colors ${
+              activeRange === range.value
+                ? "bg-white text-gray-900 shadow-sm border border-gray-200"
+                : "text-gray-500 hover:text-gray-700"
+            }`}
             onClick={() => setActiveRange(range.value)}
           >
             {range.label}

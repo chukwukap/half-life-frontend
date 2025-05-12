@@ -10,10 +10,8 @@ import TokenChart from "./_components/tokenChart";
 import MarketStats from "./_components/marketStats";
 import CommunityStats from "./_components/communityStats";
 import PredictionPlacement from "./_components/predictionPlacement";
-import OpenPositions from "./_components/openPositions";
-import Leaderboard from "./_components/leaderboard";
-import VitalityScore from "./_components/vitalityScore";
 
+import VitalityScore from "./_components/vitalityScore";
 // Import tab content components (to be created if not present)
 import OverviewTab from "./_components/overviewTab";
 import OpenPositionsTab from "./_components/openPositionsTab";
@@ -200,7 +198,6 @@ const TokenDetailPage: FC = () => {
                 <span className="font-medium text-sm">Leaderboard</span>
               </div>
             </div>
-            <Leaderboard />
           </div>
         </div>
 
@@ -241,11 +238,6 @@ const TokenDetailPage: FC = () => {
               liquidationPrice={tokenData.liquidationPrice}
               available={tokenData.available}
             />
-          </div>
-
-          {/* Open positions section */}
-          <div className="mb-6">
-            <OpenPositions positionValue={tokenData.positionValue} />
           </div>
 
           {/* Vitality score section */}
