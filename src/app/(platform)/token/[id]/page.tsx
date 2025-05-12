@@ -10,7 +10,6 @@ import TokenChart from "./_components/tokenChart";
 import MarketStats from "./_components/marketStats";
 import CommunityStats from "./_components/communityStats";
 import PredictionPlacement from "./_components/predictionPlacement";
-import VitalityScore from "./_components/vitalityScore";
 
 // Import tab content components (to be created if not present)
 import OverviewTab from "./_components/overviewTab";
@@ -26,6 +25,10 @@ import {
   ArchiveIcon,
   ActivityIcon,
 } from "@/components/icons";
+
+// Import new right-column components
+import Leaderboard from "./_components/leaderboard";
+import TrendingTokens from "./_components/trendingTokens";
 
 // Mock token data
 const tokenData = {
@@ -73,7 +76,7 @@ const TokenDetailPage: FC = () => {
       </div>
 
       {/* Token header */}
-      <div className="bg-white rounded-3xl p-6 mb-8 shadow-sm">
+      <div className="bg-white rounded-[24px] p-8 mb-8 shadow-sm border border-[#E9EAEC]">
         <div className="flex items-center">
           <div className="flex items-center">
             <div className="relative w-12 h-12 mr-4">
@@ -86,37 +89,43 @@ const TokenDetailPage: FC = () => {
               />
             </div>
             <div>
-              <h1 className="text-2xl font-bold">{tokenData.name}</h1>
-              <p className="text-gray-500 text-sm">{tokenData.fullName}</p>
+              <h1 className="text-[28px] font-bold text-[#181A20] leading-tight">
+                {tokenData.name}
+              </h1>
+              <p className="text-[#7D8FB3] text-base">{tokenData.fullName}</p>
             </div>
             <button className="ml-4 bg-blue-50 text-blue-600 p-2 rounded-full hover:bg-blue-100 transition-colors">
               <Star className="h-5 w-5" />
             </button>
           </div>
 
-          <div className="flex ml-auto space-x-12">
+          <div className="flex ml-auto space-x-10">
             <div>
-              <p className="text-gray-500 text-xs mb-1">Open trades</p>
+              <p className="text-[#7D8FB3] text-xs mb-1">Open trades</p>
               <div className="flex items-center">
-                <div className="w-4 h-4 rounded-full bg-green-100 border-2 border-green-500 mr-2"></div>
-                <p className="text-base font-medium">
+                <div className="w-4 h-4 rounded-full bg-[#E6FBF4] border-2 border-[#05CD99] mr-2"></div>
+                <p className="text-base font-semibold text-[#181A20]">
                   ${tokenData.openTraders.toLocaleString()}
                 </p>
               </div>
             </div>
             <div>
-              <p className="text-gray-500 text-xs mb-1">Volume</p>
-              <p className="text-base font-medium">{tokenData.volume}</p>
+              <p className="text-[#7D8FB3] text-xs mb-1">Volume</p>
+              <p className="text-base font-semibold text-[#181A20]">
+                {tokenData.volume}
+              </p>
             </div>
             <div>
-              <p className="text-gray-500 text-xs mb-1">Funding</p>
-              <p className="text-base font-medium text-green-500">
+              <p className="text-[#7D8FB3] text-xs mb-1">Funding</p>
+              <p className="text-base font-semibold text-[#05CD99]">
                 {tokenData.funding}
               </p>
             </div>
             <div>
-              <p className="text-gray-500 text-xs mb-1">Cooldown</p>
-              <p className="text-base font-medium">{tokenData.countdown}</p>
+              <p className="text-[#7D8FB3] text-xs mb-1">Cooldown</p>
+              <p className="text-base font-semibold text-[#181A20]">
+                {tokenData.countdown}
+              </p>
             </div>
           </div>
         </div>
@@ -224,7 +233,7 @@ const TokenDetailPage: FC = () => {
             <div className="flex items-center mb-4">
               <div className="flex items-center">
                 {/* Use ActivityIcon for vitality score, for visual consistency and clarity */}
-                {/*
+                {/**
                   Security: This is a stateless icon component, safe for all environments.
                   Professional: Using shared icon assets for UI consistency.
                 */}
@@ -232,8 +241,58 @@ const TokenDetailPage: FC = () => {
                 <span className="font-medium text-sm">Vitality Score</span>
               </div>
             </div>
-            <VitalityScore score={tokenData.vitalityScore} />
           </div>
+          {/* Leaderboard section */}
+          <Leaderboard
+            data={[
+              { rank: 1, username: "Druids_01", pnl: "$3,288.94" },
+              { rank: 2, username: "Bastille_btc", pnl: "$2,265.91" },
+              { rank: 3, username: "Te_the_gamer", pnl: "$1,753.59" },
+              { rank: 4, username: "Galactic_Hero", pnl: "$1,500.00" },
+              { rank: 5, username: "Quantum_Coder", pnl: "$1,400.75" },
+            ]}
+          />
+          {/* Trending tokens section */}
+          <TrendingTokens
+            tokens={[
+              {
+                logoUrl: "/tokens/doge.svg",
+                name: "DOGE",
+                subtitle: "Dogecoin",
+                lifeIndex: 80,
+              },
+              {
+                logoUrl: "/tokens/wif.svg",
+                name: "WIF",
+                subtitle: "dogwifhat",
+                lifeIndex: 43,
+              },
+              {
+                logoUrl: "/tokens/floki.svg",
+                name: "FLOKI",
+                subtitle: "Floki",
+                lifeIndex: 24,
+              },
+              {
+                logoUrl: "/tokens/bonk.svg",
+                name: "BONK",
+                subtitle: "Bonk",
+                lifeIndex: 80,
+              },
+              {
+                logoUrl: "/tokens/bonk.svg",
+                name: "BONK",
+                subtitle: "Bonk",
+                lifeIndex: 80,
+              },
+              {
+                logoUrl: "/tokens/bonk.svg",
+                name: "BONK",
+                subtitle: "Bonk",
+                lifeIndex: 80,
+              },
+            ]}
+          />
         </div>
       </div>
     </div>

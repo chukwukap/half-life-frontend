@@ -125,21 +125,29 @@ const TradesTab: React.FC = () => {
   return (
     <div className="bg-white rounded-[24px] p-0 shadow-sm overflow-hidden">
       <table className="w-full">
-        <thead>
+        <thead className="sticky top-0 z-10">
           <tr className="bg-[#F5F8FF] text-[#7D8FB3] text-base">
-            <th className="py-4 px-8 font-semibold text-left">Time</th>
-            <th className="py-4 px-8 font-semibold text-left">Direction</th>
-            <th className="py-4 px-8 font-semibold text-left">Price</th>
-            <th className="py-4 px-8 font-semibold text-left">Quantity</th>
+            <th className="py-4 px-8 font-semibold text-left whitespace-nowrap">
+              Time
+            </th>
+            <th className="py-4 px-8 font-semibold text-left whitespace-nowrap">
+              Direction
+            </th>
+            <th className="py-4 px-8 font-semibold text-left whitespace-nowrap">
+              Price
+            </th>
+            <th className="py-4 px-8 font-semibold text-left whitespace-nowrap">
+              Quantity
+            </th>
           </tr>
         </thead>
         <tbody>
           {trades.map((trade, i) => (
             <tr key={i} className="border-t border-[#E9EAEC]">
-              <td className="py-3 px-8 text-[#181A20] font-medium text-base">
+              <td className="py-3 px-8 text-[#181A20] font-medium text-base whitespace-nowrap">
                 {trade.time}
               </td>
-              <td className="py-3 px-8 font-medium text-base">
+              <td className="py-3 px-8 font-medium text-base whitespace-nowrap">
                 <span
                   className={
                     trade.direction === "Buy"
@@ -150,10 +158,10 @@ const TradesTab: React.FC = () => {
                   {trade.direction}
                 </span>
               </td>
-              <td className="py-3 px-8 text-[#181A20] font-medium text-base">
+              <td className="py-3 px-8 text-[#181A20] font-medium text-base whitespace-nowrap">
                 {trade.price}
               </td>
-              <td className="py-3 px-8 text-[#181A20] font-medium text-base">
+              <td className="py-3 px-8 text-[#181A20] font-medium text-base whitespace-nowrap">
                 {trade.quantity}
               </td>
             </tr>
