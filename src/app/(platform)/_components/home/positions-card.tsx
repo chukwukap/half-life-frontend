@@ -38,6 +38,15 @@ const Position = ({
   isProfit,
   logoSrc,
 }: PositionProps) => {
+  // Placeholder handlers for future integration
+  const handleModify = () => {
+    // TODO: Replace with modal or navigation to modify position
+    alert(`Modify position for ${token}`);
+  };
+  const handleClose = () => {
+    // TODO: Replace with modal or API call to close position
+    alert(`Close position for ${token}`);
+  };
   return (
     <section className="bg-white rounded-[32px] px-6 pt-6 pb-0 w-full flex flex-col shadow-none border border-[#E9EAEC]">
       {/* Token info and strategy header */}
@@ -109,10 +118,16 @@ const Position = ({
       </div>
       {/* Action buttons */}
       <div className="flex flex-col gap-3 mb-2">
-        <button className="w-full bg-[#EEF4FF] hover:bg-[#E5EDFF] text-[#335CFF] font-bold rounded-full py-3 text-lg transition-colors focus:outline-none focus:ring-2 focus:ring-[#335CFF]">
+        <button
+          className="w-full bg-[#EEF4FF] hover:bg-[#E5EDFF] text-[#335CFF] font-bold rounded-full py-3 text-lg transition-colors focus:outline-none focus:ring-2 focus:ring-[#335CFF]"
+          onClick={handleModify}
+        >
           Modify
         </button>
-        <button className="w-full bg-[#FFF0F0] hover:bg-[#FFE5E5] text-[#FF4747] font-bold rounded-full py-3 text-lg transition-colors focus:outline-none focus:ring-2 focus:ring-[#FF4747]">
+        <button
+          className="w-full bg-[#FFF0F0] hover:bg-[#FFE5E5] text-[#FF4747] font-bold rounded-full py-3 text-lg transition-colors focus:outline-none focus:ring-2 focus:ring-[#FF4747]"
+          onClick={handleClose}
+        >
           Close Position
         </button>
       </div>
@@ -126,45 +141,48 @@ const Position = ({
  * Enhanced with state management for positions and carousel functionality
  */
 export const PositionsCard = () => {
-  // Sample position data
-  const positions: PositionProps[] = [
-    // {
-    //   token: "WIF",
-    //   tokenInfo: "dogwifhat",
-    //   strategy: "Long 5x",
-    //   entryPrice: "0.00008",
-    //   currentPrice: "0.00009",
-    //   liquidationPrice: "0.00007",
-    //   fundingRate: "+0.0125%",
-    //   pnlPercent: "+12.10%",
-    //   isProfit: true,
-    //   logoSrc: "/wif.png",
-    // },
-    // {
-    //   token: "TROL",
-    //   tokenInfo: "trololol",
-    //   strategy: "Long 10x",
-    //   entryPrice: "0.133",
-    //   currentPrice: "0.923",
-    //   liquidationPrice: "0.113",
-    //   fundingRate: "-0.0125%",
-    //   pnlPercent: "-12.10%",
-    //   isProfit: false,
-    //   logoSrc: "/trol.png",
-    // },
-    // {
-    //   token: "BTC",
-    //   tokenInfo: "Bitcoin",
-    //   strategy: "Short 2x",
-    //   entryPrice: "42000",
-    //   currentPrice: "41000",
-    //   liquidationPrice: "45000",
-    //   fundingRate: "+0.01%",
-    //   pnlPercent: "+5.20%",
-    //   isProfit: true,
-    //   logoSrc: "/btc.png",
-    // },
+  // To switch to real data, replace the samplePositions array with your API or state data.
+  const samplePositions: PositionProps[] = [
+    {
+      token: "WIF",
+      tokenInfo: "dogwifhat",
+      strategy: "Long 5x",
+      entryPrice: "0.00008",
+      currentPrice: "0.00009",
+      liquidationPrice: "0.00007",
+      fundingRate: "+0.0125%",
+      pnlPercent: "+12.10%",
+      isProfit: true,
+      logoSrc: "/wif.png",
+    },
+    {
+      token: "TROL",
+      tokenInfo: "trololol",
+      strategy: "Long 10x",
+      entryPrice: "0.133",
+      currentPrice: "0.923",
+      liquidationPrice: "0.113",
+      fundingRate: "-0.0125%",
+      pnlPercent: "-12.10%",
+      isProfit: false,
+      logoSrc: "/trol.png",
+    },
+    {
+      token: "BTC",
+      tokenInfo: "Bitcoin",
+      strategy: "Short 2x",
+      entryPrice: "42000",
+      currentPrice: "41000",
+      liquidationPrice: "45000",
+      fundingRate: "+0.01%",
+      pnlPercent: "+5.20%",
+      isProfit: true,
+      logoSrc: "/btc.png",
+    },
   ];
+
+  // Use samplePositions for now; swap with real data when available
+  const positions: PositionProps[] = samplePositions;
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visiblePositions, setVisiblePositions] = useState<PositionProps[]>([]);
