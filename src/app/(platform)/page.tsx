@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <main className="max-w-[1400px] mx-auto px-4 sm:px-0 py-5">
       {/* Top row with Hero and Positions side by side */}
-      <div className="grid grid-cols-1 md:grid-cols-14 gap-5 mb-5">
+      <div className="grid grid-cols-1 md:grid-cols-14 gap-5 mb-8">
         <div className="md:col-span-10">
           <HeroSection />
         </div>

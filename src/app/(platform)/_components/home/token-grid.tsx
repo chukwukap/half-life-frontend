@@ -22,17 +22,17 @@ export const TokenGrid = () => {
           <TabsList className="bg-transparent w-auto p-0 h-auto gap-4">
             <TabsTrigger
               value="gainers"
-              className="data-[state=active]:bg-white data-[state=active]:text-blue-600 px-4 py-2 rounded-full flex gap-2 items-center data-[state=active]:shadow-sm data-[state=active]:border data-[state=active]:border-gray-100"
+              className="text-[#525866] data-[state=active]:bg-white data-[state=active]:text-primary px-4 py-2 rounded-full flex gap-2 items-center data-[state=active]:border data-[state=active]:border-border"
             >
               <TrendingUpIcon className="text-primary" />
               <span className="font-medium">Top gainers</span>
             </TabsTrigger>
             <TabsTrigger
               value="favourites"
-              className="text-gray-600 bg-transparent hover:bg-gray-50 data-[state=active]:bg-white px-4 py-2 rounded-full flex gap-2 items-center data-[state=active]:shadow-sm data-[state=active]:border data-[state=active]:border-gray-100"
+              className=" bg-transparent hover:bg-gray-50 data-[state=active]:bg-white px-4 py-2 rounded-full flex gap-2 items-center  data-[state=active]:border data-[state=active]:border-border"
             >
               <FavoriteIcon className="text-gray-500" />
-              <span className="font-medium">Favourites</span>
+              <span className="font-medium">Favorites</span>
             </TabsTrigger>
           </TabsList>
         </div>
