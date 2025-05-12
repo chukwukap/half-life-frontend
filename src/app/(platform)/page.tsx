@@ -1,6 +1,5 @@
 import { HeroSection } from "./_components/home/hero-section";
-import { PositionsCard } from "./_components/home/positions-card";
-import { TokenGrid } from "./_components/home/token-grid";
+import DashboardGrid from "./_components/home/dashboard-grid";
 import { FeatureCarousel } from "./_components/home/feature-carousel";
 // import { FireIcon } from "@/components/icons";
 
@@ -23,17 +22,8 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Bottom row with Token Grid and Deposit Card */}
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
-        <div className="md:col-span-7">
-          <TokenGrid />
-        </div>
-
-        {/* Deposit card - takes 4/12 columns on desktop */}
-        <div className="md:col-span-5">
-          <PositionsCard />
-        </div>
-      </div>
+      {/* Unified dashboard grid: TokenGrid (cards only) + PositionsCard */}
+      <DashboardGrid />
     </main>
   );
 }
