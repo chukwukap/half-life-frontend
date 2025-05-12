@@ -23,7 +23,7 @@ export const HeroSection = ({
   },
 }: HeroSectionProps) => {
   return (
-    <section className="relative w-full rounded-[20px] overflow-hidden bg-gradient-to-br from-[#4A1FB8] to-[#7517F8] h-full">
+    <section className="relative w-full rounded-xl overflow-hidden h-full">
       {/* Background pattern overlay */}
       <div className="absolute inset-0">
         <Image
@@ -31,7 +31,7 @@ export const HeroSection = ({
           alt="Abstract background pattern"
           fill
           priority
-          className="object-cover opacity-20"
+          className="object-cover"
         />
       </div>
 

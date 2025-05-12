@@ -48,22 +48,22 @@ export const FeatureSlide: FC<FeatureSlideProps> = ({
 
   return (
     <div
-      className={`${bgColors[variant]} rounded-[20px] text-white p-8 h-[420px] flex flex-col relative overflow-hidden`}
+      className={`${bgColors[variant]} rounded-3xl text-white p-8 h-80 flex flex-col relative overflow-hidden`}
     >
       {/* Background gradient effect */}
       <div className="absolute inset-0 bg-gradient-to-br from-transparent to-black/20" />
 
       {/* Content */}
       <div className="relative z-10 flex flex-col h-full">
-        <h2 className="text-[32px] font-bold leading-tight mb-4">{title}</h2>
-        <p className="text-white/80 text-lg leading-relaxed">{description}</p>
+        <h2 className="text-2xl font-bold leading-tight mb-4">{title}</h2>
+        <p className="text-white/80 text-base leading-relaxed">{description}</p>
 
         <div className="flex-grow" />
 
         <div className="flex flex-col items-start gap-6">
           <button
             onClick={onClick}
-            className={`${buttonStyles[variant]} rounded-full py-3 px-8 font-medium flex items-center gap-3 text-base transition-colors`}
+            className={`${buttonStyles[variant]} rounded-full py-3 px-8 font-medium flex items-center gap-3 text-sm transition-colors`}
           >
             {buttonIcon}
             {buttonText}

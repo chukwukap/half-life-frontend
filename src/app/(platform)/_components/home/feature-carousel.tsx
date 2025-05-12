@@ -1,6 +1,6 @@
 "use client";
 
-import { DepositIcon, CommunityIcon } from "@/components/icons";
+import { DepositIcon, InfoCircleFilledIcon } from "@/components/icons";
 import { FeatureSlide } from "./feature-slide";
 import { useState, useEffect } from "react";
 
@@ -34,7 +34,7 @@ const SLIDES = [
     description:
       "Join the Discord group and Telegram chat, and follow Half-Life on Twitter to earn points multipliers",
     buttonText: "Learn more",
-    buttonIcon: <CommunityIcon className="w-5 h-5" />,
+    buttonIcon: <InfoCircleFilledIcon className="w-5 h-5 text-[#FF8447]" />,
   },
   {
     variant: "invite" as const,

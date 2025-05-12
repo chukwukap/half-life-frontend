@@ -27,8 +27,8 @@ interface TrendingCardProps {
  */
 const TrendingCard = ({ token }: TrendingCardProps) => {
   return (
-    <div className="bg-white rounded-[20px] py-6 px-7 gap-4 w-full max-w-[640px] flex items-center justify-between shadow-sm">
-      <div className="flex flex-col gap-4 justify-between w-full">
+    <div className="bg-white rounded-2xl py-4 px-5 gap-4 md:gap-10 xl:gap-12 flex items-center justify-between ">
+      <div className="flex flex-col gap-2 justify-between w-full">
         {/* Token logo and name */}
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 rounded-full overflow-hidden bg-[#F5F6FF] flex items-center justify-center">
@@ -54,9 +54,8 @@ const TrendingCard = ({ token }: TrendingCardProps) => {
         {/* Security: Stateless, no user input, safe for all environments */}
         <IndexBar
           value={token.progress}
-          totalBars={15}
+          totalBars={30}
           getColor={() => "bg-[#05CD99]"}
-          barClassName="w-2"
         />
       </div>
       {/* Trade button */}
@@ -65,8 +64,8 @@ const TrendingCard = ({ token }: TrendingCardProps) => {
           variant="default"
           className="bg-[#335CFF] hover:bg-[#2347E2] 
                    text-white font-semibold 
-                   px-10 py-3 h-[52px] rounded-full
-                   shadow-sm text-base min-w-[140px]"
+                   px-4 py-3  rounded-full
+                    text-sm "
         >
           Trade
         </Button>

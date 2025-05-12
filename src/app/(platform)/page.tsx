@@ -13,21 +13,18 @@ export default function Home() {
   return (
     <main className="max-w-[1400px] mx-auto px-4 sm:px-0 py-5">
       {/* Top row with Hero and Positions side by side */}
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-5 mb-5">
-        {/* Hero banner with trading interface */}
-        <div className="md:col-span-8 h-full">
+      <div className="grid grid-cols-1 md:grid-cols-14 gap-5 mb-5">
+        <div className="md:col-span-10">
           <HeroSection />
         </div>
 
-        {/* User positions section with active positions */}
-        <div className="md:col-span-4 h-full">
+        <div className="md:col-span-4">
           <FeatureCarousel />
         </div>
       </div>
 
       {/* Bottom row with Token Grid and Deposit Card */}
       <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
-        {/* Token grid section - takes 8/12 columns on desktop */}
         <div className="md:col-span-7">
           <TokenGrid />
         </div>
