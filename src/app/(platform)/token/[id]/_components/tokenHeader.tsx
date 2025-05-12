@@ -22,6 +22,7 @@ interface TokenHeaderProps {
  * Uses only icons from icons.tsx and IndexBar for the Life Index.
  * Security: Stateless, no user input, safe for all environments.
  */
+
 const TokenHeader: React.FC<TokenHeaderProps> = ({
   logoUrl,
   name,
