@@ -1,6 +1,6 @@
 "use client";
 
-import { FC } from "react";
+import { FC, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Star } from "lucide-react";
@@ -13,6 +13,12 @@ import PredictionPlacement from "./_components/predictionPlacement";
 import OpenPositions from "./_components/openPositions";
 import Leaderboard from "./_components/leaderboard";
 import VitalityScore from "./_components/vitalityScore";
+
+// Import tab content components (to be created if not present)
+import OverviewTab from "./_components/overviewTab";
+import OpenPositionsTab from "./_components/openPositionsTab";
+import TradesTab from "./_components/tradesTab";
+import OrderBookTab from "./_components/orderBookTab";
 
 // Mock token data
 const tokenData = {
@@ -37,6 +43,15 @@ const tokenData = {
 };
 
 const TokenDetailPage: FC = () => {
+  // Tab state
+  const [activeTab, setActiveTab] = useState("overview");
+  const tabList = [
+    { key: "overview", label: "Overview" },
+    { key: "openPositions", label: "Open Positions" },
+    { key: "trades", label: "Trades" },
+    { key: "orderBook", label: "Order Book" },
+  ];
+
   return (
     <div className="container mx-auto px-4 py-6 max-w-screen-xl">
       {/* Back navigation */}
@@ -101,7 +116,7 @@ const TokenDetailPage: FC = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-        {/* Left column - Chart and Stats */}
+        {/* Left column - Chart, Stats, and Tabs */}
         <div className="lg:col-span-3">
           {/* Price chart section */}
           <div className="mb-6">
@@ -118,6 +133,34 @@ const TokenDetailPage: FC = () => {
               socialScore={tokenData.socialScore}
               communityScore={tokenData.communityScore}
             />
+          </div>
+
+          {/* Tab section */}
+          <div className="mb-8">
+            <div className="flex gap-2 border-b border-[#E9EAEC] mb-6">
+              {tabList.map((tab) => (
+                <button
+                  key={tab.key}
+                  className={`px-5 py-2 text-sm font-semibold rounded-t-lg transition-colors min-w-[120px] focus:outline-none
+                    ${
+                      activeTab === tab.key
+                        ? "bg-white text-[#335CFF] border-b-2 border-[#335CFF] -mb-px"
+                        : "bg-transparent text-[#7D8FB3] hover:bg-[#F5F8FF] border-b-2 border-transparent"
+                    }
+                  `}
+                  onClick={() => setActiveTab(tab.key)}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+            {/* Tab content */}
+            <div className="bg-white rounded-[16px] shadow-sm p-6 border border-[#E9EAEC]">
+              {activeTab === "overview" && <OverviewTab />}
+              {activeTab === "openPositions" && <OpenPositionsTab />}
+              {activeTab === "trades" && <TradesTab />}
+              {activeTab === "orderBook" && <OrderBookTab />}
+            </div>
           </div>
 
           {/* Leaderboard section */}
