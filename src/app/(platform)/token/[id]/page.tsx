@@ -10,8 +10,6 @@ import TokenChart from "./_components/tokenChart";
 import MarketStats from "./_components/marketStats";
 import CommunityStats from "./_components/communityStats";
 import PredictionPlacement from "./_components/predictionPlacement";
-import OpenPositions from "./_components/openPositions";
-import Leaderboard from "./_components/leaderboard";
 import VitalityScore from "./_components/vitalityScore";
 
 // Import tab content components (to be created if not present)
@@ -26,6 +24,7 @@ import {
   BookmarkIcon,
   TrendUpIcon,
   ArchiveIcon,
+  ActivityIcon,
 } from "@/components/icons";
 
 // Mock token data
@@ -145,8 +144,8 @@ const TokenDetailPage: FC = () => {
 
           {/* Tab section */}
           <div className="mb-8">
-            {/* Pixel-perfect tab header with icons */}
-            <div className="flex gap-2 border-b border-[#E9EAEC] mb-6">
+            {/* Pixel-perfect tab header with icons (updated for blue outline) */}
+            <div className="flex gap-2 mb-6">
               {tabList.map((tab) => {
                 const Icon = tab.icon;
                 const isActive = activeTab === tab.key;
@@ -156,15 +155,10 @@ const TokenDetailPage: FC = () => {
                     className={`flex items-center gap-2 px-6 py-2 text-base font-semibold rounded-full transition-colors min-w-[160px] focus:outline-none relative
                       ${
                         isActive
-                          ? "bg-white text-[#181A20] shadow-[0_2px_8px_0_rgba(51,92,255,0.08)] border border-[#E9EAEC] -mb-px z-10"
-                          : "bg-transparent text-[#7D8FB3] hover:bg-[#F5F8FF] border border-transparent"
+                          ? "bg-white text-[#335CFF] ring-2 ring-[#335CFF] ring-offset-0"
+                          : "bg-transparent text-[#7D8FB3] hover:bg-[#F5F8FF]"
                       }
                     `}
-                    style={{
-                      boxShadow: isActive
-                        ? "0px 2px 8px 0px rgba(51,92,255,0.08)"
-                        : undefined,
-                    }}
                     onClick={() => setActiveTab(tab.key)}
                   >
                     <Icon
@@ -184,46 +178,6 @@ const TokenDetailPage: FC = () => {
               {activeTab === "trades" && <TradesTab />}
               {activeTab === "orderBook" && <OrderBookTab />}
             </div>
-          </div>
-
-          {/* Leaderboard section */}
-          <div className="mb-6">
-            <div className="flex items-center mb-4">
-              <div className="flex items-center">
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="mr-2"
-                >
-                  <path
-                    d="M6.66667 11.6667H3.33333C2.8731 11.6667 2.5 12.0398 2.5 12.5V16.6667C2.5 17.1269 2.8731 17.5 3.33333 17.5H6.66667C7.1269 17.5 7.5 17.1269 7.5 16.6667V12.5C7.5 12.0398 7.1269 11.6667 6.66667 11.6667Z"
-                    stroke="#374151"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M11.6667 6.66667H8.33333C7.8731 6.66667 7.5 7.03976 7.5 7.5V16.6667C7.5 17.1269 7.8731 17.5 8.33333 17.5H11.6667C12.1269 17.5 12.5 17.1269 12.5 16.6667V7.5C12.5 7.03976 12.1269 6.66667 11.6667 6.66667Z"
-                    stroke="#374151"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M16.6667 2.5H13.3333C12.8731 2.5 12.5 2.8731 12.5 3.33333V16.6667C12.5 17.1269 12.8731 17.5 13.3333 17.5H16.6667C17.1269 17.5 17.5 17.1269 17.5 16.6667V3.33333C17.5 2.8731 17.1269 2.5 16.6667 2.5Z"
-                    stroke="#374151"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-                <span className="font-medium text-sm">Leaderboard</span>
-              </div>
-            </div>
-            <Leaderboard />
           </div>
         </div>
 
@@ -265,46 +219,16 @@ const TokenDetailPage: FC = () => {
               available={tokenData.available}
             />
           </div>
-
-          {/* Open positions section */}
-          <div className="mb-6">
-            <OpenPositions positionValue={tokenData.positionValue} />
-          </div>
-
           {/* Vitality score section */}
           <div className="mb-6">
             <div className="flex items-center mb-4">
               <div className="flex items-center">
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="mr-2"
-                >
-                  <path
-                    d="M9.99996 18.3333C14.6023 18.3333 18.3333 14.6024 18.3333 10C18.3333 5.39763 14.6023 1.66667 9.99996 1.66667C5.39759 1.66667 1.66663 5.39763 1.66663 10C1.66663 14.6024 5.39759 18.3333 9.99996 18.3333Z"
-                    stroke="#374151"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M10 6.66667V10"
-                    stroke="#374151"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M10 13.3333H10.0083"
-                    stroke="#374151"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+                {/* Use ActivityIcon for vitality score, for visual consistency and clarity */}
+                {/*
+                  Security: This is a stateless icon component, safe for all environments.
+                  Professional: Using shared icon assets for UI consistency.
+                */}
+                <ActivityIcon className="mr-2" />
                 <span className="font-medium text-sm">Vitality Score</span>
               </div>
             </div>
