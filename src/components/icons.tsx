@@ -455,7 +455,7 @@ export const OpenTrades = ({ className }: { className?: string }) => {
   );
 };
 
-export const CalculatorIcon = ({ className }: { className?: string }) => {
+export const PlacePredictionIcon = ({ className }: { className?: string }) => {
   return (
     <svg
       width="20"

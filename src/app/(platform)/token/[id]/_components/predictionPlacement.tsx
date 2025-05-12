@@ -2,6 +2,7 @@
 
 import { FC, useState } from "react";
 import { Minus, Plus } from "lucide-react";
+import { PlacePredictionIcon } from "@/components/icons";
 
 interface PredictionPlacementProps {
   entryPrice: string;
@@ -38,36 +39,23 @@ const PredictionPlacement: FC<PredictionPlacementProps> = ({
 
   return (
     <section
-      className="rounded-[28px] bg-white shadow-lg border border-[#E9EAEC] p-0 w-full max-w-[370px] mx-auto flex flex-col"
+      className="rounded-[28px] bg-white  border border-[#E9EAEC] py-0 px-6 w-full mx-auto flex flex-col"
       aria-label="Place prediction"
     >
       {/* Header */}
-      <div className="flex items-center gap-2 px-6 pt-6 pb-3">
-        <span className="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-[#F5F8FF] border border-[#E9EAEC]">
-          {/* Use a simple icon for now, replace with your own if needed */}
-          <svg width="16" height="16" fill="none" viewBox="0 0 16 16">
-            <rect
-              x="3"
-              y="3"
-              width="10"
-              height="10"
-              rx="2"
-              stroke="#335CFF"
-              strokeWidth="1.5"
-            />
-            <rect x="7" y="7" width="2" height="2" rx="1" fill="#335CFF" />
-          </svg>
-        </span>
-        <span className="text-[#181A20] text-lg font-bold">
+      <div className="flex items-center gap-1 my-4">
+        <PlacePredictionIcon className="w-5 h-5" />
+
+        <span className="text-[#181A20] text-base font-bold">
           Place prediction
         </span>
       </div>
       {/* Direction toggle */}
-      <div className="flex gap-0 px-6 pt-2 pb-4">
+      <div className="flex justify-between items-center mb-4">
         <button
           className={`flex-1 py-2 rounded-full border text-base font-semibold transition-colors ${
             direction === "long"
-              ? "bg-[#EFFFF6] border-[#05CD99] text-[#181A20] shadow-[0_2px_8px_0_rgba(5,205,153,0.08)]"
+              ? "bg-[#EFFFF6] border-[#05CD99] text-[#0B4627] shadow-[0_2px_8px_0_rgba(5,205,153,0.08)]"
               : "bg-transparent border-transparent text-[#7D8FB3]"
           }`}
           style={{ borderWidth: direction === "long" ? 1 : 0 }}
@@ -76,10 +64,11 @@ const PredictionPlacement: FC<PredictionPlacementProps> = ({
         >
           Long
         </button>
+
         <button
           className={`flex-1 py-2 rounded-full border text-base font-semibold transition-colors ${
             direction === "short"
-              ? "bg-[#F8F8F8] border-[#E9EAEC] text-[#181A20]"
+              ? "bg-[#FFF0F0] border-[#FF4747] text-[#FF4747] shadow-[0_2px_8px_0_rgba(255,71,71,0.08)]"
               : "bg-transparent border-transparent text-[#7D8FB3]"
           }`}
           style={{ borderWidth: direction === "short" ? 1 : 0 }}
@@ -90,7 +79,7 @@ const PredictionPlacement: FC<PredictionPlacementProps> = ({
         </button>
       </div>
       {/* Amount input */}
-      <div className="px-6 pb-0">
+      <div className="px-6 py-4 mb-4 border border-[#E9EAEC] rounded-3xl ">
         <label className="block text-[15px] font-bold text-[#181A20] mb-2">
           Amount (USD)
         </label>
@@ -99,7 +88,7 @@ const PredictionPlacement: FC<PredictionPlacementProps> = ({
             type="text"
             value={amount}
             onChange={handleAmountChange}
-            className="w-full py-3 px-4 border border-[#E9EAEC] rounded-full focus:ring-2 focus:ring-[#335CFF] focus:border-[#335CFF] text-lg font-semibold text-[#181A20] placeholder:text-[#B1B5C3] outline-none transition-all"
+            className="w-full py-3 px-4 border border-[#E9EAEC] rounded-full focus:ring-0 focus:ring-[#335CFF] focus:border-[#335CFF] text-lg font-semibold text-[#181A20] placeholder:text-[#B1B5C3] outline-none transition-all"
             placeholder="0.00"
             inputMode="decimal"
             aria-label="Amount in USD"
@@ -122,11 +111,11 @@ const PredictionPlacement: FC<PredictionPlacementProps> = ({
         </div>
       </div>
       {/* Leverage control */}
-      <div className="px-6 pb-0">
-        <label className="block text-[15px] font-bold text-[#181A20] mb-2">
+      <div className="border border-[#E9EAEC] rounded-3xl px-6 py-4 mb-4">
+        <label className="block text-[15px] font-extrabold text-[#181A20] mb-2">
           Leverage
         </label>
-        <div className="flex items-center bg-[#F8F8F8] rounded-full px-4 py-2">
+        <div className="flex justify-between items-center rounded-full px-4 py-2">
           <button
             onClick={() => adjustLeverage(false)}
             className="w-8 h-8 bg-white border border-[#E9EAEC] text-[#B1B5C3] rounded-full flex items-center justify-center hover:bg-[#F5F8FF] focus:outline-none focus:ring-2 focus:ring-[#335CFF]"
@@ -136,7 +125,7 @@ const PredictionPlacement: FC<PredictionPlacementProps> = ({
           >
             <Minus size={18} />
           </button>
-          <span className="mx-4 text-[22px] font-extrabold text-[#181A20]">
+          <span className="mx-4 text-3xl font-extrabold text-[#122368]">
             {leverage}x
           </span>
           <button
@@ -151,7 +140,7 @@ const PredictionPlacement: FC<PredictionPlacementProps> = ({
         </div>
       </div>
       {/* Price details */}
-      <div className="flex justify-between px-6 pt-4 pb-0">
+      <div className="flex justify-between items-center mb-4">
         <div>
           <p className="text-xs text-[#7D8FB3] mb-1">Entry price</p>
           <p className="text-base font-extrabold text-[#181A20]">
@@ -166,7 +155,7 @@ const PredictionPlacement: FC<PredictionPlacementProps> = ({
         </div>
       </div>
       {/* Submit button */}
-      <div className="px-6 pt-4 pb-6">
+      <div className="mb-4">
         <button
           className="w-full py-3 rounded-full bg-[#335CFF] text-white text-lg font-bold shadow-md hover:bg-[#274FCC] transition-colors focus:outline-none focus:ring-2 focus:ring-[#335CFF]"
           type="button"

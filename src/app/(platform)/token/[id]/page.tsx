@@ -21,7 +21,6 @@ import {
   BookmarkIcon,
   TrendUpIcon,
   ArchiveIcon,
-  ActivityIcon,
 } from "@/components/icons";
 
 // Import new right-column components
@@ -136,54 +135,13 @@ const TokenDetailPage: FC = () => {
         <div className="lg:col-span-2">
           {/* Prediction placement section */}
           <div className="mb-6">
-            <div className="flex items-center mb-4">
-              <div className="flex items-center">
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="mr-2"
-                >
-                  <path
-                    d="M10 18.3333C14.6024 18.3333 18.3334 14.6024 18.3334 10C18.3334 5.39763 14.6024 1.66667 10 1.66667C5.39765 1.66667 1.66669 5.39763 1.66669 10C1.66669 14.6024 5.39765 18.3333 10 18.3333Z"
-                    stroke="#374151"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M5 10H15"
-                    stroke="#374151"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-                <span className="font-medium text-sm">Place prediction</span>
-              </div>
-            </div>
             <PredictionPlacement
               entryPrice={tokenData.entryPrice}
               liquidationPrice={tokenData.liquidationPrice}
               available={tokenData.available}
             />
           </div>
-          {/* Vitality score section */}
-          <div className="mb-6">
-            <div className="flex items-center mb-4">
-              <div className="flex items-center">
-                {/* Use ActivityIcon for vitality score, for visual consistency and clarity */}
-                {/**
-                  Security: This is a stateless icon component, safe for all environments.
-                  Professional: Using shared icon assets for UI consistency.
-                */}
-                <ActivityIcon className="mr-2" />
-                <span className="font-medium text-sm">Vitality Score</span>
-              </div>
-            </div>
-          </div>
+
           {/* Leaderboard section */}
           <Leaderboard
             data={[
