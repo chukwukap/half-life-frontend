@@ -221,42 +221,69 @@ export const PositionsCard = () => {
 
   const totalSlides = Math.ceil(positions.length / positionsPerPage);
 
+  // Shared header for both states
+  const Header = (
+    <div className="w-full flex items-center justify-between mb-0 px-2 pt-2">
+      <div className="flex items-center gap-2">
+        <FireIcon className="text-primary" />
+        <h3 className="font-semibold text-lg">My Positions</h3>
+      </div>
+      <Link
+        href="/portfolio"
+        className="text-sm font-medium text-[#335CFF] hover:text-[#274FCC] bg-[#F5F8FF] px-4 py-2 rounded-full transition-colors"
+      >
+        See all
+      </Link>
+    </div>
+  );
+
   if (positions.length === 0) {
     return (
-      <div className="bg-background border-border rounded-2xl p-4 shadow-sm border ">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <FireIcon className="text-primary" />
-            <h3 className="font-semibold text-lg">My Positions</h3>
-          </div>
+      <section className="w-full flex flex-col items-center justify-center rounded-[32px] p-4 border border-[#E9EAEC] bg-white">
+        {Header}
+        {/* Illustration */}
+        <div className="w-full bg-[#F5F8FF] rounded-3xl flex items-center justify-center pt-10 pb-8 px-4 mt-4">
+          <Image
+            src="/assets/img/illustrations/no-open-position.svg"
+            alt="No open position"
+            width={220}
+            height={180}
+          />
         </div>
-        <EmptyPositions onAddPosition={() => {}} />
-      </div>
+        {/* Message */}
+        <div className="w-full flex flex-col items-center justify-center px-6 pt-6 pb-0">
+          <h3 className="font-extrabold text-xl text-[#181A20] text-center mb-2">
+            You have no active positions
+          </h3>
+          <p className="text-center text-[#7D8FB3] text-base mb-6 max-w-xs">
+            Pick a hype token and bet on its rise or collapse. Don&apos;t miss
+            the action
+          </p>
+        </div>
+        {/* CTA Button */}
+        <div className="w-full bg-[#F5F8FF] rounded-b-[32px] flex items-center justify-center py-5 px-4">
+          <Link href="/token" className="w-full">
+            <button
+              className="w-full rounded-full bg-transparent text-[#335CFF] text-lg font-bold py-3 transition-colors hover:underline focus:underline focus:outline-none"
+              type="button"
+            >
+              Browse tokens
+            </button>
+          </Link>
+        </div>
+      </section>
     );
   }
 
   return (
-    <div className="bg-background border-border rounded-2xl p-4 shadow-sm border  flex flex-col">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <FireIcon className="text-primary" />
-          <h3 className="font-semibold text-lg">My Positions</h3>
-        </div>
-        <Link
-          href="/portfolio"
-          className="text-sm font-medium text-primary hover:text-primary/90 bg-primary/10 px-4 py-2 rounded-full"
-        >
-          See all
-        </Link>
-      </div>
-
+    <div className="bg-background border-border rounded-2xl p-4 shadow-sm border flex flex-col">
+      {Header}
       <div className="flex-1">
         <div className="space-y-4">
           {visiblePositions.map((position, index) => (
             <Position key={`${position.token}-${index}`} {...position} />
           ))}
         </div>
-
         {/* Carousel Navigation */}
         <div className="relative flex items-center justify-center mt-6 mb-2 px-12">
           <button
@@ -271,7 +298,6 @@ export const PositionsCard = () => {
           >
             <CaretLeftIcon className="w-5 h-5" />
           </button>
-
           <div className="flex items-center gap-2">
             {Array.from({ length: totalSlides }).map((_, idx) => (
               <button
@@ -286,7 +312,6 @@ export const PositionsCard = () => {
               />
             ))}
           </div>
-
           <button
             className={cn(
               "w-8 h-8 flex items-center justify-center rounded-full transition-colors absolute right-0",
@@ -302,60 +327,5 @@ export const PositionsCard = () => {
         </div>
       </div>
     </div>
-  );
-};
-
-/**
- * EmptyPositions component displays when user has no active trading positions
- * Shows illustration, message and CTA to browse tokens
- */
-const EmptyPositions = ({ onAddPosition }: { onAddPosition?: () => void }) => {
-  return (
-    <section className="w-full flex flex-col items-center justify-center rounded-[32px] p-4 border border-[#E9EAEC] bg-white">
-      {/* Header with title and See all button */}
-      <div className="w-full flex items-center justify-between mb-0">
-        <div className="flex items-center gap-2">
-          <FireIcon className="text-primary" />
-          <h3 className="font-semibold text-lg">My Positions</h3>
-        </div>
-        <Link
-          href="/portfolio"
-          className="text-sm font-medium text-[#335CFF] hover:text-[#274FCC] bg-[#F5F8FF] px-4 py-2 rounded-full transition-colors"
-        >
-          See all
-        </Link>
-      </div>
-      {/* Illustration */}
-      <div className="w-full bg-[#F5F8FF] rounded-3xl flex items-center justify-center pt-10 pb-8 px-4 mt-4">
-        <Image
-          src="/assets/img/illustrations/no-open-position.svg"
-          alt="No open position"
-          width={220}
-          height={180}
-        />
-      </div>
-      {/* Message */}
-      <div className="w-full flex flex-col items-center justify-center px-6 pt-6 pb-0">
-        <h3 className="font-extrabold text-xl text-[#181A20] text-center mb-2">
-          You have no active positions
-        </h3>
-        <p className="text-center text-[#7D8FB3] text-base mb-6 max-w-xs">
-          Pick a hype token and bet on its rise or collapse. Don&apos;t miss the
-          action
-        </p>
-      </div>
-      {/* CTA Button */}
-      <div className="w-full bg-[#F5F8FF] rounded-b-[32px] flex items-center justify-center py-5 px-4">
-        <Link href="/token" className="w-full">
-          <button
-            className="w-full rounded-full bg-transparent text-[#335CFF] text-lg font-bold py-3 transition-colors hover:underline focus:underline focus:outline-none"
-            onClick={onAddPosition}
-            type="button"
-          >
-            Browse tokens
-          </button>
-        </Link>
-      </div>
-    </section>
   );
 };
