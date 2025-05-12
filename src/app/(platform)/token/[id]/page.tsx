@@ -156,39 +156,39 @@ const TokenDetailPage: FC = () => {
           <TrendingTokens
             tokens={[
               {
-                logoUrl: "/tokens/doge.svg",
+                logoUrl: "/assets/img/tokens/doge.png",
                 name: "DOGE",
                 subtitle: "Dogecoin",
                 lifeIndex: 80,
               },
               {
-                logoUrl: "/tokens/wif.svg",
+                logoUrl: "/assets/img/tokens/wif.png",
                 name: "WIF",
                 subtitle: "dogwifhat",
                 lifeIndex: 43,
               },
               {
-                logoUrl: "/tokens/floki.svg",
+                logoUrl: "/assets/img/tokens/floki.png",
                 name: "FLOKI",
                 subtitle: "Floki",
                 lifeIndex: 24,
               },
               {
-                logoUrl: "/tokens/bonk.svg",
+                logoUrl: "/assets/img/tokens/pepe.png",
+                name: "PEPE",
+                subtitle: "Pepe",
+                lifeIndex: 80,
+              },
+              {
+                logoUrl: "/assets/img/tokens/bonk.png",
                 name: "BONK",
                 subtitle: "Bonk",
                 lifeIndex: 80,
               },
               {
-                logoUrl: "/tokens/bonk.svg",
-                name: "BONK",
-                subtitle: "Bonk",
-                lifeIndex: 80,
-              },
-              {
-                logoUrl: "/tokens/bonk.svg",
-                name: "BONK",
-                subtitle: "Bonk",
+                logoUrl: "/assets/img/tokens/trol.png",
+                name: "TROL",
+                subtitle: "Trol",
                 lifeIndex: 80,
               },
             ]}
