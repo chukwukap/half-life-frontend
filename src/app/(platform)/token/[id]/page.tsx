@@ -33,7 +33,7 @@ const tokenData = {
   id: "wif",
   name: "WIF",
   fullName: "dogwifhat",
-  logoUrl: "/tokens/wif.svg",
+  logoUrl: "/assets/img/tokens/wif.png",
   openTraders: 547260,
   volume: "$3,807,383",
   funding: "0.0934%",
@@ -61,14 +61,14 @@ const TokenDetailPage: FC = () => {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-6 max-w-screen-xl">
+    <div className="container mx-auto py-6 max-w-screen-xl">
       {/* Back navigation */}
-      <div className="mb-6">
+      <div className="mb-4 text-sm font-extrabold">
         <Link
           href="/token"
           className="flex items-center text-blue-600 hover:underline text-sm"
         >
-          <ArrowLeft className="h-4 w-4 mr-2" />
+          <ArrowLeft className=" mr-2 bg-[#EBF1FF] rounded-full p-1" />
           back to tokens
         </Link>
       </div>
@@ -85,28 +85,28 @@ const TokenDetailPage: FC = () => {
         lifeIndex={tokenData.vitalityScore}
       />
 
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-7 gap-6">
         {/* Left column - Chart, Stats, and Tabs */}
-        <div className="lg:col-span-3">
+        <div className="lg:col-span-5 border border-[#EBF1FF] rounded-lg p-4">
           {/* Price chart section */}
-          <div className="mb-6">
+          <div className="mb-16">
             <TokenChart />
           </div>
 
           {/* Tab section */}
           <div className="mb-8">
-            {/* Pixel-perfect tab header with icons (updated for blue outline) */}
-            <div className="flex gap-2 mb-6">
+            {/*  tab header with icons (updated for blue outline) */}
+            <div className="flex gap-2 mb-6 ">
               {tabList.map((tab) => {
                 const Icon = tab.icon;
                 const isActive = activeTab === tab.key;
                 return (
                   <button
                     key={tab.key}
-                    className={`flex items-center gap-2 px-6 py-2 text-base font-semibold rounded-full transition-colors min-w-[160px] focus:outline-none relative
+                    className={`flex items-center gap-2 px-4 py-2 text-sm rounded-full transition-colors  focus:outline-none relative
                       ${
                         isActive
-                          ? "bg-white text-[#335CFF] ring-2 ring-[#335CFF] ring-offset-0"
+                          ? "bg-white text-[#335CFF] ring-1 ring-[#335CFF] ring-offset-0"
                           : "bg-transparent text-[#7D8FB3] hover:bg-[#F5F8FF]"
                       }
                     `}
@@ -123,7 +123,7 @@ const TokenDetailPage: FC = () => {
               })}
             </div>
             {/* Tab content */}
-            <div className="bg-white rounded-[16px] shadow-sm p-6 border border-[#E9EAEC]">
+            <div className="bg-white rounded-[16px] ">
               {activeTab === "overview" && <OverviewTab />}
               {activeTab === "openPositions" && <OpenPositionsTab />}
               {activeTab === "trades" && <TradesTab />}

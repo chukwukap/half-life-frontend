@@ -6,7 +6,7 @@ import React from "react";
  */
 const OverviewTab: React.FC = () => {
   return (
-    <div className="bg-white rounded-[24px] p-8 shadow-sm">
+    <div className="bg-white  border border-[#EBF1FF] p-6 rounded-lg">
       <div className="space-y-7">
         <div>
           <div className="font-bold text-lg text-[#181A20] mb-1">
