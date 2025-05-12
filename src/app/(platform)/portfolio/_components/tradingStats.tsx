@@ -16,10 +16,10 @@ const TradingStats: FC = () => {
     value,
     isGreen,
   }) => (
-    <div className="flex items-center">
-      <div className="bg-blue-50 p-3 rounded-full flex items-center justify-center">
+    <div className="flex items-center gap-3">
+      <div className="bg-[#EBF2FF] p-2.5 rounded-full flex items-center justify-center">
         <svg
-          className="h-5 w-5 text-blue-600"
+          className="h-5 w-5 text-[#335CFF]"
           viewBox="0 0 24 24"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -48,10 +48,12 @@ const TradingStats: FC = () => {
           />
         </svg>
       </div>
-      <div className="ml-3">
-        <div className="text-gray-500 text-xs mb-1">{label}</div>
+      <div>
+        <div className="text-[#7D8FB3] text-xs mb-0.5 font-medium">{label}</div>
         <div
-          className={`text-xl font-semibold ${isGreen ? "text-green-500" : ""}`}
+          className={`text-[20px] leading-6 font-bold tracking-tight ${
+            isGreen ? "text-[#05CD99]" : "text-[#0D1C59]"
+          }`}
         >
           {value}
         </div>
@@ -60,10 +62,10 @@ const TradingStats: FC = () => {
   );
 
   return (
-    <div className="bg-white rounded-3xl p-6 h-full border border-gray-100 shadow-sm">
-      <div className="flex items-center mb-6">
+    <div className="bg-white rounded-[20px] p-8 h-full border border-gray-100 shadow-sm">
+      <div className="flex items-center mb-8">
         <svg
-          className="h-5 w-5 text-blue-600 mr-2"
+          className="h-5 w-5 text-[#335CFF] mr-2"
           viewBox="0 0 24 24"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -90,7 +92,9 @@ const TradingStats: FC = () => {
             strokeLinejoin="round"
           />
         </svg>
-        <h2 className="text-blue-600 font-medium">Trading stats</h2>
+        <h2 className="text-[#335CFF] font-semibold text-base tracking-tight">
+          Trading stats
+        </h2>
       </div>
 
       <div className="grid grid-cols-2 gap-y-8 gap-x-4">

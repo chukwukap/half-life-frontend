@@ -10,13 +10,23 @@ import TokenChart from "./_components/tokenChart";
 import MarketStats from "./_components/marketStats";
 import CommunityStats from "./_components/communityStats";
 import PredictionPlacement from "./_components/predictionPlacement";
-
+import OpenPositions from "./_components/openPositions";
+import Leaderboard from "./_components/leaderboard";
 import VitalityScore from "./_components/vitalityScore";
+
 // Import tab content components (to be created if not present)
 import OverviewTab from "./_components/overviewTab";
 import OpenPositionsTab from "./_components/openPositionsTab";
 import TradesTab from "./_components/tradesTab";
 import OrderBookTab from "./_components/orderBookTab";
+
+// Import icons for tabs
+import {
+  InfoIcon,
+  BookmarkIcon,
+  TrendUpIcon,
+  ArchiveIcon,
+} from "@/components/icons";
 
 // Mock token data
 const tokenData = {
@@ -44,10 +54,10 @@ const TokenDetailPage: FC = () => {
   // Tab state
   const [activeTab, setActiveTab] = useState("overview");
   const tabList = [
-    { key: "overview", label: "Overview" },
-    { key: "openPositions", label: "Open Positions" },
-    { key: "trades", label: "Trades" },
-    { key: "orderBook", label: "Order Book" },
+    { key: "overview", label: "Overview", icon: InfoIcon },
+    { key: "openPositions", label: "Open Positions", icon: BookmarkIcon },
+    { key: "trades", label: "Trades", icon: TrendUpIcon },
+    { key: "orderBook", label: "Order Book", icon: ArchiveIcon },
   ];
 
   return (
@@ -135,22 +145,37 @@ const TokenDetailPage: FC = () => {
 
           {/* Tab section */}
           <div className="mb-8">
+            {/* Pixel-perfect tab header with icons */}
             <div className="flex gap-2 border-b border-[#E9EAEC] mb-6">
-              {tabList.map((tab) => (
-                <button
-                  key={tab.key}
-                  className={`px-5 py-2 text-sm font-semibold rounded-t-lg transition-colors min-w-[120px] focus:outline-none
-                    ${
-                      activeTab === tab.key
-                        ? "bg-white text-[#335CFF] border-b-2 border-[#335CFF] -mb-px"
-                        : "bg-transparent text-[#7D8FB3] hover:bg-[#F5F8FF] border-b-2 border-transparent"
-                    }
-                  `}
-                  onClick={() => setActiveTab(tab.key)}
-                >
-                  {tab.label}
-                </button>
-              ))}
+              {tabList.map((tab) => {
+                const Icon = tab.icon;
+                const isActive = activeTab === tab.key;
+                return (
+                  <button
+                    key={tab.key}
+                    className={`flex items-center gap-2 px-6 py-2 text-base font-semibold rounded-full transition-colors min-w-[160px] focus:outline-none relative
+                      ${
+                        isActive
+                          ? "bg-white text-[#181A20] shadow-[0_2px_8px_0_rgba(51,92,255,0.08)] border border-[#E9EAEC] -mb-px z-10"
+                          : "bg-transparent text-[#7D8FB3] hover:bg-[#F5F8FF] border border-transparent"
+                      }
+                    `}
+                    style={{
+                      boxShadow: isActive
+                        ? "0px 2px 8px 0px rgba(51,92,255,0.08)"
+                        : undefined,
+                    }}
+                    onClick={() => setActiveTab(tab.key)}
+                  >
+                    <Icon
+                      className={`w-5 h-5 ${
+                        isActive ? "text-[#335CFF]" : "text-[#7D8FB3]"
+                      }`}
+                    />
+                    <span>{tab.label}</span>
+                  </button>
+                );
+              })}
             </div>
             {/* Tab content */}
             <div className="bg-white rounded-[16px] shadow-sm p-6 border border-[#E9EAEC]">
@@ -198,6 +223,7 @@ const TokenDetailPage: FC = () => {
                 <span className="font-medium text-sm">Leaderboard</span>
               </div>
             </div>
+            <Leaderboard />
           </div>
         </div>
 
@@ -238,6 +264,11 @@ const TokenDetailPage: FC = () => {
               liquidationPrice={tokenData.liquidationPrice}
               available={tokenData.available}
             />
+          </div>
+
+          {/* Open positions section */}
+          <div className="mb-6">
+            <OpenPositions positionValue={tokenData.positionValue} />
           </div>
 
           {/* Vitality score section */}
