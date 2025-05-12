@@ -142,43 +142,45 @@ const Position = ({
  */
 export const PositionsCard = () => {
   // To switch to real data, replace the samplePositions array with your API or state data.
+  // Positions data copied from @tokens.ts mockTokens for demo purposes.
+  // In a real app, this would be dynamic and user-specific.
   const samplePositions: PositionProps[] = [
-    {
-      token: "WIF",
-      tokenInfo: "dogwifhat",
-      strategy: "Long 5x",
-      entryPrice: "0.00008",
-      currentPrice: "0.00009",
-      liquidationPrice: "0.00007",
-      fundingRate: "+0.0125%",
-      pnlPercent: "+12.10%",
-      isProfit: true,
-      logoSrc: "/wif.png",
-    },
-    {
-      token: "TROL",
-      tokenInfo: "trololol",
-      strategy: "Long 10x",
-      entryPrice: "0.133",
-      currentPrice: "0.923",
-      liquidationPrice: "0.113",
-      fundingRate: "-0.0125%",
-      pnlPercent: "-12.10%",
-      isProfit: false,
-      logoSrc: "/trol.png",
-    },
-    {
-      token: "BTC",
-      tokenInfo: "Bitcoin",
-      strategy: "Short 2x",
-      entryPrice: "42000",
-      currentPrice: "41000",
-      liquidationPrice: "45000",
-      fundingRate: "+0.01%",
-      pnlPercent: "+5.20%",
-      isProfit: true,
-      logoSrc: "/btc.png",
-    },
+    // {
+    //   token: "CBTC",
+    //   tokenInfo: "Coinbase Wrapped Staked BTC",
+    //   strategy: "Long 7x",
+    //   entryPrice: "99960.000000", // 2% below current price (102000)
+    //   currentPrice: "102000",
+    //   liquidationPrice: "86700.000000", // 15% below current price
+    //   fundingRate: "0.011%",
+    //   pnlPercent: "+5.20%", // Placeholder
+    //   isProfit: true, // Placeholder
+    //   logoSrc: "/assets/img/tokens/cbBTC.png",
+    // },
+    // {
+    //   token: "ZORA",
+    //   tokenInfo: "Zora",
+    //   strategy: "Long 7x",
+    //   entryPrice: "0.012544", // 2% below current price (0.0128)
+    //   currentPrice: "0.0128",
+    //   liquidationPrice: "0.010880", // 15% below current price
+    //   fundingRate: "0.011%",
+    //   pnlPercent: "+5.20%", // Placeholder
+    //   isProfit: true, // Placeholder
+    //   logoSrc: "/assets/img/tokens/zora.png",
+    // },
+    // {
+    //   token: "ETH",
+    //   tokenInfo: "Ethereum (Base)",
+    //   strategy: "Long 20x",
+    //   entryPrice: "3058.041000", // 2% below current price (3120.45)
+    //   currentPrice: "3120.45",
+    //   liquidationPrice: "2652.382500", // 15% below current price
+    //   fundingRate: "0.018%",
+    //   pnlPercent: "+5.20%", // Placeholder
+    //   isProfit: true, // Placeholder
+    //   logoSrc: "/assets/img/tokens/eth.png",
+    // },
   ];
 
   // Use samplePositions for now; swap with real data when available
@@ -309,14 +311,27 @@ export const PositionsCard = () => {
  */
 const EmptyPositions = ({ onAddPosition }: { onAddPosition?: () => void }) => {
   return (
-    <section className="w-full flex flex-col items-center justify-center rounded-[32px] bg-white border border-[#E9EAEC] px-0 pt-0 pb-0">
+    <section className="w-full flex flex-col items-center justify-center rounded-[32px] p-4 border border-[#E9EAEC] bg-white">
+      {/* Header with title and See all button */}
+      <div className="w-full flex items-center justify-between mb-0">
+        <div className="flex items-center gap-2">
+          <FireIcon className="text-primary" />
+          <h3 className="font-semibold text-lg">My Positions</h3>
+        </div>
+        <Link
+          href="/portfolio"
+          className="text-sm font-medium text-[#335CFF] hover:text-[#274FCC] bg-[#F5F8FF] px-4 py-2 rounded-full transition-colors"
+        >
+          See all
+        </Link>
+      </div>
       {/* Illustration */}
-      <div className="w-full bg-[#F5F8FF] rounded-t-[32px] flex items-center justify-center pt-10 pb-8 px-4">
+      <div className="w-full bg-[#F5F8FF] rounded-3xl flex items-center justify-center pt-10 pb-8 px-4 mt-4">
         <Image
           src="/assets/img/illustrations/no-open-position.svg"
           alt="No open position"
-          width={128}
-          height={128}
+          width={220}
+          height={180}
         />
       </div>
       {/* Message */}
