@@ -3,6 +3,9 @@
 import { FC, useState } from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { useParams } from "next/navigation";
+import { getTokenById } from "@/lib/mockData/tokens";
+import { TokenData } from "@/lib/types";
 
 // Components for the token detail page
 import TokenHeader from "./_components/tokenHeader";
@@ -27,29 +30,21 @@ import {
 import Leaderboard from "./_components/leaderboard";
 import TrendingTokens from "./_components/trendingTokens";
 
-// Mock token data
-const tokenData = {
-  id: "wif",
-  name: "WIF",
-  fullName: "dogwifhat",
-  logoUrl: "/assets/img/tokens/wif.png",
-  openTraders: 547260,
-  volume: "$3,807,383",
-  funding: "0.0934%",
-  countdown: "00:59:20",
-  entryPrice: "0.000008",
-  liquidationPrice: "0.000008",
-  leverage: 1,
-  available: "5,321.78",
-  positionValue: "+12.10%",
-  marketCap: "$390.00M",
-  volume24h: "$125.00M",
-  socialScore: "8.7/10",
-  communityScore: "7.2/10",
-  vitalityScore: 80,
-};
-
 const TokenDetailPage: FC = () => {
+  // Get the token id from the URL params
+  const params = useParams();
+  const tokenId =
+    typeof params.id === "string"
+      ? params.id
+      : Array.isArray(params.id)
+      ? params.id[0]
+      : undefined;
+
+  // Fetch the token data by id
+  const tokenData: TokenData | undefined = tokenId
+    ? getTokenById(tokenId)
+    : undefined;
+
   // Tab state
   const [activeTab, setActiveTab] = useState("overview");
   const tabList = [
@@ -58,6 +53,22 @@ const TokenDetailPage: FC = () => {
     { key: "trades", label: "Trades", icon: TrendUpIcon },
     { key: "orderBook", label: "Order Book", icon: ArchiveIcon },
   ];
+
+  // If token not found, show a not found message
+  if (!tokenData) {
+    return (
+      <div className="container mx-auto py-6 max-w-screen-xl">
+        <div className="text-center text-red-600 font-bold text-lg mt-20">
+          Token not found.
+        </div>
+        <div className="text-center mt-4">
+          <Link href="/token" className="text-blue-600 hover:underline">
+            Back to tokens
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto py-6 max-w-screen-xl">
@@ -74,11 +85,11 @@ const TokenDetailPage: FC = () => {
 
       {/* Pixel-perfect token header component */}
       <TokenHeader
-        logoUrl={tokenData.logoUrl}
-        name={tokenData.name}
+        logoUrl={tokenData.iconSrc || ""}
+        name={tokenData.symbol}
         subtitle={tokenData.fullName}
         openTraders={tokenData.openTraders}
-        volume={tokenData.volume}
+        volume={tokenData.volume24h}
         funding={tokenData.funding}
         cooldown={tokenData.countdown}
         lifeIndex={tokenData.vitalityScore}
@@ -136,8 +147,8 @@ const TokenDetailPage: FC = () => {
           {/* Prediction placement section */}
           <div className="mb-6">
             <PredictionPlacement
-              entryPrice={tokenData.entryPrice}
-              liquidationPrice={tokenData.liquidationPrice}
+              entryPrice={tokenData.price.toString()}
+              liquidationPrice={tokenData.positionValue}
               available={tokenData.available}
             />
           </div>

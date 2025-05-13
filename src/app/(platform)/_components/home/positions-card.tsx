@@ -48,7 +48,7 @@ const Position = ({
     alert(`Close position for ${token}`);
   };
   return (
-    <section className="bg-white rounded-[32px] px-6 pt-6 pb-0 w-full flex flex-col shadow-none border border-[#E9EAEC]">
+    <section className="bg-white  px-6 pt-6 pb-0 w-full flex flex-col shadow-none">
       {/* Token info and strategy header */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
@@ -239,7 +239,7 @@ export const PositionsCard = () => {
 
   if (positions.length === 0) {
     return (
-      <section className="w-full flex flex-col items-center justify-center rounded-[32px] p-4 border border-[#E9EAEC] bg-white">
+      <section className="w-full flex flex-col items-center justify-center rounded-2xl p-4 border border-[#E9EAEC] bg-white">
         {Header}
         {/* Illustration */}
         <div className="w-full bg-[#F5F8FF] rounded-3xl flex items-center justify-center pt-10 pb-8 px-4 mt-4">
@@ -276,7 +276,7 @@ export const PositionsCard = () => {
   }
 
   return (
-    <div className="bg-background border-border rounded-2xl p-4 shadow-sm border flex flex-col">
+    <div className="bg-background border-border  p-4 shadow-sm border flex flex-col">
       {Header}
       <div className="flex-1">
         <div className="space-y-4">
