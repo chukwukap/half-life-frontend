@@ -142,7 +142,30 @@ const TradeHistory: FC = () => {
   ];
 
   return (
-    <div className="bg-white rounded-[20px] overflow-hidden border border-[#E9EAEC]">
+    <div className="bg-white rounded-[24px] overflow-hidden border border-[#E9EAEC]">
+      {/* Card Header */}
+      <div className="flex items-center gap-3 px-8 pt-6 pb-2 bg-white">
+        <span className="text-[#335CFF]">
+          {/* Use your FireIcon or similar here for consistency */}
+          <svg width="20" height="20" fill="none" viewBox="0 0 20 20">
+            <path
+              fill="#335CFF"
+              d="M10.7 2.1c.2-.2.5-.2.7 0 2.2 2.2 3.6 4.7 3.6 7.2 0 1.2-.3 2.3-.8 3.2-.5.9-1.2 1.7-2.1 2.2a.5.5 0 01-.7-.7c.7-.7 1.2-1.4 1.5-2.1.3-.7.5-1.5.5-2.3 0-2-1.1-4.1-3-6.1-.2-.2-.2-.5 0-.7z"
+            />
+            <path
+              fill="#335CFF"
+              d="M8.2 3.6c.2-.2.5-.2.7 0 1.7 1.7 2.7 3.5 2.7 5.3 0 .8-.2 1.5-.5 2.1-.3.6-.8 1.2-1.4 1.6a.5.5 0 01-.7-.7c.5-.5.8-1 .9-1.5.2-.5.3-1 .3-1.5 0-1.3-.7-2.7-2-4-.2-.2-.2-.5 0-.7z"
+            />
+            <path
+              fill="#335CFF"
+              d="M10 18c-4.1 0-7-2.7-7-6.2 0-2.2 1.2-4.2 3.2-5.7a.5.5 0 01.7.7C5.1 8.2 4 10 4 11.8c0 2.8 2.3 4.8 6 4.8s6-2 6-4.8c0-1.8-1.1-3.6-2.9-4.9a.5.5 0 01.6-.8c2.1 1.5 3.3 3.5 3.3 5.7C17 15.3 14.1 18 10 18z"
+            />
+          </svg>
+        </span>
+        <h2 className="text-[#181A20] text-xl font-bold leading-tight">
+          Trade History
+        </h2>
+      </div>
       {/* Trade History Table - Pixel-perfect, accessible, and modular */}
       <div className="overflow-x-auto">
         <table className="w-full min-w-[900px]">
