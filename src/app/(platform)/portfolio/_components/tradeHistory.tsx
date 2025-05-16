@@ -225,65 +225,38 @@ const TradeHistory: FC = () => {
   ];
 
   return (
-    <div className="bg-white rounded-[20px] overflow-hidden shadow-sm border border-gray-100">
-      {/* Trade History header */}
-      <div className="p-8 border-b border-gray-100">
-        <div className="flex items-center">
-          <svg
-            className="h-5 w-5 text-[#335CFF] mr-2"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M3 3V21H21"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M7 14L11 10L15 14L21 8"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-          <h2 className="text-[#335CFF] font-semibold text-base tracking-tight">
-            Trade History
-          </h2>
-        </div>
-      </div>
-
+    <div className="bg-white rounded-[20px] overflow-hidden border border-[#E9EAEC]">
+      {/* Trade History Table - Pixel-perfect, accessible, and modular */}
       <div className="overflow-x-auto">
-        <table className="w-full">
+        <table className="w-full min-w-[900px]">
           <thead>
-            <tr className="text-left text-[#7D8FB3] text-xs bg-[#F5F8FF]">
-              <th className="py-3 px-8 font-semibold">Token</th>
-              <th className="py-3 px-8 font-semibold">Open</th>
-              <th className="py-3 px-8 font-semibold">Type</th>
-              <th className="py-3 px-8 font-semibold">Size</th>
-              <th className="py-3 px-8 font-semibold">Leverage</th>
-              <th className="py-3 px-8 font-semibold">PnL</th>
-              <th className="py-3 px-8 font-semibold"></th>
+            <tr className="text-left text-[#7D8FB3] text-sm bg-[#F5F8FF] font-semibold">
+              <th className="py-4 px-8 font-semibold">Token</th>
+              <th className="py-4 px-8 font-semibold">Open</th>
+              <th className="py-4 px-8 font-semibold">Type</th>
+              <th className="py-4 px-8 font-semibold">Size</th>
+              <th className="py-4 px-8 font-semibold">Leverage</th>
+              <th className="py-4 px-8 font-semibold">PnL</th>
+              <th className="py-4 px-8 font-semibold"></th>
             </tr>
           </thead>
           <tbody>
-            {trades.map((trade) => (
+            {trades.map((trade, idx) => (
               <tr
                 key={trade.id}
-                className="border-t border-gray-100 hover:bg-[#F5F8FF] transition-colors"
+                className={`transition-colors ${
+                  idx !== 0 ? "border-t border-[#E9EAEC]" : ""
+                } hover:bg-[#F5F8FF]`}
               >
+                {/* Token cell: avatar, ticker, name */}
                 <td className="py-4 px-8">
                   <div className="flex items-center">
                     <div className="w-8 h-8 mr-3 relative">
-                      {/* Token logo or fallback */}
                       {trade.token.logo ? (
                         <img
                           src={trade.token.logo}
                           alt={trade.token.ticker}
-                          className="w-8 h-8 rounded-full object-cover border border-gray-200"
+                          className="w-8 h-8 rounded-full object-cover border border-[#E9EAEC]"
                         />
                       ) : (
                         <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-xs font-bold text-[#0D1C59]">
@@ -292,24 +265,28 @@ const TradeHistory: FC = () => {
                       )}
                     </div>
                     <div>
-                      <div className="font-semibold text-[#0D1C59] text-sm">
+                      <div className="font-bold text-[#181A20] text-sm leading-tight">
                         {trade.token.ticker}
                       </div>
-                      <div className="text-[#7D8FB3] text-xs">
+                      <div className="text-[#7D8FB3] text-xs leading-tight">
                         {trade.token.name}
                       </div>
                     </div>
                   </div>
                 </td>
+                {/* Open cell: date, time */}
                 <td className="py-4 px-8">
-                  <div className="font-semibold text-[#0D1C59] text-sm">
+                  <div className="font-bold text-[#181A20] text-sm leading-tight">
                     {trade.openDate}
                   </div>
-                  <div className="text-[#7D8FB3] text-xs">{trade.openTime}</div>
+                  <div className="text-[#7D8FB3] text-xs leading-tight">
+                    {trade.openTime}
+                  </div>
                 </td>
+                {/* Type cell: Long/Short pill */}
                 <td className="py-4 px-8">
                   <span
-                    className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                    className={`px-3 py-1 rounded-full text-xs font-semibold select-none ${
                       trade.type === "Long"
                         ? "bg-[#E6FBF4] text-[#05CD99]"
                         : "bg-[#FEECEC] text-[#FF5A5A]"
@@ -318,30 +295,37 @@ const TradeHistory: FC = () => {
                     {trade.type}
                   </span>
                 </td>
-                <td className="py-4 px-8 text-[#0D1C59] text-sm font-semibold">
+                {/* Size cell */}
+                <td className="py-4 px-8 text-[#181A20] text-sm font-bold">
                   {trade.size}
                 </td>
-                <td className="py-4 px-8 text-[#0D1C59] text-sm font-semibold">
+                {/* Leverage cell */}
+                <td className="py-4 px-8 text-[#181A20] text-sm font-bold">
                   {trade.leverage}
                 </td>
+                {/* PnL cell: value and percent, colored */}
                 <td className="py-4 px-8">
                   <div
-                    className={`text-sm font-semibold ${
+                    className={`text-sm font-bold leading-tight ${
                       trade.pnl.isPositive ? "text-[#05CD99]" : "text-[#FF5A5A]"
                     }`}
                   >
                     {trade.pnl.value}
                   </div>
                   <div
-                    className={`text-xs font-medium ${
+                    className={`text-xs font-medium leading-tight ${
                       trade.pnl.isPositive ? "text-[#05CD99]" : "text-[#FF5A5A]"
                     }`}
                   >
                     {trade.pnl.percentage}
                   </div>
                 </td>
+                {/* View button */}
                 <td className="py-4 px-8">
-                  <button className="px-4 py-1.5 bg-[#F5F8FF] text-[#335CFF] text-xs font-semibold rounded-full shadow-sm hover:bg-[#E6EDFF] transition-colors">
+                  <button
+                    className="px-6 py-2 bg-[#F5F8FF] text-[#335CFF] text-sm font-bold rounded-full shadow-none hover:bg-[#E6EDFF] transition-colors focus:outline-none focus:ring-2 focus:ring-[#335CFF]"
+                    aria-label={`View trade ${trade.token.ticker}`}
+                  >
                     View
                   </button>
                 </td>
