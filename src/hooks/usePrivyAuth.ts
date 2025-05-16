@@ -11,7 +11,6 @@ export function usePrivyAuth() {
     linkWallet,
     unlinkWallet,
     createWallet,
-    wallet,
   } = usePrivy();
 
   const handleLogin = useCallback(async () => {
@@ -34,7 +33,6 @@ export function usePrivyAuth() {
     ready,
     authenticated,
     user,
-    wallet,
     handleLogin,
     handleLogout,
     linkWallet,
