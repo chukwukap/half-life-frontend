@@ -1,36 +1,45 @@
-import { Roboto, Poppins, Open_Sans } from "next/font/google";
-import localFont from 'next/font/local';
+import { Roboto, Poppins, Open_Sans, Host_Grotesk } from "next/font/google";
 
 /**
  * Primary font configuration
- * Clash Grotesk - A modern, geometric sans-serif font
+ * A modern, highly readable font designed for screens
  */
-export const primaryFont = localFont({
-  src: [
-    {
-      path: '../../public/fonts/ClashGrotesk-Regular.woff2',
-      weight: '400',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/ClashGrotesk-Medium.woff2',
-      weight: '500',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/ClashGrotesk-SemiBold.woff2',
-      weight: '600',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/ClashGrotesk-Bold.woff2',
-      weight: '700',
-      style: 'normal',
-    },
-  ],
-  variable: '--font-primary',
-  display: 'swap',
+export const primaryFont = Host_Grotesk({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-primary",
 });
+
+// /**
+//  * Primary font configuration
+//  * Clash Grotesk - A modern, geometric sans-serif font
+//  */
+// export const primaryFont = localFont({
+//   src: [
+//     {
+//       path: "../../public/fonts/ClashGrotesk-Regular.woff2",
+//       weight: "400",
+//       style: "normal",
+//     },
+//     {
+//       path: "../../public/fonts/ClashGrotesk-Medium.woff2",
+//       weight: "500",
+//       style: "normal",
+//     },
+//     {
+//       path: "../../public/fonts/ClashGrotesk-SemiBold.woff2",
+//       weight: "600",
+//       style: "normal",
+//     },
+//     {
+//       path: "../../public/fonts/ClashGrotesk-Bold.woff2",
+//       weight: "700",
+//       style: "normal",
+//     },
+//   ],
+//   variable: "--font-primary",
+//   display: "swap",
+// });
 
 /**
  * Secondary font configuration

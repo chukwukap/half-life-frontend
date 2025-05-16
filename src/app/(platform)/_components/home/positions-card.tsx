@@ -1,9 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
-import { CaretLeftIcon, CaretRightIcon, FireIcon } from "@/components/icons";
-import { cn } from "@/lib/utils";
+import { FireIcon } from "@/components/icons";
 import Image from "next/image";
 
 /**
@@ -11,20 +9,20 @@ import Image from "next/image";
  */
 interface PositionProps {
   token: string;
-  tokenInfo: string;
-  strategy: string;
+  tokenInfo: string; // e.g., username or subtext
+  strategy: string; // e.g., "Long 5x"
   entryPrice: string;
   currentPrice: string;
   liquidationPrice: string;
   fundingRate: string;
-  pnlPercent: string;
-  isProfit: boolean;
+  pnlUsd: string; // e.g., "+1210.35 USD"
+  pnlPercent: string; // e.g., "+12.10%"
+  size: string; // e.g., "$1,200"
   logoSrc?: string;
 }
 
 /**
- * Component displaying a single position with token info, prices, and actions
- * Pixel-perfect, Figma-accurate, accessible, and modular.
+ * Pixel-perfect, accessible, and modular position card for a single open position.
  */
 const Position = ({
   token,
@@ -34,22 +32,21 @@ const Position = ({
   currentPrice,
   liquidationPrice,
   fundingRate,
+  pnlUsd,
   pnlPercent,
-  isProfit,
+  size,
   logoSrc,
 }: PositionProps) => {
   // Placeholder handlers for future integration
   const handleModify = () => {
-    // TODO: Replace with modal or navigation to modify position
     alert(`Modify position for ${token}`);
   };
   const handleClose = () => {
-    // TODO: Replace with modal or API call to close position
     alert(`Close position for ${token}`);
   };
   return (
-    <section className="bg-white  px-6 pt-6 pb-0 w-full flex flex-col shadow-none">
-      {/* Token info and strategy header */}
+    <section className="bg-white rounded-2xl border border-[#E9EAEC] px-6 pt-6 pb-0 w-full flex flex-col shadow-none mb-4">
+      {/* Header: Token info, strategy, PnL */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
           {logoSrc ? (
@@ -67,25 +64,24 @@ const Position = ({
               </span>
             </div>
           )}
-          <div>
-            <h3 className="font-extrabold text-lg text-[#181A20] leading-tight">
+          <div className="flex flex-col justify-center">
+            <span className="font-extrabold text-lg text-[#181A20] leading-tight">
               {token}
-            </h3>
-            <p className="text-[#7D8FB3] text-base leading-tight">
+            </span>
+            <span className="text-[#7D8FB3] text-sm leading-tight">
               {tokenInfo}
-            </p>
+            </span>
           </div>
-        </div>
-        <div className="flex flex-col items-end gap-1">
-          <span className="inline-block px-3 py-1 bg-[#EFFFF6] text-[#05CD99] rounded-full text-base font-semibold mb-1">
+          <span className="ml-3 px-3 py-1 bg-[#EFFFF6] text-[#05CD99] rounded-full text-sm font-semibold">
             {strategy}
           </span>
-          <span
-            className={`text-lg font-extrabold ${
-              isProfit ? "text-[#05CD99]" : "text-[#FF4747]"
-            }`}
-          >
-            {pnlPercent}
+        </div>
+        <div className="flex flex-col items-end gap-0.5">
+          <span className="text-[#05CD99] font-extrabold text-base">
+            {pnlUsd} <span className="font-bold">({pnlPercent})</span>
+          </span>
+          <span className="text-[#B1B5C3] text-sm font-medium">
+            Size: {size}
           </span>
         </div>
       </div>
@@ -94,19 +90,19 @@ const Position = ({
         <div>
           <p className="text-[#7D8FB3] text-xs mb-1">Entry price</p>
           <p className="font-extrabold text-base text-[#181A20]">
-            ${entryPrice}
+            {entryPrice}
           </p>
         </div>
         <div>
           <p className="text-[#7D8FB3] text-xs mb-1">Current price</p>
           <p className="font-extrabold text-base text-[#181A20]">
-            ${currentPrice}
+            {currentPrice}
           </p>
         </div>
         <div>
           <p className="text-[#7D8FB3] text-xs mb-1">Liquidation price</p>
           <p className="font-extrabold text-base text-[#181A20]">
-            ${liquidationPrice}
+            {liquidationPrice}
           </p>
         </div>
         <div>
@@ -117,109 +113,61 @@ const Position = ({
         </div>
       </div>
       {/* Action buttons */}
-      <div className="flex flex-col gap-3 mb-2">
+      <div className="flex gap-4 mb-6">
         <button
-          className="w-full bg-[#EEF4FF] hover:bg-[#E5EDFF] text-[#335CFF] font-bold rounded-full py-3 text-lg transition-colors focus:outline-none focus:ring-2 focus:ring-[#335CFF]"
+          className="w-1/2 bg-[#EEF4FF] hover:bg-[#E5EDFF] text-[#335CFF] font-bold rounded-full py-3 text-lg transition-colors focus:outline-none focus:ring-2 focus:ring-[#335CFF]"
           onClick={handleModify}
         >
           Modify
         </button>
         <button
-          className="w-full bg-[#FFF0F0] hover:bg-[#FFE5E5] text-[#FF4747] font-bold rounded-full py-3 text-lg transition-colors focus:outline-none focus:ring-2 focus:ring-[#FF4747]"
+          className="w-1/2 bg-[#FFF0F0] hover:bg-[#FFE5E5] text-[#FF4747] font-bold rounded-full py-3 text-lg transition-colors focus:outline-none focus:ring-2 focus:ring-[#FF4747]"
           onClick={handleClose}
         >
           Close Position
         </button>
       </div>
-      {/* Carousel dots and nav would be outside this card, as in the Figma */}
     </section>
   );
 };
 
 /**
- * Positions card component showing a list of user's positions
- * Enhanced with state management for positions and carousel functionality
+ * Positions card component showing a list of user's positions or empty state.
+ * Pixel-perfect, accessible, and modular.
  */
 export const PositionsCard = () => {
-  // To switch to real data, replace the samplePositions array with your API or state data.
-  // Positions data copied from @tokens.ts mockTokens for demo purposes.
-  // In a real app, this would be dynamic and user-specific.
+  // Sample data for demonstration; replace with real data as needed.
   const samplePositions: PositionProps[] = [
-    // {
-    //   token: "CBTC",
-    //   tokenInfo: "Coinbase Wrapped Staked BTC",
-    //   strategy: "Long 7x",
-    //   entryPrice: "99960.000000", // 2% below current price (102000)
-    //   currentPrice: "102000",
-    //   liquidationPrice: "86700.000000", // 15% below current price
-    //   fundingRate: "0.011%",
-    //   pnlPercent: "+5.20%", // Placeholder
-    //   isProfit: true, // Placeholder
-    //   logoSrc: "/assets/img/tokens/cbBTC.png",
-    // },
-    // {
-    //   token: "ZORA",
-    //   tokenInfo: "Zora",
-    //   strategy: "Long 7x",
-    //   entryPrice: "0.012544", // 2% below current price (0.0128)
-    //   currentPrice: "0.0128",
-    //   liquidationPrice: "0.010880", // 15% below current price
-    //   fundingRate: "0.011%",
-    //   pnlPercent: "+5.20%", // Placeholder
-    //   isProfit: true, // Placeholder
-    //   logoSrc: "/assets/img/tokens/zora.png",
-    // },
-    // {
-    //   token: "ETH",
-    //   tokenInfo: "Ethereum (Base)",
-    //   strategy: "Long 20x",
-    //   entryPrice: "3058.041000", // 2% below current price (3120.45)
-    //   currentPrice: "3120.45",
-    //   liquidationPrice: "2652.382500", // 15% below current price
-    //   fundingRate: "0.018%",
-    //   pnlPercent: "+5.20%", // Placeholder
-    //   isProfit: true, // Placeholder
-    //   logoSrc: "/assets/img/tokens/eth.png",
-    // },
+    {
+      token: "WIF",
+      tokenInfo: "dogwifhat",
+      strategy: "Long 5x",
+      entryPrice: "$0.00008",
+      currentPrice: "$0.00009",
+      liquidationPrice: "$0.00007",
+      fundingRate: "+0.0125%",
+      pnlUsd: "+1210.35 USD",
+      pnlPercent: "+12.10%",
+      size: "$1,200",
+      logoSrc: "/assets/img/tokens/wif.png",
+    },
+    {
+      token: "WIF",
+      tokenInfo: "dogwifhat",
+      strategy: "Long 5x",
+      entryPrice: "$0.00008",
+      currentPrice: "$0.00009",
+      liquidationPrice: "$0.00007",
+      fundingRate: "+0.0125%",
+      pnlUsd: "+1210.35 USD",
+      pnlPercent: "+12.10%",
+      size: "$1,200",
+      logoSrc: "/assets/img/tokens/wif.png",
+    },
   ];
 
   // Use samplePositions for now; swap with real data when available
   const positions: PositionProps[] = samplePositions;
-
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [visiblePositions, setVisiblePositions] = useState<PositionProps[]>([]);
-  const positionsPerPage = 1;
-
-  useEffect(() => {
-    updateVisiblePositions();
-  }, [currentIndex]);
-
-  const updateVisiblePositions = () => {
-    const start = currentIndex;
-    const end = start + positionsPerPage;
-    setVisiblePositions(positions.slice(start, end));
-  };
-
-  const nextSlide = () => {
-    if (currentIndex + positionsPerPage < positions.length) {
-      setCurrentIndex((prev) => prev + positionsPerPage);
-    }
-  };
-
-  const prevSlide = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex((prev) => prev - positionsPerPage);
-    }
-  };
-
-  const goToSlide = (index: number) => {
-    const slideIndex = index * positionsPerPage;
-    if (slideIndex < positions.length) {
-      setCurrentIndex(slideIndex);
-    }
-  };
-
-  const totalSlides = Math.ceil(positions.length / positionsPerPage);
 
   // Shared header for both states
   const Header = (
@@ -230,7 +178,7 @@ export const PositionsCard = () => {
       </div>
       <Link
         href="/portfolio"
-        className="text-sm font-medium text-[#335CFF] hover:text-[#274FCC] bg-[#F5F8FF] px-4 py-2 rounded-full transition-colors"
+        className="text-base font-medium text-[#335CFF] hover:text-[#274FCC] bg-[#F5F8FF] px-6 py-2 rounded-full transition-colors"
       >
         See all
       </Link>
@@ -242,7 +190,7 @@ export const PositionsCard = () => {
       <section className="w-full flex flex-col items-center justify-center rounded-2xl p-4 border border-[#E9EAEC] bg-white">
         {Header}
         {/* Illustration */}
-        <div className="w-full bg-[#F5F8FF] rounded-3xl flex items-center justify-center pt-10 pb-8 px-4 mt-4">
+        <div className="w-full bg-[#EEF4FF] rounded-3xl flex items-center justify-center pt-10 pb-8 px-4 mt-4">
           <Image
             src="/assets/img/illustrations/no-open-position.svg"
             alt="No open position"
@@ -261,7 +209,7 @@ export const PositionsCard = () => {
           </p>
         </div>
         {/* CTA Button */}
-        <div className="w-full bg-[#F5F8FF] rounded-b-[32px] flex items-center justify-center py-5 px-4">
+        <div className="w-full bg-[#EEF4FF] rounded-b-[32px] flex items-center justify-center py-5 px-4">
           <Link href="/token" className="w-full">
             <button
               className="w-full rounded-full bg-transparent text-[#335CFF] text-lg font-bold py-3 transition-colors hover:underline focus:underline focus:outline-none"
@@ -276,55 +224,12 @@ export const PositionsCard = () => {
   }
 
   return (
-    <div className="bg-background border-border  p-4 shadow-sm border flex flex-col">
+    <div className="w-full flex flex-col rounded-2xl p-4 border border-[#E9EAEC] bg-white">
       {Header}
-      <div className="flex-1">
-        <div className="space-y-4">
-          {visiblePositions.map((position, index) => (
-            <Position key={`${position.token}-${index}`} {...position} />
-          ))}
-        </div>
-        {/* Carousel Navigation */}
-        <div className="relative flex items-center justify-center mt-6 mb-2 px-12">
-          <button
-            className={cn(
-              "w-8 h-8 flex items-center justify-center rounded-full transition-colors absolute left-0",
-              currentIndex === 0
-                ? "text-gray-300"
-                : "text-gray-500 hover:bg-gray-100"
-            )}
-            onClick={prevSlide}
-            disabled={currentIndex === 0}
-          >
-            <CaretLeftIcon className="w-5 h-5" />
-          </button>
-          <div className="flex items-center gap-2">
-            {Array.from({ length: totalSlides }).map((_, idx) => (
-              <button
-                key={idx}
-                className={cn(
-                  "h-2 w-2 rounded-full transition-colors",
-                  currentIndex / positionsPerPage === idx
-                    ? "bg-primary"
-                    : "bg-gray-200 hover:bg-gray-300"
-                )}
-                onClick={() => goToSlide(idx)}
-              />
-            ))}
-          </div>
-          <button
-            className={cn(
-              "w-8 h-8 flex items-center justify-center rounded-full transition-colors absolute right-0",
-              currentIndex + positionsPerPage >= positions.length
-                ? "text-gray-300"
-                : "text-gray-500 hover:bg-gray-100"
-            )}
-            onClick={nextSlide}
-            disabled={currentIndex + positionsPerPage >= positions.length}
-          >
-            <CaretRightIcon className="w-5 h-5" />
-          </button>
-        </div>
+      <div className="flex-1 w-full">
+        {positions.map((position, index) => (
+          <Position key={`${position.token}-${index}`} {...position} />
+        ))}
       </div>
     </div>
   );
