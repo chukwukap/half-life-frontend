@@ -16,20 +16,9 @@ const PortfolioPage: FC = () => {
       <TimeFilter />
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        {/* Portfolio value */}
-        <div className="md:col-span-1">
-          <PortfolioValue />
-        </div>
-
-        {/* Trading stats */}
-        <div className="md:col-span-1">
-          <TradingStats />
-        </div>
-
-        {/* Achievements */}
-        <div className="md:col-span-1">
-          <Achievements />
-        </div>
+        <PortfolioValue />
+        <TradingStats />
+        <Achievements />
       </div>
 
       {/* Trade history */}

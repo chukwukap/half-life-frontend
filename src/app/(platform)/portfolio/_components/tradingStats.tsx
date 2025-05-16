@@ -48,16 +48,16 @@ const TradingStats: FC = () => {
   );
 
   return (
-    <div className="bg-white rounded-[24px] border border-[#E9EAEC] p-8 w-full max-w-full">
+    <div className="bg-white rounded-[24px] border border-[#E9EAEC] p-2 w-full max-w-full">
       {/* Header */}
-      <div className="flex items-center gap-2 mb-6">
+      <div className="flex items-center gap-2 mb-4">
         <FireIcon className="w-6 h-6 text-[#335CFF]" />
         <h2 className="text-[#181A20] text-xl font-bold leading-tight">
           Trading stats
         </h2>
       </div>
       {/* Stats grid: two rows, two columns, separated by border */}
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-2">
         {/* First row */}
         <div className="flex gap-6 pb-4 border-b border-[#E9EAEC]">
           <StatItem
