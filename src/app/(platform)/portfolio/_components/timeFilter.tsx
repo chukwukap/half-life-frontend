@@ -22,7 +22,7 @@ const TimeFilter: FC = () => {
         {timeRanges.map((range) => (
           <button
             key={range.value}
-            className={`px-5 py-2 text-sm font-semibold rounded-full transition-colors min-w-[48px] h-[38px] focus:outline-none focus:ring-2 focus:ring-[#335CFF] focus:ring-offset-2
+            className={`px-5 py-2 text-sm font-semibold rounded-full transition-colors min-w-[48px] h-[38px]
               ${
                 activeRange === range.value
                   ? "bg-white text-[#335CFF] shadow-sm border border-[#E9EAEC]"
