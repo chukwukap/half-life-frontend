@@ -6,6 +6,7 @@ export interface LeaderboardEntry {
   rank: number;
   username: string;
   pnl: string;
+  image: string; // URL for the pixel art image
 }
 
 interface LeaderboardProps {
@@ -62,6 +63,11 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ data }) => {
             }}
           >
             <span className="w-12">{entry.rank}</span>
+            <img
+              src={entry.image}
+              alt={`${entry.username} avatar`}
+              className="w-8 h-8 rounded-full mr-2"
+            />
             <span className="flex-1 truncate">{entry.username}</span>
             <span
               className="w-32 text-right font-semibold text-[#22B15D]"

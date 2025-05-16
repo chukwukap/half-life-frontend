@@ -156,11 +156,36 @@ const TokenDetailPage: FC = () => {
           {/* Leaderboard section */}
           <Leaderboard
             data={[
-              { rank: 1, username: "Druids_01", pnl: "$3,288.94" },
-              { rank: 2, username: "Bastille_btc", pnl: "$2,265.91" },
-              { rank: 3, username: "Te_the_gamer", pnl: "$1,753.59" },
-              { rank: 4, username: "Galactic_Hero", pnl: "$1,500.00" },
-              { rank: 5, username: "Quantum_Coder", pnl: "$1,400.75" },
+              {
+                rank: 1,
+                username: "Druids_01",
+                pnl: "$3,288.94",
+                image: "/assets/img/pixel/druids.png",
+              },
+              {
+                rank: 2,
+                username: "Bastille_btc",
+                pnl: "$2,265.91",
+                image: "/assets/img/pixel/bastille.png",
+              },
+              {
+                rank: 3,
+                username: "Te_the_gamer",
+                pnl: "$1,753.59",
+                image: "/assets/img/pixel/te.png",
+              },
+              {
+                rank: 4,
+                username: "Galactic_Hero",
+                pnl: "$1,500.00",
+                image: "/assets/img/pixel/galactic.png",
+              },
+              {
+                rank: 5,
+                username: "Quantum_Coder",
+                pnl: "$1,400.75",
+                image: "/assets/img/pixel/quantum.png",
+              },
             ]}
           />
           {/* Trending tokens section */}

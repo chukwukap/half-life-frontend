@@ -2,6 +2,10 @@ import "./globals.css";
 import { fontClasses } from "@/lib/fonts";
 import type { Metadata } from "next";
 import AppProviders from "@/components/providers/appProviders";
+import { PrivyProviderWrapper } from "@/components/privyProvider";
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
@@ -21,7 +25,9 @@ export default function RootLayout({
       <body
         className={`${fontClasses.primary} ${fontClasses.secondary} ${fontClasses.heading} ${fontClasses.body} antialiased min-h-screen flex flex-col font-primary`}
       >
-        <AppProviders>{children}</AppProviders>
+        <PrivyProviderWrapper>
+          <AppProviders>{children}</AppProviders>
+        </PrivyProviderWrapper>
       </body>
     </html>
   );
