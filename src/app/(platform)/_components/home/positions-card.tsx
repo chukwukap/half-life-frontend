@@ -136,20 +136,49 @@ const Position = ({
  * Pixel-perfect, accessible, and modular.
  */
 export const PositionsCard = () => {
-  // Sample data for demonstration; replace with real data as needed.
+  /**
+   * Sample/mock positions for demonstration. Replace or extend this array with real data from API or state.
+   * To add a new position, simply add an object with the required fields.
+   */
   const samplePositions: PositionProps[] = [
     {
-      token: "WIF",
-      tokenInfo: "dogwifhat",
-      strategy: "Long 5x",
-      entryPrice: "$0.00008",
-      currentPrice: "$0.00009",
-      liquidationPrice: "$0.00007",
-      fundingRate: "+0.0125%",
-      pnlUsd: "+1210.35 USD",
-      pnlPercent: "+12.10%",
-      size: "$1,200",
-      logoSrc: "/assets/img/tokens/wif.png",
+      token: "CBTC",
+      tokenInfo: "Coinbase Wrapped Staked BTC",
+      strategy: "Long 7x",
+      entryPrice: "$99,960.00",
+      currentPrice: "$102,000.00",
+      liquidationPrice: "$86,700.00",
+      fundingRate: "+0.011%",
+      pnlUsd: "+5,200.00 USD",
+      pnlPercent: "+5.20%",
+      size: "$10,000",
+      logoSrc: "/assets/img/tokens/cbBTC.png",
+    },
+    {
+      token: "ZORA",
+      tokenInfo: "Zora",
+      strategy: "Long 7x",
+      entryPrice: "$0.012544",
+      currentPrice: "$0.0128",
+      liquidationPrice: "$0.010880",
+      fundingRate: "+0.011%",
+      pnlUsd: "+1,200.00 USD",
+      pnlPercent: "+3.20%",
+      size: "$2,500",
+      logoSrc: "/assets/img/tokens/zora.png",
+    },
+    {
+      token: "ETH",
+      tokenInfo: "Ethereum (Base)",
+      strategy: "Long 20x",
+      entryPrice: "$3,058.04",
+      currentPrice: "$3,120.45",
+      liquidationPrice: "$2,652.38",
+      fundingRate: "+0.018%",
+      pnlUsd: "+2,800.00 USD",
+      pnlPercent: "+8.10%",
+      size: "$5,000",
+      logoSrc: "/assets/img/tokens/eth.png",
     },
     {
       token: "WIF",
@@ -159,14 +188,14 @@ export const PositionsCard = () => {
       currentPrice: "$0.00009",
       liquidationPrice: "$0.00007",
       fundingRate: "+0.0125%",
-      pnlUsd: "+1210.35 USD",
+      pnlUsd: "+1,210.35 USD",
       pnlPercent: "+12.10%",
       size: "$1,200",
       logoSrc: "/assets/img/tokens/wif.png",
     },
   ];
 
-  // Use samplePositions for now; swap with real data when available
+  // To use real data, replace 'samplePositions' with your data source (API, context, props, etc.)
   const positions: PositionProps[] = samplePositions;
 
   // Shared header for both states
