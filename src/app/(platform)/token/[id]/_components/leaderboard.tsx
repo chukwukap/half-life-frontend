@@ -34,7 +34,7 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ data }) => {
           className="w-5 h-5 mr-2 text-[#335CFF]"
           aria-hidden="true"
         />
-        <span className="font-semibold text-[20px] leading-[24px] text-[#181A20]">
+        <span className="font-semibold text-2xl leading-[24px] text-[#181A20]">
           Leaderboard
         </span>
       </div>
@@ -56,12 +56,7 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ data }) => {
         {data.map((entry) => (
           <li
             key={entry.rank}
-            className="flex items-center py-[10px] text-[18px] font-normal text-[#181A20]"
-            style={{
-              fontSize: "18px",
-              lineHeight: "22px",
-              fontWeight: 400,
-            }}
+            className="flex items-center py-[10px] text-sm font-normal text-[#181A20]"
           >
             <span className="w-12">{entry.rank}</span>
             <Image

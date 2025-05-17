@@ -70,7 +70,7 @@ const PositionsCard: React.FC<PositionsCardProps> = ({
           className="w-6 h-6 text-[#335CFF] mr-2"
           aria-hidden="true"
         />
-        <span className="font-bold text-xl text-[#181A20]">Positions</span>
+        <span className="font-bold text-sm text-[#181A20]">Positions</span>
       </div>
       {/* Positions list */}
       <div className="flex flex-col gap-4">
@@ -125,7 +125,7 @@ const PositionsCard: React.FC<PositionsCardProps> = ({
               {!isOpen && (
                 <div className="flex flex-col gap-1 mt-2">
                   <span
-                    className={`font-bold text-lg ${
+                    className={`font-bold text-sm ${
                       pos.pnl < 0 ? "text-red-500" : "text-green-500"
                     }`}
                   >
@@ -136,7 +136,7 @@ const PositionsCard: React.FC<PositionsCardProps> = ({
                     })}
                   </span>
                   <span
-                    className={`text-base font-semibold ${
+                    className={`text-sm font-semibold ${
                       pos.pnlPercent < 0 ? "text-red-500" : "text-green-500"
                     }`}
                   >
@@ -154,7 +154,7 @@ const PositionsCard: React.FC<PositionsCardProps> = ({
                         <span className="text-[#B1B5C3] text-sm font-medium">
                           Entry
                         </span>
-                        <span className="font-bold text-lg text-[#181A20]">
+                        <span className="font-bold text-sm text-[#181A20]">
                           {pos.entry}{" "}
                           <sup className="text-xs align-super">A</sup>
                         </span>
@@ -163,7 +163,7 @@ const PositionsCard: React.FC<PositionsCardProps> = ({
                         <span className="text-[#B1B5C3] text-sm font-medium">
                           Liquidated at
                         </span>
-                        <span className="font-bold text-lg text-[#181A20]">
+                        <span className="font-bold text-sm text-[#181A20]">
                           {pos.liquidation}{" "}
                           <sup className="text-xs align-super">A</sup>
                         </span>
@@ -172,7 +172,7 @@ const PositionsCard: React.FC<PositionsCardProps> = ({
                         <span className="text-[#B1B5C3] text-sm font-medium">
                           Position size
                         </span>
-                        <span className="font-bold text-lg text-[#181A20]">
+                        <span className="font-bold text-sm text-[#181A20]">
                           {pos.size}
                         </span>
                       </div>
@@ -181,7 +181,7 @@ const PositionsCard: React.FC<PositionsCardProps> = ({
                   {/* PnL row */}
                   <div className="col-span-2 flex justify-between items-center mt-4">
                     <span
-                      className={`font-bold text-lg ${
+                      className={`font-bold text-sm ${
                         pos.pnl < 0 ? "text-red-500" : "text-green-500"
                       }`}
                     >
@@ -192,7 +192,7 @@ const PositionsCard: React.FC<PositionsCardProps> = ({
                       })}
                     </span>
                     <span
-                      className={`text-base font-semibold ${
+                      className={`text-sm font-semibold ${
                         pos.pnlPercent < 0 ? "text-red-500" : "text-green-500"
                       }`}
                     >
