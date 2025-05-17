@@ -1,6 +1,23 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import { WalletIcon, CaretDownIcon, ArrowUpIcon } from "@/components/icons";
+import { WalletIcon, CaretDownIcon } from "@/components/icons";
+
+// Custom CaretUpIcon SVG (matches CaretDownIcon style)
+const CaretUpIcon = ({ className = "" }) => (
+  <svg
+    width="20"
+    height="20"
+    viewBox="0 0 20 20"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+  >
+    <path
+      d="M16.6925 12.0579L10.4425 5.80795C10.3845 5.74977 10.3156 5.70367 10.2397 5.67222C10.1638 5.64077 10.0825 5.62459 10.0003 5.62459C9.91821 5.62459 9.83688 5.64077 9.76101 5.67222C9.68514 5.70367 9.61621 5.74977 9.55816 5.80795L3.30816 12.0579C3.19088 12.1752 3.125 12.3343 3.125 12.5001C3.125 12.6659 3.19088 12.825 3.30816 12.9423C3.42544 13.0596 3.5845 13.1255 3.75035 13.1255C3.9162 13.1255 4.07526 13.0596 4.19253 12.9423L10.0003 7.13367L15.8082 12.9423C15.8662 13.0004 15.9352 13.0465 16.011 13.0779C16.0869 13.1093 16.1682 13.1255 16.2503 13.1255C16.3325 13.1255 16.4138 13.1093 16.4897 13.0779C16.5655 13.0465 16.6345 13.0004 16.6925 12.9423C16.7506 12.8843 16.7967 12.8153 16.8281 12.7394C16.8595 12.6636 16.8757 12.5823 16.8757 12.5001C16.8757 12.418 16.8595 12.3367 16.8281 12.2608C16.7967 12.185 16.7506 12.116 16.6925 12.0579Z"
+      fill="#335CFF"
+    />
+  </svg>
+);
 
 // Mock data for demonstration
 const positions = [
@@ -102,7 +119,7 @@ const PositionsCard: React.FC = () => {
                   </span>
                   {/* Caret icon for accordion */}
                   {isOpen ? (
-                    <ArrowUpIcon className="w-5 h-5 text-[#335CFF]" />
+                    <CaretUpIcon className="w-5 h-5 text-[#335CFF]" />
                   ) : (
                     <CaretDownIcon className="w-5 h-5 text-[#335CFF]" />
                   )}
