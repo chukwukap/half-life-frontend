@@ -8,7 +8,7 @@ const topTraders = [
   {
     id: "1",
     name: "Bastille_btc",
-    avatar: "/avatars/trader1.png",
+    avatar: "/assets/img/defiCTO.png",
     totalProfit: "$50,361",
     winRate: "90%",
     totalTrades: 150,
@@ -17,7 +17,7 @@ const topTraders = [
   {
     id: "2",
     name: "Te_the_gamer",
-    avatar: "/avatars/trader2.png",
+    avatar: "/assets/img/defiCTO.png",
     totalProfit: "$47,548",
     winRate: "89%",
     totalTrades: 147,
@@ -26,7 +26,7 @@ const topTraders = [
   {
     id: "3",
     name: "Galactic_Hero",
-    avatar: "/avatars/trader3.png",
+    avatar: "/assets/img/defiCTO.png",
     totalProfit: "$45,934",
     winRate: "87%",
     totalTrades: 144,

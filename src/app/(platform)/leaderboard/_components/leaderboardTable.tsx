@@ -19,7 +19,7 @@ const leaderboardData: Trader[] = [
   {
     id: "1",
     name: "Bastille_btc",
-    avatar: "/avatars/trader1.png",
+    avatar: "/assets/img/defiCTO.png",
     totalProfit: "$50,361",
     winRate: "90%",
     totalTrades: 150,
@@ -28,7 +28,7 @@ const leaderboardData: Trader[] = [
   {
     id: "2",
     name: "Te_the_gamer",
-    avatar: "/avatars/trader2.png",
+    avatar: "/assets/img/defiCTO.png",
     totalProfit: "$47,548",
     winRate: "89%",
     totalTrades: 147,
@@ -37,7 +37,7 @@ const leaderboardData: Trader[] = [
   {
     id: "3",
     name: "Galactic_Hero",
-    avatar: "/avatars/trader3.png",
+    avatar: "/assets/img/defiCTO.png",
     totalProfit: "$45,934",
     winRate: "87%",
     totalTrades: 144,
@@ -46,7 +46,7 @@ const leaderboardData: Trader[] = [
   {
     id: "4",
     name: "Quantum_Coder",
-    avatar: "/avatars/trader4.png",
+    avatar: "/assets/img/defiCTO.png",
     totalProfit: "$43,109",
     winRate: "86%",
     totalTrades: 141,
@@ -55,7 +55,7 @@ const leaderboardData: Trader[] = [
   {
     id: "5",
     name: "Nebula_Surfer",
-    avatar: "/avatars/trader5.png",
+    avatar: "/assets/img/defiCTO.png",
     totalProfit: "$40,409",
     winRate: "84%",
     totalTrades: 138,
@@ -64,7 +64,7 @@ const leaderboardData: Trader[] = [
   {
     id: "6",
     name: "Pixel_Wizard",
-    avatar: "/avatars/trader6.png",
+    avatar: "/assets/img/defiCTO.png",
     totalProfit: "$37,923",
     winRate: "83%",
     totalTrades: 135,
@@ -73,7 +73,7 @@ const leaderboardData: Trader[] = [
   {
     id: "7",
     name: "Techno_Giant",
-    avatar: "/avatars/trader7.png",
+    avatar: "/assets/img/defiCTO.png",
     totalProfit: "$35,536",
     winRate: "81%",
     totalTrades: 132,
@@ -82,7 +82,7 @@ const leaderboardData: Trader[] = [
   {
     id: "8",
     name: "Arcane_Scholar",
-    avatar: "/avatars/trader8.png",
+    avatar: "/assets/img/defiCTO.png",
     totalProfit: "$33,492",
     winRate: "80%",
     totalTrades: 129,
@@ -91,7 +91,7 @@ const leaderboardData: Trader[] = [
   {
     id: "9",
     name: "Crypto_Explorer",
-    avatar: "/avatars/trader9.png",
+    avatar: "/assets/img/defiCTO.png",
     totalProfit: "$30,037",
     winRate: "78%",
     totalTrades: 126,
@@ -100,7 +100,7 @@ const leaderboardData: Trader[] = [
   {
     id: "10",
     name: "Data_Ninja",
-    avatar: "/avatars/trader10.png",
+    avatar: "/assets/img/defiCTO.png",
     totalProfit: "$27,705",
     winRate: "77%",
     totalTrades: 123,
@@ -109,7 +109,7 @@ const leaderboardData: Trader[] = [
   {
     id: "11",
     name: "rektober",
-    avatar: "/avatars/trader11.png",
+    avatar: "/assets/img/defiCTO.png",
     totalProfit: "$25,365",
     winRate: "75%",
     totalTrades: 120,
