@@ -19,33 +19,23 @@ const CaretUpIcon = ({ className = "" }) => (
   </svg>
 );
 
-// Mock data for demonstration
-const positions = [
-  {
-    logo: "/assets/img/tokens/wif.png",
-    name: "WIF",
-    subtitle: "dogwifhat",
-    leverage: "Long 5x",
-    leverageColor: "bg-green-100 text-green-600",
-    entry: 3.05,
-    liquidation: 1.95,
-    size: "$113,950.01",
-    pnl: -2.61,
-    pnlPercent: -0.3,
-  },
-  {
-    logo: "/assets/img/tokens/doge.png",
-    name: "DOGE",
-    subtitle: "Dogecoin",
-    leverage: "Short 3x",
-    leverageColor: "bg-red-100 text-red-500",
-    entry: null,
-    liquidation: null,
-    size: null,
-    pnl: 1210.35,
-    pnlPercent: 12.1,
-  },
-];
+// Types for position and props
+interface Position {
+  logo: string;
+  name: string;
+  subtitle: string;
+  leverage: string;
+  leverageColor: string;
+  entry: number | null;
+  liquidation: number | null;
+  size: string | null;
+  pnl: number;
+  pnlPercent: number;
+}
+interface PositionsCardProps {
+  positions: Position[];
+  setPositions: React.Dispatch<React.SetStateAction<Position[]>>;
+}
 
 /**
  * PositionsCard - Accordion for user's open positions.
@@ -53,7 +43,10 @@ const positions = [
  * Security: Stateless, no user input, safe for all environments.
  * Accessibility: Uses semantic HTML and alt text for images.
  */
-const PositionsCard: React.FC = () => {
+const PositionsCard: React.FC<PositionsCardProps> = ({
+  positions,
+  //   setPositions,
+}) => {
   // Accordion state: index of open position, or null
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
@@ -81,9 +74,7 @@ const PositionsCard: React.FC = () => {
           return (
             <div
               key={pos.name + idx}
-              className={`rounded-2xl border border-[#E9EAEC] p-4 flex flex-col gap-2 bg-white transition-all duration-200 ${
-                isOpen ? "shadow-md" : ""
-              }`}
+              className={`rounded-2xl border border-[#E9EAEC] p-4 flex flex-col gap-2 bg-white transition-all duration-200`}
             >
               <button
                 className="flex items-center justify-between w-full focus:outline-none"

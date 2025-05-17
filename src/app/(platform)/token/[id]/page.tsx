@@ -1,6 +1,6 @@
 "use client";
 
-import { FC } from "react";
+import { FC, useState } from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { useParams } from "next/navigation";
@@ -32,6 +32,57 @@ const TokenDetailPage: FC = () => {
   const tokenData: TokenData | undefined = tokenId
     ? getTokenById(tokenId)
     : undefined;
+
+  // Positions state for simulation
+  const [positions, setPositions] = useState([
+    {
+      logo: "/assets/img/tokens/wif.png",
+      name: "WIF",
+      subtitle: "dogwifhat",
+      leverage: "Long 5x",
+      leverageColor: "bg-green-100 text-green-600",
+      entry: 3.05,
+      liquidation: 1.95,
+      size: "$113,950.01",
+      pnl: -2.61,
+      pnlPercent: -0.3,
+    },
+    {
+      logo: "/assets/img/tokens/doge.png",
+      name: "DOGE",
+      subtitle: "Dogecoin",
+      leverage: "Short 3x",
+      leverageColor: "bg-red-100 text-red-500",
+      entry: null,
+      liquidation: null,
+      size: null,
+      pnl: 1210.35,
+      pnlPercent: 12.1,
+    },
+  ]);
+
+  // Simulate opening a new position with haptic feedback
+  const handleOpenPosition = () => {
+    // Haptic feedback for supported devices (security: safe, non-blocking)
+    if (typeof window !== "undefined" && navigator.vibrate) {
+      navigator.vibrate(50); // 50ms vibration
+    }
+    setPositions((prev) => [
+      {
+        logo: "/assets/img/tokens/wif.png",
+        name: "WIF",
+        subtitle: "dogwifhat",
+        leverage: "Long 2x",
+        leverageColor: "bg-green-100 text-green-600",
+        entry: 2.99,
+        liquidation: 1.5,
+        size: "$10,000.00",
+        pnl: 0.0,
+        pnlPercent: 0.0,
+      },
+      ...prev,
+    ]);
+  };
 
   // If token not found, show a not found message
   if (!tokenData) {
@@ -130,10 +181,11 @@ const TokenDetailPage: FC = () => {
               entryPrice={tokenData.price.toString()}
               liquidationPrice={tokenData.positionValue}
               available={tokenData.available}
+              onOpenPosition={handleOpenPosition}
             />
           </div>
           {/* Positions card - new, matches Figma */}
-          <PositionsCard />
+          <PositionsCard positions={positions} setPositions={setPositions} />
           <OverviewTab />
         </div>
       </div>

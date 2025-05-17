@@ -8,12 +8,14 @@ interface PredictionPlacementProps {
   entryPrice: string;
   liquidationPrice: string;
   available: string;
+  onOpenPosition?: () => void;
 }
 
 const PredictionPlacement: FC<PredictionPlacementProps> = ({
   entryPrice,
   liquidationPrice,
   available,
+  onOpenPosition,
 }) => {
   const [amount, setAmount] = useState<string>("100");
   const [leverage, setLeverage] = useState<number>(1);
@@ -159,6 +161,7 @@ const PredictionPlacement: FC<PredictionPlacementProps> = ({
         <button
           className="w-full py-3 rounded-full bg-[#335CFF] text-white text-lg font-bold shadow-md hover:bg-[#274FCC] transition-colors focus:outline-none focus:ring-2 focus:ring-[#335CFF]"
           type="button"
+          onClick={onOpenPosition}
         >
           Open Position
         </button>
