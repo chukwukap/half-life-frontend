@@ -75,49 +75,62 @@ const TokenExplorer: FC = () => {
           backgroundSize: "cover",
         }}
       >
-        <h1 className="text-3xl font-bold mb-1">Token Explorer</h1>
-        <p className="mb-2 text-blue-100">
-          Track every token&apos;s lifespan in real time.
-        </p>
-        <p className="mb-6 text-blue-100">
-          Compare momentum, spot decay early, and place your bets where it
-          counts.
-        </p>
-        <form onSubmit={handleSearch} className="relative w-full max-w-lg">
-          <div className="relative flex items-center">
-            <div className="absolute left-4 top-1/2 -translate-y-1/2">
-              <SearchIcon className="fill-white" />
+        {/* Overlay: semi-transparent blue gradient for readability */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full rounded-xl pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(90deg, rgba(59,130,246,0.85) 0%, rgba(30,58,138,0.92) 100%)",
+            zIndex: 1,
+          }}
+        />
+        {/* Content wrapper with relative z-index to appear above overlay */}
+        <div className="relative z-10">
+          <h1 className="text-3xl font-bold mb-1">Token Explorer</h1>
+          <p className="mb-2 text-blue-100">
+            Track every token&apos;s lifespan in real time.
+          </p>
+          <p className="mb-6 text-blue-100">
+            Compare momentum, spot decay early, and place your bets where it
+            counts.
+          </p>
+          <form onSubmit={handleSearch} className="relative w-full max-w-lg">
+            <div className="relative flex items-center">
+              <div className="absolute left-4 top-1/2 -translate-y-1/2">
+                <SearchIcon className="fill-white" />
+              </div>
+              <input
+                ref={searchInputRef}
+                type="text"
+                placeholder="Enter token name or ticker"
+                className={`w-full h-12 rounded-full py-3 px-4 pl-11 text-white focus:outline-none focus:ring-2 focus:ring-white placeholder-white ${
+                  isFocused ? "ring-2 ring-white" : ""
+                } shadow-lg cursor-pointer border-white border`}
+                // value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onFocus={handleSearchFocus}
+                onClick={handleSearchFocus}
+                onBlur={() => setIsFocused(false)}
+              />
             </div>
-            <input
-              ref={searchInputRef}
-              type="text"
-              placeholder="Enter token name or ticker"
-              className={`w-full h-12 rounded-full py-3 px-4 pl-11 text-white focus:outline-none focus:ring-2 focus:ring-white placeholder-white ${
-                isFocused ? "ring-2 ring-white" : ""
-              } shadow-lg cursor-pointer border-white border`}
-              // value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              onFocus={handleSearchFocus}
-              onClick={handleSearchFocus}
-              onBlur={() => setIsFocused(false)}
-            />
-          </div>
-        </form>
+          </form>
 
-        {/* Quick search suggestions */}
-        {/* <div className="mt-4 flex flex-wrap gap-2">
-          <p className="text-blue-100 mr-2">Try:</p>
-          {Object.entries(testSearchTerms).map(([term, description]) => (
-            <button
-              key={term}
-              onClick={() => handleSuggestionClick(term)}
-              className="px-3 py-1 bg-blue-500/30 hover:bg-blue-400/40 rounded-full text-sm transition-colors"
-              title={description as string | undefined}
-            >
-              {term}
-            </button>
-          ))}
-        </div> */}
+          {/* Quick search suggestions */}
+          {/* <div className="mt-4 flex flex-wrap gap-2">
+            <p className="text-blue-100 mr-2">Try:</p>
+            {Object.entries(testSearchTerms).map(([term, description]) => (
+              <button
+                key={term}
+                onClick={() => handleSuggestionClick(term)}
+                className="px-3 py-1 bg-blue-500/30 hover:bg-blue-400/40 rounded-full text-sm transition-colors"
+                title={description as string | undefined}
+              >
+                {term}
+              </button>
+            ))}
+          </div> */}
+        </div>
       </div>
 
       <SearchPopup
