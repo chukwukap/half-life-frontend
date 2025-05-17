@@ -10,17 +10,28 @@ import { Medics } from "@/components/icons"; // Import Medics icon
  * Accessibility: Uses alt text for images and semantic HTML.
  */
 export const TokenCard: React.FC<{ token: TokenData }> = ({ token }) => {
-  // Determine color for lifeIndex and change
+  /**
+   * Returns the correct color classes for the life index badge.
+   * - Green: value > 0 (matches the image, all positive values are green)
+   * - Red: value < 0 (matches the image, all negative values are red)
+   * - Gray: value === 0 (matches the image, zero is gray)
+   */
   const getLifeIndexColor = (value: number) => {
-    if (value >= 100) return "bg-green-100 text-green-600";
-    if (value >= 50) return "bg-green-100 text-green-600";
-    if (value > 0) return "bg-yellow-100 text-yellow-600";
-    return "bg-red-100 text-red-600";
+    if (value > 0) return "bg-[#E9FAF1] text-[#19C37D]"; // Green badge
+    if (value < 0) return "bg-[#FFF0F0] text-[#FF4747]"; // Red badge
+    return "bg-[#F4F4F6] text-[#A1A1AA]"; // Gray badge
   };
+
+  /**
+   * Returns the correct color classes for the 24h change badge.
+   * - Green: value > 0 (matches the image, all positive values are green)
+   * - Red: value < 0 (matches the image, all negative values are red)
+   * - Gray: value === 0 (matches the image, zero is gray)
+   */
   const getChangeColor = (value: number) => {
-    if (value > 0) return "bg-green-100 text-green-600";
-    if (value < 0) return "bg-red-100 text-red-600";
-    return "bg-gray-100 text-gray-600";
+    if (value > 0) return "bg-[#E9FAF1] text-[#19C37D]"; // Green badge
+    if (value < 0) return "bg-[#FFF0F0] text-[#FF4747]"; // Red badge
+    return "bg-[#F4F4F6] text-[#A1A1AA]"; // Gray badge
   };
 
   return (
