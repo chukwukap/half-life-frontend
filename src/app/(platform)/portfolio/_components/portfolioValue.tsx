@@ -92,7 +92,6 @@ const PortfolioValue: FC = () => {
             {portfolioValue}
           </div>
         </div>
-
         {/* Action buttons: responsive, stacked on mobile, row on desktop */}
         <div className="flex flex-col gap-4 w-full sm:flex-row sm:gap-8">
           <SimpleActionButton
