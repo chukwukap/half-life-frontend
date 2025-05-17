@@ -3,13 +3,15 @@
 import { WinRateIcon, WinStreakIcon } from "@/components/icons";
 import { FC, useState } from "react";
 import AchievementsModal from "./achievements-modal";
+import ShareAchievementModal from "./share-achievement-modal";
 
 // Achievement card component
 const AchievementCard: FC<{
   title: string;
   description: string;
   icon: React.ReactNode;
-}> = ({ title, description, icon }) => (
+  onFlex?: () => void;
+}> = ({ title, description, icon, onFlex }) => (
   <div className="flex flex-col items-center justify-between border border-[#E9EAEC] rounded-[18px] px-6 pt-6 pb-4 bg-white h-full">
     <div className="mb-4">{icon}</div>
     <div className="text-center mb-6">
@@ -24,6 +26,7 @@ const AchievementCard: FC<{
       className="w-full rounded-full bg-[#EEF4FF] text-[#335CFF] text-lg font-bold py-3 transition-colors hover:bg-[#E5EDFF] focus:outline-none focus:ring-2 focus:ring-[#335CFF]/20"
       type="button"
       aria-label={`Flex your achievement: ${title}`}
+      onClick={onFlex}
     >
       Flex
     </button>
@@ -60,6 +63,11 @@ const achievementsList = [
 
 const Achievements: FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [shareOpen, setShareOpen] = useState(false);
+  const [selectedAchievement, setSelectedAchievement] = useState<{
+    title: string;
+    description: string;
+  } | null>(null);
 
   return (
     <>
@@ -85,11 +93,25 @@ const Achievements: FC = () => {
             title="First trade"
             description="Completed your first trade"
             icon={<WinRateIcon />}
+            onFlex={() => {
+              setSelectedAchievement({
+                title: "First trade",
+                description: "Completed your first trade",
+              });
+              setShareOpen(true);
+            }}
           />
           <AchievementCard
             title="Win Streak"
             description="Won 3 trades in a row"
             icon={<WinStreakIcon />}
+            onFlex={() => {
+              setSelectedAchievement({
+                title: "Win Streak",
+                description: "Won 3 trades in a row",
+              });
+              setShareOpen(true);
+            }}
           />
         </div>
       </div>
@@ -97,6 +119,11 @@ const Achievements: FC = () => {
         open={modalOpen}
         onClose={() => setModalOpen(false)}
         achievements={achievementsList}
+      />
+      <ShareAchievementModal
+        open={shareOpen}
+        onClose={() => setShareOpen(false)}
+        achievement={selectedAchievement}
       />
     </>
   );
