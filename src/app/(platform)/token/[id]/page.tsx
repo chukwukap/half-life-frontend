@@ -7,6 +7,7 @@ import { useParams } from "next/navigation";
 import { getTokenById } from "@/lib/mockData/tokens";
 import { TokenData } from "@/lib/types";
 import { toast } from "sonner";
+import mockTokens from "@/lib/mockData/tokens";
 
 // Components for the token detail page
 import TokenHeader from "./_components/tokenHeader";
@@ -48,32 +49,21 @@ const TokenDetailPage: FC = () => {
     ? getTokenById(tokenId)
     : undefined;
 
-  // Positions state for simulation
+  // Positions state for simulation, initialized from mockTokens
   const [positions, setPositions] = useState<Position[]>([
-    {
-      logo: "/assets/img/tokens/wif.png",
-      name: "WIF",
-      subtitle: "dogwifhat",
-      leverage: "Long 5x",
-      leverageColor: "bg-green-100 text-green-600",
-      entry: 3.05,
-      liquidation: 1.95,
-      size: "$113,950.01",
-      pnl: -2.61,
-      pnlPercent: -0.3,
-    },
-    {
-      logo: "/assets/img/tokens/doge.png",
-      name: "DOGE",
-      subtitle: "Dogecoin",
-      leverage: "Short 3x",
-      leverageColor: "bg-red-100 text-red-500",
-      entry: null,
-      liquidation: null,
-      size: null,
-      pnl: 1210.35,
-      pnlPercent: 12.1,
-    },
+    ...mockTokens.slice(0, 2).map((token, i) => ({
+      logo: token.iconSrc || "",
+      name: token.symbol,
+      subtitle: token.fullName,
+      leverage: i === 0 ? "Long 5x" : "Short 3x",
+      leverageColor:
+        i === 0 ? "bg-green-100 text-green-600" : "bg-red-100 text-red-500",
+      entry: i === 0 ? 3.05 : null,
+      liquidation: i === 0 ? 1.95 : null,
+      size: i === 0 ? "$113,950.01" : null,
+      pnl: i === 0 ? -2.61 : 1210.35,
+      pnlPercent: i === 0 ? -0.3 : 12.1,
+    })),
   ]);
 
   // Simulate opening a new position with haptic feedback
