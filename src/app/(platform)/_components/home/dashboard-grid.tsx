@@ -51,8 +51,8 @@ const DashboardGrid: React.FC = () => {
         {/* Main grid: token cards (left) and positions card (right) */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-5 min-h-[600px]">
           {/* Token cards grid - left */}
-          <div className="md:col-span-7 h-full flex flex-col">
-            <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="md:col-span-7">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {(activeTab === "gainers"
                 ? tokens.slice(0, 9)
                 : tokens.slice(0, 3)
@@ -68,7 +68,7 @@ const DashboardGrid: React.FC = () => {
             </div>
           </div>
           {/* Positions card - right */}
-          <div className="md:col-span-5 h-full flex flex-col">
+          <div className="md:col-span-5 flex flex-col">
             <PositionsCard />
           </div>
         </div>

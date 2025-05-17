@@ -65,17 +65,18 @@ export const TokenCard: React.FC<{ token: TokenData }> = ({ token }) => {
       {/* Life Index and Change */}
       <div className="flex items-center justify-between mt-2">
         <div
-          className={`flex items-center px-3 py-2 rounded-3xl font-semibold text-sm ${getLifeIndexColor(
+          className={`flex items-center px-4 py-1 rounded-2xl font-semibold text-sm ${getLifeIndexColor(
             token.lifeIndex
           )}`}
           aria-label="Life Index"
         >
           {/* Use Medics icon instead of SVG for life index */}
           <Medics className="mr-1" />
-          {token.lifeIndex} <sup className="text-xs ml-1 align-baseline">A</sup>
+          {token.lifeIndex}{" "}
+          <sup className="text-[10px] ml-1 align-baseline text-gray-900">A</sup>
         </div>
         <div
-          className={`px-3 py-2 rounded-3xl font-semibold text-sm ${getChangeColor(
+          className={`px-3.5 py-1 rounded-2xl font-semibold text-xs ${getChangeColor(
             token.change24h
           )}`}
           aria-label="24 hour change"
