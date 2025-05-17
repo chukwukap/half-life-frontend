@@ -75,9 +75,9 @@ const TokenDetailPage: FC = () => {
     toast.success("Position opened successfully!");
     setPositions((prev) => [
       {
-        logo: "/assets/img/tokens/wif.png",
-        name: "WIF",
-        subtitle: "dogwifhat",
+        logo: "/assets/img/tokens/zora.png",
+        name: "ZORA",
+        subtitle: "Zora",
         leverage: "Long 2x",
         leverageColor: "bg-green-100 text-green-600",
         entry: 2.99,
