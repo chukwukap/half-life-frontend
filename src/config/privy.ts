@@ -77,10 +77,10 @@ const baseSepolia: Chain = {
 export const privyConfig: PrivyClientConfig = {
   appearance: {
     theme: "light",
-    accentColor: "#6366f1",
+    accentColor: "#335CFF",
     showWalletLoginFirst: true,
   },
-  loginMethods: ["email", "wallet", "google", "discord"],
+  loginMethods: ["email", "wallet"],
   embeddedWallets: {
     createOnLogin: "all-users",
     // Removed 'noPromptOnSignature' as it is not a valid property in the current PrivyClientConfig type.

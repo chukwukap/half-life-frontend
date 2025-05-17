@@ -12,9 +12,11 @@ export default function OnboardingManager({
 }) {
   const { ready, authenticated, handleLogin } = usePrivyAuth();
   const [showOnboarding, setShowOnboarding] = useState(false);
+  const [loginRequested, setLoginRequested] = useState(false);
 
   useEffect(() => {
-    if (ready && !authenticated) {
+    if (ready && !authenticated && !loginRequested) {
+      setLoginRequested(true);
       handleLogin();
     }
     if (ready && authenticated) {
@@ -26,7 +28,8 @@ export default function OnboardingManager({
         setShowOnboarding(true);
       }
     }
-  }, [ready, authenticated, handleLogin]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ready, authenticated, loginRequested]);
 
   const handleOnboardingComplete = () => {
     if (typeof window !== "undefined") {
@@ -36,7 +39,7 @@ export default function OnboardingManager({
   };
 
   // Show a centered spinner while authentication is not ready
-  if (!ready)
+  if (!ready || (!authenticated && !loginRequested))
     return (
       <div className="fixed inset-0 flex items-center justify-center bg-white/80 z-50">
         <div
@@ -45,6 +48,23 @@ export default function OnboardingManager({
         />
       </div>
     );
+
+  // If login was requested but user is not authenticated (e.g., cancelled), show a message or fallback
+  if (ready && !authenticated && loginRequested) {
+    return (
+      <div className="fixed inset-0 flex flex-col items-center justify-center bg-white/80 z-50">
+        <p className="mb-4 text-[#181A20] font-semibold">
+          Login required to use Half-Life.
+        </p>
+        <button
+          className="rounded-full bg-[#335CFF] text-white font-bold px-6 py-2"
+          onClick={handleLogin}
+        >
+          Try Login Again
+        </button>
+      </div>
+    );
+  }
 
   return (
     <>
