@@ -53,7 +53,7 @@ const TokenRow: FC<TokenRowProps> = ({ token }) => {
             } text-sm font-medium`}
           >
             {token.change24h >= 0 ? (
-              <TrendingUpIcon className="h-3.5 w-3.5 mr-1" />
+              <TrendingUpIcon className="h-3.5 w-3.5 mr-1 text-green-600" />
             ) : (
               <TrendingDownIcon className="h-3.5 w-3.5 mr-1" />
             )}

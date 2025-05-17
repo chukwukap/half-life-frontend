@@ -9,22 +9,7 @@ import { TokenData } from "@/lib/types";
 
 // Components for the token detail page
 import TokenHeader from "./_components/tokenHeader";
-import TokenChart from "./_components/tokenChart";
 import PredictionPlacement from "./_components/predictionPlacement";
-
-// Import tab content components (to be created if not present)
-import OverviewTab from "./_components/overviewTab";
-import OpenPositionsTab from "./_components/openPositionsTab";
-import TradesTab from "./_components/tradesTab";
-import OrderBookTab from "./_components/orderBookTab";
-
-// Import icons for tabs
-import {
-  InfoIcon,
-  BookmarkIcon,
-  TrendUpIcon,
-  ArchiveIcon,
-} from "@/components/icons";
 
 // Import new right-column components
 import Leaderboard from "./_components/leaderboard";
@@ -46,12 +31,10 @@ const TokenDetailPage: FC = () => {
     : undefined;
 
   // Tab state
-  const [activeTab, setActiveTab] = useState("overview");
+  const [activeTab, setActiveTab] = useState("leaderboard");
   const tabList = [
-    { key: "overview", label: "Overview", icon: InfoIcon },
-    { key: "openPositions", label: "Open Positions", icon: BookmarkIcon },
-    { key: "trades", label: "Trades", icon: TrendUpIcon },
-    { key: "orderBook", label: "Order Book", icon: ArchiveIcon },
+    { key: "leaderboard", label: "Leaderboard" },
+    { key: "trending", label: "Trending tokens" },
   ];
 
   // If token not found, show a not found message
@@ -96,24 +79,18 @@ const TokenDetailPage: FC = () => {
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-7 gap-6">
-        {/* Left column - Chart, Stats, and Tabs */}
+        {/* Left column - Tabs: Leaderboard and Trending tokens */}
         <div className="lg:col-span-5 border border-[#EBF1FF] rounded-lg p-4">
-          {/* Price chart section */}
-          <div className="mb-16">
-            <TokenChart />
-          </div>
-
           {/* Tab section */}
           <div className="mb-8">
-            {/*  tab header with icons (updated for blue outline) */}
+            {/* tab header (no icons, just text, blue highlight for active) */}
             <div className="flex gap-2 mb-6 ">
               {tabList.map((tab) => {
-                const Icon = tab.icon;
                 const isActive = activeTab === tab.key;
                 return (
                   <button
                     key={tab.key}
-                    className={`flex items-center gap-2 px-4 py-2 text-sm rounded-full transition-colors  focus:outline-none relative
+                    className={`px-6 py-2 text-base rounded-full font-semibold transition-colors focus:outline-none relative
                       ${
                         isActive
                           ? "bg-white text-[#335CFF] ring-1 ring-[#335CFF] ring-offset-0"
@@ -122,22 +99,91 @@ const TokenDetailPage: FC = () => {
                     `}
                     onClick={() => setActiveTab(tab.key)}
                   >
-                    <Icon
-                      className={`w-5 h-5 ${
-                        isActive ? "text-[#335CFF]" : "text-[#7D8FB3]"
-                      }`}
-                    />
                     <span>{tab.label}</span>
                   </button>
                 );
               })}
             </div>
-            {/* Tab content */}
-            <div className="bg-white rounded-[16px] ">
-              {activeTab === "overview" && <OverviewTab />}
-              {activeTab === "openPositions" && <OpenPositionsTab />}
-              {activeTab === "trades" && <TradesTab />}
-              {activeTab === "orderBook" && <OrderBookTab />}
+            {/* Tab content: show Leaderboard or TrendingTokens only */}
+            <div className="bg-white rounded-[16px] p-0">
+              {activeTab === "leaderboard" && (
+                <Leaderboard
+                  data={[
+                    {
+                      rank: 1,
+                      username: "Druids_01",
+                      pnl: "$3,288.94",
+                      image: "/assets/img/pixel/druids.png",
+                    },
+                    {
+                      rank: 2,
+                      username: "Bastille_btc",
+                      pnl: "$2,265.91",
+                      image: "/assets/img/pixel/bastille.png",
+                    },
+                    {
+                      rank: 3,
+                      username: "Te_the_gamer",
+                      pnl: "$1,753.59",
+                      image: "/assets/img/pixel/te.png",
+                    },
+                    {
+                      rank: 4,
+                      username: "Galactic_Hero",
+                      pnl: "$1,500.00",
+                      image: "/assets/img/pixel/galactic.png",
+                    },
+                    {
+                      rank: 5,
+                      username: "Quantum_Coder",
+                      pnl: "$1,400.75",
+                      image: "/assets/img/pixel/quantum.png",
+                    },
+                  ]}
+                />
+              )}
+              {activeTab === "trending" && (
+                <TrendingTokens
+                  tokens={[
+                    {
+                      logoUrl: "/assets/img/tokens/doge.png",
+                      name: "DOGE",
+                      subtitle: "Dogecoin",
+                      lifeIndex: 55,
+                    },
+                    {
+                      logoUrl: "/assets/img/tokens/wif.png",
+                      name: "WIF",
+                      subtitle: "dogwifhat",
+                      lifeIndex: 18,
+                    },
+                    {
+                      logoUrl: "/assets/img/tokens/wif.png",
+                      name: "WIF",
+                      subtitle: "bunnywifhat",
+                      lifeIndex: 15,
+                    },
+                    {
+                      logoUrl: "/assets/img/tokens/wif.png",
+                      name: "WIF",
+                      subtitle: "catwifhat",
+                      lifeIndex: 198,
+                    },
+                    {
+                      logoUrl: "/assets/img/tokens/wif.png",
+                      name: "WIF",
+                      subtitle: "hamsterswifhat",
+                      lifeIndex: 43,
+                    },
+                    {
+                      logoUrl: "/assets/img/tokens/wif.png",
+                      name: "WIF",
+                      subtitle: "parrotwifhat",
+                      lifeIndex: 19,
+                    },
+                  ]}
+                />
+              )}
             </div>
           </div>
         </div>
@@ -152,83 +198,6 @@ const TokenDetailPage: FC = () => {
               available={tokenData.available}
             />
           </div>
-
-          {/* Leaderboard section */}
-          <Leaderboard
-            data={[
-              {
-                rank: 1,
-                username: "Druids_01",
-                pnl: "$3,288.94",
-                image: "/assets/img/pixel/druids.png",
-              },
-              {
-                rank: 2,
-                username: "Bastille_btc",
-                pnl: "$2,265.91",
-                image: "/assets/img/pixel/bastille.png",
-              },
-              {
-                rank: 3,
-                username: "Te_the_gamer",
-                pnl: "$1,753.59",
-                image: "/assets/img/pixel/te.png",
-              },
-              {
-                rank: 4,
-                username: "Galactic_Hero",
-                pnl: "$1,500.00",
-                image: "/assets/img/pixel/galactic.png",
-              },
-              {
-                rank: 5,
-                username: "Quantum_Coder",
-                pnl: "$1,400.75",
-                image: "/assets/img/pixel/quantum.png",
-              },
-            ]}
-          />
-          {/* Trending tokens section */}
-          <TrendingTokens
-            tokens={[
-              {
-                logoUrl: "/assets/img/tokens/doge.png",
-                name: "DOGE",
-                subtitle: "Dogecoin",
-                lifeIndex: 80,
-              },
-              {
-                logoUrl: "/assets/img/tokens/wif.png",
-                name: "WIF",
-                subtitle: "dogwifhat",
-                lifeIndex: 43,
-              },
-              {
-                logoUrl: "/assets/img/tokens/floki.png",
-                name: "FLOKI",
-                subtitle: "Floki",
-                lifeIndex: 24,
-              },
-              {
-                logoUrl: "/assets/img/tokens/pepe.png",
-                name: "PEPE",
-                subtitle: "Pepe",
-                lifeIndex: 80,
-              },
-              {
-                logoUrl: "/assets/img/tokens/bonk.png",
-                name: "BONK",
-                subtitle: "Bonk",
-                lifeIndex: 80,
-              },
-              {
-                logoUrl: "/assets/img/tokens/trol.png",
-                name: "TROL",
-                subtitle: "Trol",
-                lifeIndex: 80,
-              },
-            ]}
-          />
         </div>
       </div>
     </div>
