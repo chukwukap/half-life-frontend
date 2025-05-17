@@ -10,31 +10,41 @@ import {
 import { CopyIcon } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
+import { usePrivyAuth } from "@/hooks/usePrivyAuth";
+import type { LinkedAccountWithMetadata } from "@privy-io/react-auth";
 
 /**
- * UserNav component displays the connected wallet address and actions.
- * - Modular: Accepts wallet address and disconnect handler as props.
+ * UserNav component displays the connected wallet address and actions using Privy authentication.
  * - Security: Copy and disconnect actions are safe and do not expose sensitive data.
  * - Accessibility: Keyboard and screen reader friendly, with ARIA attributes and focus management.
  * - UI/UX: Pixel-perfect, tooltip for copy, and ready for real data integration.
+ * - Privy: Fetches wallet address and avatar from Privy user object, uses Privy logout for disconnect.
  */
-export interface UserNavProps {
-  walletAddress: string; // Full wallet address (masked in UI, full in clipboard)
-  onDisconnect: () => void; // Secure disconnect handler
-  avatarUrl?: string; // Optional avatar image URL
-}
-
-export const UserNav = ({
-  walletAddress,
-  onDisconnect,
-  avatarUrl = "/assets/img/defiCTO.png",
-}: UserNavProps) => {
+export const UserNav = () => {
+  const { user, handleLogout } = usePrivyAuth();
   const [copied, setCopied] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
 
+  // Get wallet address from Privy user object
+  // Prefer user.wallet.address, fallback to first wallet in linkedAccounts
+  const walletAddress =
+    user?.wallet?.address ||
+    (user?.linkedAccounts?.find(
+      (acc: LinkedAccountWithMetadata) =>
+        acc.type === "wallet" && "address" in acc
+    )?.address ??
+      "");
+
+  // Get avatar from social accounts, fallback to default
+  const avatarUrl =
+    user?.twitter?.profilePictureUrl ||
+    user?.farcaster?.pfp ||
+    user?.telegram?.photoUrl ||
+    "/assets/img/defiCTO.png";
+
   // Mask wallet address for UI display (e.g., 0x1234...abcd)
   const maskAddress = (address: string) =>
-    address.length > 10
+    address && address.length > 10
       ? `${address.slice(0, 6)}...${address.slice(-4)}`
       : address;
 
@@ -65,9 +75,12 @@ export const UserNav = ({
   const handleDisconnectKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
-      onDisconnect();
+      handleLogout();
     }
   };
+
+  // If no wallet address, do not render the menu
+  if (!walletAddress) return null;
 
   return (
     <DropdownMenu>
@@ -131,7 +144,7 @@ export const UserNav = ({
         </DropdownMenuItem>
         {/* Disconnect Wallet */}
         <DropdownMenuItem
-          onClick={onDisconnect}
+          onClick={handleLogout}
           onKeyDown={handleDisconnectKeyDown}
           className="flex items-center gap-3 px-0 py-2 rounded-[12px] mt-1 hover:bg-[#FFF0F0] transition-colors cursor-pointer focus:ring-2 focus:ring-[#FF3B3B] focus:outline-none"
           tabIndex={0}

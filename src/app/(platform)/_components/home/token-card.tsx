@@ -1,92 +1,88 @@
-"use client";
-
+import React from "react";
 import { TokenData } from "@/lib/types";
-import { cn } from "@/lib/utils";
 import Image from "next/image";
-import IndexBar from "../indexBar";
+
+import { Medics } from "@/components/icons"; // Import Medics icon
 
 /**
- * Single token card component exactly matching the UI design
+ * TokenCard - Displays a summary card for a cryptocurrency token.
+ * Security: Stateless, no user input, safe for all environments.
+ * Accessibility: Uses alt text for images and semantic HTML.
  */
-export const TokenCard = ({ token }: { token: TokenData }) => {
-  // Different colors based on life index percentage
-  const getTokenColor = (lifeIndexPercent: number) => {
-    if (lifeIndexPercent >= 80) {
-      return "bg-red-500"; // High life index
-    } else if (lifeIndexPercent >= 50) {
-      return "bg-amber-500"; // Medium life index
-    } else {
-      return "bg-green-500"; // Low life index
-    }
+export const TokenCard: React.FC<{ token: TokenData }> = ({ token }) => {
+  // Determine color for lifeIndex and change
+  const getLifeIndexColor = (value: number) => {
+    if (value >= 100) return "bg-green-100 text-green-600";
+    if (value >= 50) return "bg-green-100 text-green-600";
+    if (value > 0) return "bg-yellow-100 text-yellow-600";
+    return "bg-red-100 text-red-600";
+  };
+  const getChangeColor = (value: number) => {
+    if (value > 0) return "bg-green-100 text-green-600";
+    if (value < 0) return "bg-red-100 text-red-600";
+    return "bg-gray-100 text-gray-600";
   };
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-100 p-5 h-full">
-      {/* Top section with icon and name */}
-      <div className="flex mb-3">
+    <div
+      className="rounded-2xl border border-[#E9EAEC] bg-white p-4 flex flex-col gap-4  transition  min-h-[120px]"
+      tabIndex={0}
+      aria-label={`${token.fullName} (${token.symbol}) card`}
+    >
+      {/* Header: Icon, Name, Symbol */}
+      <div className="flex items-center gap-3">
         <div
-          className={cn(
-            "w-8 h-8 rounded-full overflow-hidden flex items-center justify-center mr-3",
-            token.iconColor || "bg-blue-100"
-          )}
+          className={`w-12 h-12 rounded-full flex items-center justify-center border border-[#F2F3F5] ${
+            token.iconColor || "bg-gray-100"
+          }`}
         >
+          {/* Token icon: alt text for accessibility, never user-supplied */}
           {token.iconSrc ? (
             <Image
+              width={48}
+              height={48}
               src={token.iconSrc}
-              width={24}
-              height={24}
-              alt={token.fullName}
-              className="w-full h-full object-cover"
+              alt={`${token.fullName} logo`}
+              className="w-10 h-10 rounded-full object-contain"
+              loading="lazy"
+              draggable="false"
             />
           ) : (
-            <span className="text-sm font-semibold">
-              {token.fullName.substring(0, 1)}
+            <span className="text-xl font-bold text-gray-400">
+              {token.symbol[0]}
             </span>
           )}
         </div>
-        <div>
-          <h3 className="font-bold text-sm">{token.symbol}</h3>
-          <p className="text-xs text-gray-500">{token.fullName}</p>
+        <div className="flex flex-col">
+          <span className="font-bold text-lg text-[#181A20] leading-tight">
+            {token.symbol}
+          </span>
+          <span className="text-gray-400 text-sm leading-tight">
+            {token.fullName}
+          </span>
         </div>
       </div>
-
-      {/* Price row */}
-      <div className="flex items-start justify-between mb-2">
-        <div className="flex items-start">
-          <span className="text-xl font-bold">{token.price}</span>
-          <span className="text-xs text-blue-600 font-bold mt-1 ml-0.5">
-            LI
-          </span>
+      {/* Life Index and Change */}
+      <div className="flex items-center justify-between mt-2">
+        <div
+          className={`flex items-center px-3 py-2 rounded-3xl font-semibold text-sm ${getLifeIndexColor(
+            token.lifeIndex
+          )}`}
+          aria-label="Life Index"
+        >
+          {/* Use Medics icon instead of SVG for life index */}
+          <Medics className="mr-1" />
+          {token.lifeIndex} <sup className="text-xs ml-1 align-baseline">A</sup>
         </div>
         <div
-          className={cn(
-            "px-3 py-1 rounded-full text-sm",
-            token.change24h > 0
-              ? "bg-green-50 text-green-500"
-              : "bg-red-50 text-red-500"
-          )}
+          className={`px-3 py-2 rounded-3xl font-semibold text-sm ${getChangeColor(
+            token.change24h
+          )}`}
+          aria-label="24 hour change"
         >
           {token.change24h > 0 ? "+" : ""}
-          {token.change24h}%
+          {token.change24h.toFixed(1)}%
         </div>
-      </div>
-
-      {/* Life index section */}
-      <div>
-        <div className="flex justify-between mb-1.5">
-          <span className="text-sm text-gray-500">Life Index</span>
-          <span className="text-sm text-gray-500">
-            {token.lifeIndexPercent}%
-          </span>
-        </div>
-
-        {/* Life index dots replaced with reusable IndexBar */}
-        {/* Security: Stateless, no user input, safe for all environments */}
-        <IndexBar
-          value={token.lifeIndexPercent}
-          totalBars={20}
-          getColor={getTokenColor}
-        />
       </div>
     </div>
   );

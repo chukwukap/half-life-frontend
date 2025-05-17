@@ -11,11 +11,11 @@ const TokenExplorer: FC = () => {
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   // Example search terms that match our test states
-  const testSearchTerms = {
-    cat: "Shows cat tokens",
-    error: "Shows server error state",
-    other: "Shows no results state",
-  };
+  // const testSearchTerms = {
+  //   // cat: "Shows cat tokens",
+  //   // error: "Shows server error state",
+  //   // other: "Shows no results state",
+  // };
 
   // Close the popup when clicking outside
   useEffect(() => {
@@ -58,11 +58,11 @@ const TokenExplorer: FC = () => {
     setSearchQuery(query);
   };
 
-  // Handle clicking on a search suggestion
-  const handleSuggestionClick = (term: string) => {
-    setSearchQuery(term);
-    setIsSearchPopupOpen(true);
-  };
+  // // Handle clicking on a search suggestion
+  // const handleSuggestionClick = (term: string) => {
+  //   setSearchQuery(term);
+  //   setIsSearchPopupOpen(true);
+  // };
 
   return (
     <>
@@ -97,19 +97,19 @@ const TokenExplorer: FC = () => {
         </form>
 
         {/* Quick search suggestions */}
-        <div className="mt-4 flex flex-wrap gap-2">
+        {/* <div className="mt-4 flex flex-wrap gap-2">
           <p className="text-blue-100 mr-2">Try:</p>
           {Object.entries(testSearchTerms).map(([term, description]) => (
             <button
               key={term}
               onClick={() => handleSuggestionClick(term)}
               className="px-3 py-1 bg-blue-500/30 hover:bg-blue-400/40 rounded-full text-sm transition-colors"
-              title={description}
+              title={description as string | undefined}
             >
               {term}
             </button>
           ))}
-        </div>
+        </div> */}
       </div>
 
       <SearchPopup
