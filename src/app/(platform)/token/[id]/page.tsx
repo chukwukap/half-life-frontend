@@ -136,7 +136,7 @@ const TokenDetailPage: FC = () => {
         <div className="lg:col-span-5 border border-[#EBF1FF] rounded-lg p-4">
           {/* Price chart section */}
           <div className="mb-16">
-            <TokenChart />
+            <TokenChart tokenId={tokenData.id} />
           </div>
 
           {/* Tab section */}
