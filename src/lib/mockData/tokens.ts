@@ -16,28 +16,6 @@ import { TokenData } from "@/lib/types";
 
 export const mockTokens: TokenData[] = [
   {
-    id: "coinbase-btc",
-    symbol: "CBTC",
-    fullName: "Coinbase Wrapped Staked BTC",
-    price: 102_000,
-    change24h: 1.45,
-    marketCap: "$8,000,000",
-    volume24h: "$600,000",
-    lifeIndex: 2,
-    lifeIndexPercent: 2,
-    iconColor: "bg-pink-100",
-    iconSrc: "/assets/img/tokens/cbBTC.png",
-    openTraders: 2000,
-    funding: "0.011%",
-    countdown: "01:30:00",
-    leverage: 7,
-    available: "$40,000",
-    positionValue: "$38,000",
-    socialScore: "62",
-    communityScore: "65",
-    vitalityScore: 61,
-  },
-  {
     id: "zora",
     symbol: "ZORA",
     fullName: "Zora",
