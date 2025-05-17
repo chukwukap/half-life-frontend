@@ -1,7 +1,8 @@
 "use client";
 
-import { FC, useEffect, useRef } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { AchievementIcon, CloseIcon } from "@/components/icons";
+import ShareAchievementModal from "./share-achievement-modal";
 
 interface Achievement {
   title: string;
@@ -21,6 +22,9 @@ const AchievementsModal: FC<AchievementsModalProps> = ({
   achievements,
 }) => {
   const modalRef = useRef<HTMLDivElement>(null);
+  const [shareOpen, setShareOpen] = useState(false);
+  const [selectedAchievement, setSelectedAchievement] =
+    useState<Achievement | null>(null);
 
   // Focus trap and ESC close
   useEffect(() => {
@@ -51,80 +55,93 @@ const AchievementsModal: FC<AchievementsModalProps> = ({
   if (!open) return null;
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm"
-      aria-modal="true"
-      role="dialog"
-      tabIndex={-1}
-      onClick={onClose}
-    >
+    <>
       <div
-        className="relative bg-white rounded-[24px] shadow-2xl p-8 w-full max-w-2xl mx-4"
-        ref={modalRef}
-        onClick={(e) => e.stopPropagation()}
+        className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm"
+        aria-modal="true"
+        role="dialog"
+        tabIndex={-1}
+        onClick={onClose}
       >
-        {/* Header */}
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-2xl font-bold text-[#181A20]">Achievements</h2>
-          <button
-            onClick={onClose}
-            aria-label="Close achievements modal"
-            className="text-[#7D8FB3] hover:text-[#335CFF] rounded-full p-2 focus:outline-none focus:ring-2 focus:ring-[#335CFF]/20"
-          >
-            <CloseIcon className="w-6 h-6" />
-          </button>
-        </div>
-        {/* Achievements grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {achievements.map((ach) => (
-            <div
-              key={ach.title}
-              className={`flex flex-col items-center justify-between border rounded-[18px] px-6 pt-6 pb-4 h-full transition-all ${
-                ach.locked
-                  ? "border-[#F0EFFF] bg-[#FAF8FF] opacity-60 cursor-not-allowed"
-                  : "border-[#E9EAEC] bg-white"
-              }`}
+        <div
+          className="relative bg-white rounded-[24px] shadow-2xl p-8 w-full max-w-2xl mx-4"
+          ref={modalRef}
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Header */}
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-2xl font-bold text-[#181A20]">Achievements</h2>
+            <button
+              onClick={onClose}
+              aria-label="Close achievements modal"
+              className="text-[#7D8FB3] hover:text-[#335CFF] rounded-full p-2 focus:outline-none focus:ring-2 focus:ring-[#335CFF]/20"
             >
-              <div className="mb-4">
-                <AchievementIcon />
-              </div>
-              <div className="text-center mb-6">
-                <div
-                  className={`font-extrabold text-xl mb-1 leading-tight ${
-                    ach.locked ? "text-[#B8B8C7]" : "text-[#181A20]"
-                  }`}
-                >
-                  {ach.title}
-                </div>
-                <div
-                  className={`text-base leading-tight ${
-                    ach.locked ? "text-[#B8B8C7]" : "text-[#7D8FB3]"
-                  }`}
-                >
-                  {ach.description}
-                </div>
-              </div>
-              <button
-                className={`w-full rounded-full text-lg font-bold py-3 transition-colors focus:outline-none focus:ring-2 ${
+              <CloseIcon className="w-6 h-6" />
+            </button>
+          </div>
+          {/* Achievements grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {achievements.map((ach) => (
+              <div
+                key={ach.title}
+                className={`flex flex-col items-center justify-between border rounded-[18px] px-6 pt-6 pb-4 h-full transition-all ${
                   ach.locked
-                    ? "bg-[#F5F0FF] text-[#B8B8C7] cursor-not-allowed"
-                    : "bg-[#F5F0FF] text-[#B18CFF] hover:bg-[#EDE6FF] focus:ring-[#B18CFF]/20"
+                    ? "border-[#F0EFFF] bg-[#FAF8FF] opacity-60 cursor-not-allowed"
+                    : "border-[#E9EAEC] bg-white"
                 }`}
-                type="button"
-                aria-label={
-                  ach.locked
-                    ? `Locked: ${ach.title}`
-                    : `Flex your achievement: ${ach.title}`
-                }
-                disabled={ach.locked}
               >
-                Flex
-              </button>
-            </div>
-          ))}
+                <div className="mb-4">
+                  <AchievementIcon />
+                </div>
+                <div className="text-center mb-6">
+                  <div
+                    className={`font-extrabold text-xl mb-1 leading-tight ${
+                      ach.locked ? "text-[#B8B8C7]" : "text-[#181A20]"
+                    }`}
+                  >
+                    {ach.title}
+                  </div>
+                  <div
+                    className={`text-base leading-tight ${
+                      ach.locked ? "text-[#B8B8C7]" : "text-[#7D8FB3]"
+                    }`}
+                  >
+                    {ach.description}
+                  </div>
+                </div>
+                <button
+                  className={`w-full rounded-full text-lg font-bold py-3 transition-colors focus:outline-none focus:ring-2 ${
+                    ach.locked
+                      ? "bg-[#F5F0FF] text-[#B8B8C7] cursor-not-allowed"
+                      : "bg-[#F5F0FF] text-[#B18CFF] hover:bg-[#EDE6FF] focus:ring-[#B18CFF]/20"
+                  }`}
+                  type="button"
+                  aria-label={
+                    ach.locked
+                      ? `Locked: ${ach.title}`
+                      : `Flex your achievement: ${ach.title}`
+                  }
+                  disabled={ach.locked}
+                  onClick={() => {
+                    if (!ach.locked) {
+                      setSelectedAchievement(ach);
+                      setShareOpen(true);
+                    }
+                  }}
+                >
+                  Flex
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+      <ShareAchievementModal
+        open={shareOpen}
+        onClose={() => setShareOpen(false)}
+        achievement={selectedAchievement}
+      />
+    </>
   );
 };
 
