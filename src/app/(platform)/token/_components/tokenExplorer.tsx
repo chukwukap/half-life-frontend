@@ -66,7 +66,21 @@ const TokenExplorer: FC = () => {
 
   return (
     <>
-      <div className="bg-gradient-to-br from-blue-600 to-blue-800 text-white rounded-xl p-10 w-full">
+      <div className="bg-gradient-to-br from-blue-600 to-blue-800 text-white rounded-xl p-10 w-full relative overflow-hidden">
+        {/* Decorative background image covering 5% from the left */}
+        <div
+          aria-hidden="true"
+          className="absolute top-0 left-0 h-full"
+          style={{
+            width: "5%",
+            backgroundImage: "url('/assets/img/sample-bg.png')",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "left center",
+            backgroundSize: "cover",
+            pointerEvents: "none",
+            zIndex: 0,
+          }}
+        />
         <h1 className="text-3xl font-bold mb-1">Token Explorer</h1>
         <p className="mb-2 text-blue-100">
           Track every token&apos;s lifespan in real time.
