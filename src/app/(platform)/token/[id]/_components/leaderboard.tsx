@@ -34,7 +34,7 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ data }) => {
           className="w-5 h-5 mr-2 text-[#335CFF]"
           aria-hidden="true"
         />
-        <span className="font-semibold text-2xl leading-[24px] text-[#181A20]">
+        <span className="font-semibold text-base leading-[24px] text-[#181A20]">
           Leaderboard
         </span>
       </div>

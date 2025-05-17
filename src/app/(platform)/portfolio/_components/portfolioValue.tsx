@@ -79,7 +79,15 @@ const PortfolioValue: FC = () => {
 
   return (
     <>
-      <div className="bg-[#101E6C] rounded-lg px-6 py-8 flex flex-col gap-10 w-full h-full">
+      <div
+        className="bg-[#101E6C] rounded-lg px-6 py-8 flex flex-col gap-10 w-full h-full relative overflow-hidden"
+        style={{
+          backgroundImage: "url('/assets/img/sample-bg.png')",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "left center",
+          backgroundSize: "auto 100%",
+        }}
+      >
         {/* Portfolio label and value */}
         <div>
           <h2 className="text-[#B6C2E2] text-base font-normal mb-3 tracking-tight leading-5 sm:text-[18px] sm:leading-[22px]">

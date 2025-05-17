@@ -14,10 +14,6 @@ const routes = [
     href: "/token",
   },
   {
-    label: "Social",
-    href: "/social",
-  },
-  {
     label: "Portfolio",
     href: "/portfolio",
   },
