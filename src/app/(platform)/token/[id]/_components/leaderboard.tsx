@@ -1,5 +1,6 @@
 import React from "react";
 import { CommunityIcon } from "@/components/icons"; // Use the correct icon as per design
+import Image from "next/image";
 
 // Type for leaderboard entry
 export interface LeaderboardEntry {
@@ -63,7 +64,9 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ data }) => {
             }}
           >
             <span className="w-12">{entry.rank}</span>
-            <img
+            <Image
+              width={32}
+              height={32}
               src={entry.image}
               alt={`${entry.username} avatar`}
               className="w-8 h-8 rounded-full mr-2"
