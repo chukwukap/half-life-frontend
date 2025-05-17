@@ -59,7 +59,7 @@ const TrendingCard = ({ token }: TrendingCardProps) => {
         />
       </div>
       {/* Trade button */}
-      <Link href={`/trade/${token.id}`}>
+      <Link href={`/token/${token.id}`}>
         <Button
           variant="default"
           className="bg-[#335CFF] hover:bg-[#2347E2] 
