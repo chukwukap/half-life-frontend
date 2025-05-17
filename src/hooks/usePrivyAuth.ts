@@ -15,7 +15,7 @@ export function usePrivyAuth() {
 
   const handleLogin = useCallback(async () => {
     try {
-      await login();
+      login();
     } catch (error) {
       console.error("Error logging in:", error);
     }

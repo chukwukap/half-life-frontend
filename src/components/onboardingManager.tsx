@@ -35,7 +35,16 @@ export default function OnboardingManager({
     setShowOnboarding(false);
   };
 
-  if (!ready) return null; // Or a spinner
+  // Show a centered spinner while authentication is not ready
+  if (!ready)
+    return (
+      <div className="fixed inset-0 flex items-center justify-center bg-white/80 z-50">
+        <div
+          className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-[#335CFF]"
+          aria-label="Loading"
+        />
+      </div>
+    );
 
   return (
     <>
