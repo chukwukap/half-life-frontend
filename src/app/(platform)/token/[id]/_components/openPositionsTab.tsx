@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 /**
@@ -37,12 +38,12 @@ const positions = [
 
 const OpenPositionsTab: React.FC = () => {
   return (
-    <div className="bg-white rounded-[24px] p-8 shadow-sm">
+    <div className="bg-white rounded-[24px] p-8">
       <div className="flex flex-wrap gap-8 mb-8">
         {positions.map((pos, i) => (
           <div
             key={i}
-            className={`flex-1 min-w-[340px] max-w-[420px] bg-white rounded-[32px] p-8 shadow-sm border border-[#E9EAEC] relative ${
+            className={`flex-1 min-w-[340px] max-w-[420px] bg-white rounded-[32px] p-8 border border-[#E9EAEC] relative ${
               pos.type === "Long"
                 ? "border-t-4 border-t-[#05CD99]"
                 : "border-t-4 border-t-[#FF5A5A]"
@@ -50,7 +51,9 @@ const OpenPositionsTab: React.FC = () => {
           >
             {/* Header */}
             <div className="flex items-center mb-4">
-              <img
+              <Image
+                width={48}
+                height={48}
                 src={pos.avatar}
                 alt={pos.name}
                 className="w-12 h-12 rounded-full mr-4"

@@ -42,6 +42,8 @@ interface PositionsCardProps {
  * Only one position can be open at a time.
  * Security: Stateless, no user input, safe for all environments.
  * Accessibility: Uses semantic HTML and alt text for images.
+ *
+ * Only shows the top 2 tokens (positions).
  */
 const PositionsCard: React.FC<PositionsCardProps> = ({
   positions,
@@ -53,6 +55,9 @@ const PositionsCard: React.FC<PositionsCardProps> = ({
   const handleToggle = (idx: number) => {
     setOpenIndex(openIndex === idx ? null : idx);
   };
+
+  // Only show the top 2 positions for security and UI clarity
+  const topPositions = positions.slice(0, 2);
 
   return (
     <section
@@ -69,7 +74,7 @@ const PositionsCard: React.FC<PositionsCardProps> = ({
       </div>
       {/* Positions list */}
       <div className="flex flex-col gap-4">
-        {positions.map((pos, idx) => {
+        {topPositions.map((pos, idx) => {
           const isOpen = openIndex === idx;
           return (
             <div

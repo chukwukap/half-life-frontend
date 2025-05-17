@@ -6,6 +6,7 @@ import { ArrowLeft } from "lucide-react";
 import { useParams } from "next/navigation";
 import { getTokenById } from "@/lib/mockData/tokens";
 import { TokenData } from "@/lib/types";
+import { toast } from "sonner";
 
 // Components for the token detail page
 import TokenHeader from "./_components/tokenHeader";
@@ -17,6 +18,20 @@ import Leaderboard from "./_components/leaderboard";
 import TrendingTokens from "./_components/trendingTokens";
 import OverviewTab from "./_components/overviewTab";
 import PositionsCard from "./_components/positionsCard";
+
+// Type for a position (should match PositionsCard)
+type Position = {
+  logo: string;
+  name: string;
+  subtitle: string;
+  leverage: string;
+  leverageColor: string;
+  entry: number | null;
+  liquidation: number | null;
+  size: string | null;
+  pnl: number;
+  pnlPercent: number;
+};
 
 const TokenDetailPage: FC = () => {
   // Get the token id from the URL params
@@ -34,7 +49,7 @@ const TokenDetailPage: FC = () => {
     : undefined;
 
   // Positions state for simulation
-  const [positions, setPositions] = useState([
+  const [positions, setPositions] = useState<Position[]>([
     {
       logo: "/assets/img/tokens/wif.png",
       name: "WIF",
@@ -67,6 +82,7 @@ const TokenDetailPage: FC = () => {
     if (typeof window !== "undefined" && navigator.vibrate) {
       navigator.vibrate(50); // 50ms vibration
     }
+    toast.success("Position opened successfully!");
     setPositions((prev) => [
       {
         logo: "/assets/img/tokens/wif.png",
