@@ -131,9 +131,9 @@ const TokenDetailPage: FC = () => {
         lifeIndex={tokenData.vitalityScore}
       />
 
-      <div className="grid grid-cols-1 lg:grid-cols-7 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-6 gap-6">
         {/* Left column - Chart, Stats, and Tabs */}
-        <div className="lg:col-span-5 border border-[#EBF1FF] rounded-lg p-4">
+        <div className="lg:col-span-4 border border-[#EBF1FF] rounded-lg p-4">
           {/* Price chart section */}
           <div className="mb-16">
             <TokenChart tokenId={tokenData.id} />

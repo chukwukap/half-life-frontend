@@ -37,10 +37,10 @@ const TradingStats: FC = () => {
         {icon}
       </div>
       <div className="flex flex-col min-w-0">
-        <span className="text-[#7D8FB3] text-base font-medium leading-tight truncate">
+        <span className="text-[#7D8FB3] text-sm font-medium leading-tight truncate">
           {label}
         </span>
-        <span className="text-[#181A20] text-[28px] font-extrabold leading-tight tracking-tight truncate">
+        <span className="text-[#181A20] text-base font-extrabold leading-tight tracking-tight truncate">
           {value}
         </span>
       </div>
@@ -57,27 +57,31 @@ const TradingStats: FC = () => {
         </h2>
       </div>
       {/* Stats grid: 2x2 grid for perfect alignment */}
-      <div className="grid grid-cols-2 grid-rows-2 gap-6">
-        <StatItem
-          icon={<ChartLineIcon className="w-7 h-7 text-[#335CFF]" />}
-          label="Total Trades"
-          value={stats.totalTrades}
-        />
-        <StatItem
-          icon={<WinRateIcon className="w-7 h-7 text-[#335CFF]" />}
-          label="Win Rate"
-          value={stats.winRate}
-        />
-        <StatItem
-          icon={<WalletIcon className="w-7 h-7 text-[#335CFF]" />}
-          label="Unrealized PnL"
-          value={stats.unrealizedPnl}
-        />
-        <StatItem
-          icon={<BankIcon className="w-7 h-7 text-[#335CFF]" />}
-          label="Realized PnL"
-          value={stats.realizedPnl}
-        />
+      <div className="flex flex-col gap-4">
+        <div className="flex flex-1 gap-2 border border-[#EBF1FF] rounded-lg p-4">
+          <StatItem
+            icon={<ChartLineIcon className="w-7 h-7 text-[#335CFF]" />}
+            label="Total Trades"
+            value={stats.totalTrades}
+          />
+          <StatItem
+            icon={<WinRateIcon className="w-7 h-7 text-[#335CFF]" />}
+            label="Win Rate"
+            value={stats.winRate}
+          />
+        </div>
+        <div className="flex flex-1 gap-2 border border-[#EBF1FF] rounded-lg p-4">
+          <StatItem
+            icon={<WalletIcon className="w-7 h-7 text-[#335CFF]" />}
+            label="Unrealized PnL"
+            value={stats.unrealizedPnl}
+          />
+          <StatItem
+            icon={<BankIcon className="w-7 h-7 text-[#335CFF]" />}
+            label="Realized PnL"
+            value={stats.realizedPnl}
+          />
+        </div>
       </div>
     </div>
   );

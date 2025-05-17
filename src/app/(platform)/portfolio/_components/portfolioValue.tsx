@@ -64,9 +64,9 @@ const PortfolioValue: FC = () => {
       className={
         "flex items-center justify-center gap-2 rounded-full w-full " +
         (primary
-          ? "bg-[#335CFF] text-white hover:bg-[#2347E2] "
+          ? "bg-[#335CFF] text-white hover:bg-[#2347E2]"
           : "bg-white text-[#335CFF] hover:bg-[#F5F8FF] ") +
-        "px-4 py-3 sm:px-8 sm:py-4 font-semibold text-base sm:text-lg transition-colors focus:outline-none focus:ring-2 " +
+        "px-2 py-1 sm:px-6 sm:py-4 font-semibold text-sm sm:text-base transition-colors focus:outline-none focus:ring-2 " +
         (primary ? "focus:ring-[#335CFF]/40" : "focus:ring-[#335CFF]/20")
       }
       onClick={onClick}
@@ -79,7 +79,7 @@ const PortfolioValue: FC = () => {
 
   return (
     <>
-      <div className="bg-[#101E6C] rounded-[32px] px-6 pt-8 pb-10 flex flex-col gap-10 w-full h-full sm:px-10 sm:pt-10 sm:pb-12 sm:gap-12">
+      <div className="bg-[#101E6C] rounded-lg px-6 py-8 flex flex-col gap-10 w-full h-full">
         {/* Portfolio label and value */}
         <div>
           <h2 className="text-[#B6C2E2] text-base font-normal mb-3 tracking-tight leading-5 sm:text-[18px] sm:leading-[22px]">
@@ -93,7 +93,7 @@ const PortfolioValue: FC = () => {
           </div>
         </div>
         {/* Action buttons: responsive, stacked on mobile, row on desktop */}
-        <div className="flex flex-col gap-4 w-full sm:flex-row sm:gap-8">
+        <div className="flex gap-3 w-full justify-between items-center">
           <SimpleActionButton
             icon={<ArrowDownIcon className="w-5 h-5" />}
             label="Deposit"
