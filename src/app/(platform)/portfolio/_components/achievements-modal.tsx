@@ -1,18 +1,7 @@
 "use client";
 
 import { FC, useEffect, useRef } from "react";
-import { CloseIcon } from "@/components/icons";
-
-// Example icon for all achievements (replace with real icons as needed)
-const AchievementIcon = () => (
-  <svg width="32" height="32" fill="none" viewBox="0 0 32 32">
-    <circle cx="16" cy="16" r="16" fill="#F5F0FF" />
-    <path
-      d="M16 10l2.09 4.24L22 15.27l-3.18 3.09L19.18 22 16 19.77 12.82 22l.36-3.64L10 15.27l3.91-.03L16 10z"
-      fill="#B18CFF"
-    />
-  </svg>
-);
+import { AchievementIcon, CloseIcon } from "@/components/icons";
 
 interface Achievement {
   title: string;
