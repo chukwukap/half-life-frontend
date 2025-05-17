@@ -109,14 +109,14 @@ const PortfolioValue: FC = () => {
         {/* Action buttons: responsive, stacked on mobile, row on desktop */}
         <div className="flex gap-3 w-full justify-between items-center">
           <SimpleActionButton
-            icon={<ArrowDownIcon className="w-5 h-5" />}
+            icon={<ArrowDownIcon className="w-5 h-5 text-white" />}
             label="Deposit"
             primary
             onClick={() => setDepositOpen(true)}
             ariaLabel="Deposit"
           />
           <SimpleActionButton
-            icon={<ArrowUpIcon className="w-5 h-5" />}
+            icon={<ArrowUpIcon className="w-5 h-5 text-[#335CFF]" />}
             label="Withdraw"
             onClick={() => setWithdrawOpen(true)}
             ariaLabel="Withdraw"
