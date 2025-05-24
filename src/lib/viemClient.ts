@@ -12,7 +12,7 @@ import { useMemo } from "react";
 
 // Utility hook to get viem clients (public and wallet) using Privy
 export function useViemClients() {
-  const { ready, wallets } = usePrivy();
+  const { ready, wallet } = usePrivy(); // Use 'wallet' from Privy
   // Use the first supported chain as default (Base mainnet or Base Sepolia)
   const defaultChain = privyConfig.defaultChain;
 
@@ -28,7 +28,8 @@ export function useViemClients() {
 
   // Wallet client for write operations (if Privy wallet is connected)
   const walletClient: WalletClient | null = useMemo(() => {
-    const provider = wallets?.[0]?.getEthereumProvider?.();
+    // Use the Privy wallet's Ethereum provider
+    const provider = wallet?.getEthereumProvider?.();
     if (provider) {
       return createWalletClient({
         chain: defaultChain,
@@ -36,7 +37,7 @@ export function useViemClients() {
       });
     }
     return null;
-  }, [wallets, defaultChain]);
+  }, [wallet, defaultChain]);
 
   return { publicClient, walletClient, ready };
 }
