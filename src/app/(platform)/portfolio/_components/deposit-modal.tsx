@@ -20,10 +20,14 @@ const DepositModal: FC<DepositModalProps> = ({
 }) => {
   const modalRef = useRef<HTMLDivElement>(null);
   const [amount, setAmount] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   // Focus trap and ESC close
   useEffect(() => {
     if (!open) return;
+    setError(null);
+    setLoading(false);
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
       // Trap focus
@@ -46,6 +50,19 @@ const DepositModal: FC<DepositModalProps> = ({
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [open, onClose]);
+
+  // Handle deposit click
+  const handleDepositClick = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      await onDeposit(amount);
+    } catch (e) {
+      setError("Deposit failed");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   if (!open) return null;
 
@@ -89,6 +106,7 @@ const DepositModal: FC<DepositModalProps> = ({
             onChange={(e) => setAmount(Number(e.target.value))}
             className="w-full rounded-[16px] border border-[#E9EAEC] px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-[#335CFF]/20 mb-2"
             placeholder="0"
+            disabled={loading}
           />
           <div className="flex justify-between text-[#7D8FB3] text-sm mb-2">
             <span>Balance</span>
@@ -103,6 +121,7 @@ const DepositModal: FC<DepositModalProps> = ({
               type="button"
               className="flex-1 rounded-full bg-[#F5F8FF] text-[#335CFF] font-semibold py-2 transition-colors hover:bg-[#E5EDFF] focus:outline-none focus:ring-2 focus:ring-[#335CFF]/20"
               onClick={() => setAmount(amt)}
+              disabled={loading}
             >
               {amt} USDT
             </button>
@@ -111,6 +130,7 @@ const DepositModal: FC<DepositModalProps> = ({
             type="button"
             className="flex-1 rounded-full bg-[#F5F8FF] text-[#335CFF] font-semibold py-2 transition-colors hover:bg-[#E5EDFF] focus:outline-none focus:ring-2 focus:ring-[#335CFF]/20"
             onClick={() => setAmount(balance)}
+            disabled={loading}
           >
             Max
           </button>
@@ -120,11 +140,12 @@ const DepositModal: FC<DepositModalProps> = ({
           className="w-full rounded-full bg-[#335CFF] text-white text-lg font-bold py-4 transition-colors hover:bg-[#2347E2] focus:outline-none focus:ring-2 focus:ring-[#335CFF]/20"
           type="button"
           aria-label="Deposit"
-          onClick={() => onDeposit(amount)}
-          disabled={amount <= 0}
+          onClick={handleDepositClick}
+          disabled={amount <= 0 || loading}
         >
-          Deposit
+          {loading ? "Depositing..." : "Deposit"}
         </button>
+        {error && <div className="text-red-500 mt-2">{error}</div>}
       </div>
     </div>
   );

@@ -1,51 +1,116 @@
 "use client";
 
-import { FC, useState } from "react";
+import { FC, useState, useEffect, useCallback } from "react";
 import { ArrowDownIcon, ArrowUpIcon } from "@/components/icons";
 import DepositModal from "./deposit-modal";
 import WithdrawModal from "./withdraw-modal";
 import InsufficientFundsModal from "./insufficient-funds-modal";
+import { useMarginVault, useMockUSDC } from "@/hooks/useContracts";
+import { useViemClients } from "@/lib/viemClient";
 
 /**
  * PortfolioValue component displays the user's portfolio value
  * and provides Deposit and Withdraw actions.
- *
- * Security: All actions are handled client-side and do not expose sensitive data.
+ * Now fully integrated with on-chain margin and USDC balance.
  */
 const PortfolioValue: FC = () => {
-  // Mock values for demonstration
-  const portfolioValue = "$5,321.78";
-  const balance = 0.00007784; // Mock balance in USDT
-  const minAmount = 0.000111; // Minimum required for deposit/withdraw
-  const address = "0x75ba...d06c";
+  // Contract hooks
+  const { readMargin, deposit, withdraw } = useMarginVault();
+  const { readBalanceOf } = useMockUSDC();
+  const { address } = useViemClients();
+
+  // State for on-chain values
+  const [margin, setMargin] = useState<bigint | null>(null);
+  const [usdcBalance, setUsdcBalance] = useState<bigint | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   // Modal state
   const [depositOpen, setDepositOpen] = useState(false);
   const [withdrawOpen, setWithdrawOpen] = useState(false);
   const [insufficientOpen, setInsufficientOpen] = useState(false);
 
+  // Minimum required for deposit/withdraw (example: 0.000111 USDC)
+  const minAmount = 0.000111;
+
+  // Fetch margin and USDC balance
+  const fetchPortfolio = useCallback(async () => {
+    if (!address) return;
+    setLoading(true);
+    setError(null);
+    try {
+      const m = await readMargin(address);
+      const b = await readBalanceOf(address);
+      setMargin(typeof m === "bigint" ? m : BigInt(m?.toString?.() ?? "0"));
+      setUsdcBalance(
+        typeof b === "bigint" ? b : BigInt(b?.toString?.() ?? "0")
+      );
+    } catch (e) {
+      setError("Failed to fetch portfolio data");
+    } finally {
+      setLoading(false);
+    }
+  }, [address, readMargin, readBalanceOf]);
+
+  useEffect(() => {
+    fetchPortfolio();
+  }, [fetchPortfolio]);
+
+  // Convert USDC balance to display (assume 6 decimals)
+  const displayBalance =
+    usdcBalance !== null ? Number(usdcBalance) / 1_000_000 : 0;
+  // Portfolio value: for demo, use margin as value (could be more complex)
+  const portfolioValue =
+    margin !== null
+      ? `$${(Number(margin) / 1_000_000).toLocaleString()}`
+      : "$0.00";
+
   // Handle deposit action
-  const handleDeposit = () => {
-    if (balance < minAmount) {
+  const handleDeposit = async (amount: number) => {
+    if (!address) return;
+    if (displayBalance < minAmount) {
       setDepositOpen(false);
       setInsufficientOpen(true);
       return;
     }
-    // TODO: Implement deposit logic
-    setDepositOpen(false);
-    // Optionally show success modal/notification
+    setLoading(true);
+    setError(null);
+    try {
+      // Call deposit (convert amount to 6 decimals)
+      await deposit(
+        // USDC address (mockUSDCAddress is imported in the hook)
+        address,
+        BigInt(Math.floor(amount * 1_000_000))
+      );
+      await fetchPortfolio();
+      setDepositOpen(false);
+    } catch (e) {
+      setError("Deposit failed");
+    } finally {
+      setLoading(false);
+    }
   };
 
   // Handle withdraw action
-  const handleWithdraw = () => {
-    if (balance < minAmount) {
+  const handleWithdraw = async (amount: number) => {
+    if (!address) return;
+    if (displayBalance < minAmount) {
       setWithdrawOpen(false);
       setInsufficientOpen(true);
       return;
     }
-    // TODO: Implement withdraw logic
-    setWithdrawOpen(false);
-    // Optionally show success modal/notification
+    setLoading(true);
+    setError(null);
+    try {
+      // Call withdraw (convert amount to 6 decimals)
+      await withdraw(address, BigInt(Math.floor(amount * 1_000_000)));
+      await fetchPortfolio();
+      setWithdrawOpen(false);
+    } catch (e) {
+      setError("Withdraw failed");
+    } finally {
+      setLoading(false);
+    }
   };
 
   /**
@@ -71,6 +136,7 @@ const PortfolioValue: FC = () => {
       }
       onClick={onClick}
       aria-label={ariaLabel}
+      disabled={loading}
     >
       <span className="flex items-center justify-center">{icon}</span>
       <span className="truncate">{label}</span>
@@ -122,27 +188,29 @@ const PortfolioValue: FC = () => {
             ariaLabel="Withdraw"
           />
         </div>
+        {error && <div className="text-red-500 mt-2">{error}</div>}
+        {loading && <div className="text-blue-500 mt-2">Loading...</div>}
       </div>
       {/* Deposit Modal */}
       <DepositModal
         open={depositOpen}
         onClose={() => setDepositOpen(false)}
-        balance={balance}
+        balance={displayBalance}
         onDeposit={handleDeposit}
       />
       {/* Withdraw Modal */}
       <WithdrawModal
         open={withdrawOpen}
         onClose={() => setWithdrawOpen(false)}
-        balance={balance}
+        balance={displayBalance}
         onWithdraw={handleWithdraw}
       />
       {/* Insufficient Funds Modal */}
       <InsufficientFundsModal
         open={insufficientOpen}
         onClose={() => setInsufficientOpen(false)}
-        address={address}
-        balance={balance}
+        address={address ?? ""}
+        balance={displayBalance}
         minAmount={minAmount}
       />
     </>
