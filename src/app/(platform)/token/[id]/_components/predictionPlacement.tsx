@@ -8,7 +8,13 @@ interface PredictionPlacementProps {
   entryPrice: string;
   liquidationPrice: string;
   available: string;
-  onOpenPosition?: () => void;
+  onOpenPosition?: (params: {
+    amount: number;
+    leverage: number;
+    direction: "long" | "short";
+  }) => Promise<void>;
+  loading?: boolean;
+  error?: string | null;
 }
 
 const PredictionPlacement: FC<PredictionPlacementProps> = ({
@@ -16,6 +22,8 @@ const PredictionPlacement: FC<PredictionPlacementProps> = ({
   liquidationPrice,
   available,
   onOpenPosition,
+  loading = false,
+  error = null,
 }) => {
   const [amount, setAmount] = useState<string>("100");
   const [leverage, setLeverage] = useState<number>(1);
@@ -37,6 +45,17 @@ const PredictionPlacement: FC<PredictionPlacementProps> = ({
       ? Math.min(leverage + 1, 10)
       : Math.max(leverage - 1, 1);
     setLeverage(newLeverage);
+  };
+
+  // Handle open position click
+  const handleOpenPositionClick = async () => {
+    if (onOpenPosition) {
+      await onOpenPosition({
+        amount: Number(amount),
+        leverage,
+        direction,
+      });
+    }
   };
 
   return (
@@ -94,6 +113,7 @@ const PredictionPlacement: FC<PredictionPlacementProps> = ({
             placeholder="0.00"
             inputMode="decimal"
             aria-label="Amount in USD"
+            disabled={loading}
           />
         </div>
         <div className="flex items-center bg-[#F5F8FF] rounded-full px-4 py-2 mb-4">
@@ -107,6 +127,7 @@ const PredictionPlacement: FC<PredictionPlacementProps> = ({
             tabIndex={0}
             aria-label="Set max amount"
             type="button"
+            disabled={loading}
           >
             Max
           </button>
@@ -121,7 +142,7 @@ const PredictionPlacement: FC<PredictionPlacementProps> = ({
           <button
             onClick={() => adjustLeverage(false)}
             className="w-8 h-8 bg-white border border-[#E9EAEC] text-[#B1B5C3] rounded-full flex items-center justify-center hover:bg-[#F5F8FF] focus:outline-none focus:ring-2 focus:ring-[#335CFF]"
-            disabled={leverage <= 1}
+            disabled={leverage <= 1 || loading}
             aria-label="Decrease leverage"
             type="button"
           >
@@ -133,7 +154,7 @@ const PredictionPlacement: FC<PredictionPlacementProps> = ({
           <button
             onClick={() => adjustLeverage(true)}
             className="w-8 h-8 bg-white border border-[#E9EAEC] text-[#B1B5C3] rounded-full flex items-center justify-center hover:bg-[#F5F8FF] focus:outline-none focus:ring-2 focus:ring-[#335CFF]"
-            disabled={leverage >= 10}
+            disabled={leverage >= 10 || loading}
             aria-label="Increase leverage"
             type="button"
           >
@@ -161,10 +182,12 @@ const PredictionPlacement: FC<PredictionPlacementProps> = ({
         <button
           className="w-full py-3 rounded-full bg-[#335CFF] text-white text-lg font-bold shadow-md hover:bg-[#274FCC] transition-colors focus:outline-none focus:ring-2 focus:ring-[#335CFF]"
           type="button"
-          onClick={onOpenPosition}
+          onClick={handleOpenPositionClick}
+          disabled={loading}
         >
-          Open Position
+          {loading ? "Opening..." : "Open Position"}
         </button>
+        {error && <div className="text-red-500 mt-2">{error}</div>}
       </div>
     </section>
   );
