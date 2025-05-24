@@ -33,12 +33,14 @@ export function useMarginVault() {
   // Deposit collateral (requires wallet)
   const deposit = async (token: string, amount: bigint) => {
     if (!walletClient) throw new Error("Wallet not connected");
+    if (!walletClient.account) throw new Error("Wallet account not available");
     return await walletClient.writeContract({
       address: CONTRACTS.marginVault.address,
       abi: CONTRACTS.marginVault.abi as Abi,
       functionName: "deposit",
       args: [token, amount],
       account: walletClient.account,
+      chain: undefined,
     });
   };
 
