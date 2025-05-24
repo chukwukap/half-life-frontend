@@ -21,17 +21,18 @@ export function useViemClients() {
     () =>
       createPublicClient({
         chain: defaultChain,
-        transport: http(defaultChain.rpcUrls.default.http[0]),
+        transport: http(defaultChain?.rpcUrls.default.http[0] ?? ""),
       }),
     [defaultChain]
   );
 
   // Wallet client for write operations (if Privy wallet is connected)
   const walletClient: WalletClient | null = useMemo(() => {
-    if (wallet?.ethereum) {
+    const provider = wallet?.getEthereumProvider?.();
+    if (provider) {
       return createWalletClient({
         chain: defaultChain,
-        transport: custom(wallet.ethereum),
+        transport: custom(provider),
       });
     }
     return null;

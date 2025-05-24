@@ -1,6 +1,14 @@
-import { Abi, getContract, readContract, writeContract } from "viem";
+import { Abi, getContract } from "viem";
 import { useViemClients } from "@/lib/viemClient";
-import { CONTRACTS } from "@/lib/contracts";
+// import { CONTRACTS } from "@/lib/contracts"; // Uncomment when contracts.ts is available
+
+// Placeholder CONTRACTS object for demonstration (replace with actual import)
+const CONTRACTS = {
+  marginVault: {
+    address: "0xYourMarginVaultAddress" as `0x${string}`,
+    abi: [] as Abi, // Replace with actual ABI
+  },
+};
 
 // Example: useMarginVault hook for interacting with the margin vault contract
 export function useMarginVault() {
@@ -13,7 +21,8 @@ export function useMarginVault() {
 
   // Read margin for a user
   const readMargin = async (user: string) => {
-    return await readContract(publicClient, {
+    if (!publicClient) throw new Error("Public client not available");
+    return await publicClient.readContract({
       address: CONTRACTS.marginVault.address,
       abi: CONTRACTS.marginVault.abi as Abi,
       functionName: "margin",
@@ -24,7 +33,7 @@ export function useMarginVault() {
   // Deposit collateral (requires wallet)
   const deposit = async (token: string, amount: bigint) => {
     if (!walletClient) throw new Error("Wallet not connected");
-    return await writeContract(walletClient, {
+    return await walletClient.writeContract({
       address: CONTRACTS.marginVault.address,
       abi: CONTRACTS.marginVault.abi as Abi,
       functionName: "deposit",

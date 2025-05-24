@@ -4,7 +4,7 @@ import { usePrivyAuth } from "@/hooks/usePrivyAuth";
 import { useMarginVault } from "@/hooks/useContracts";
 import { useState } from "react";
 
-export default function Dashboard() {
+export default function Dashboard({ usdcAddress }: { usdcAddress: string }) {
   const { authenticated, user, handleLogin, handleLogout } = usePrivyAuth();
   const { readMargin, deposit } = useMarginVault();
   const [margin, setMargin] = useState<bigint | null>(null);
@@ -18,7 +18,9 @@ export default function Dashboard() {
     setError(null);
     try {
       const m = await readMargin(user.wallet.address);
-      setMargin(BigInt(m));
+      // Ensure m is string or number before converting to BigInt
+      const mValue = typeof m === "bigint" ? m : BigInt(m?.toString?.() ?? "0");
+      setMargin(mValue);
     } catch (e) {
       setError("Failed to fetch margin");
     } finally {
@@ -28,10 +30,14 @@ export default function Dashboard() {
 
   // Example: deposit 1000 USDC (6 decimals)
   const handleDeposit = async () => {
+    if (!usdcAddress) {
+      setError("USDC address not set. Please provide the deployed address.");
+      return;
+    }
     setLoading(true);
     setError(null);
     try {
-      await deposit("0xYourMockUSDCAddress", 1_000_000n); // Replace with actual address
+      await deposit(usdcAddress, 1_000_000n); // 1000 USDC (6 decimals)
       await fetchMargin();
     } catch (e) {
       setError("Deposit failed");
