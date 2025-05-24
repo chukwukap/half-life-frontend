@@ -1,4 +1,4 @@
-import { usePrivy } from "@privy-io/react-auth";
+import { useWallets } from "@privy-io/react-auth";
 import {
   createPublicClient,
   createWalletClient,
@@ -8,12 +8,11 @@ import {
   WalletClient,
 } from "viem";
 import { privyConfig } from "@/config/privy";
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
 
-// Utility hook to get viem clients (public and wallet) using Privy
+// Utility hook to get viem clients (public and wallet) using Privy v2
 export function useViemClients() {
-  const { ready, wallet } = usePrivy(); // Use 'wallet' from Privy
-  // Use the first supported chain as default (Base mainnet or Base Sepolia)
+  const { wallets, ready } = useWallets(); // Modern Privy API
   const defaultChain = privyConfig.defaultChain;
 
   // Public client for read-only operations
@@ -26,18 +25,48 @@ export function useViemClients() {
     [defaultChain]
   );
 
-  // Wallet client for write operations (if Privy wallet is connected)
-  const walletClient: WalletClient | null = useMemo(() => {
-    // Use the Privy wallet's Ethereum provider
-    const provider = wallet?.getEthereumProvider?.();
-    if (provider) {
-      return createWalletClient({
-        chain: defaultChain,
-        transport: custom(provider),
-      });
-    }
-    return null;
-  }, [wallet, defaultChain]);
+  // Find the first EVM wallet (embedded or external)
+  const evmWallet = useMemo(
+    () =>
+      wallets.find(
+        (w) =>
+          w.type === "ethereum" && typeof w.getEthereumProvider === "function"
+      ),
+    [wallets]
+  );
 
-  return { publicClient, walletClient, ready };
+  // Wallet client for write operations (async provider)
+  const [walletClient, setWalletClient] = useState<WalletClient | null>(null);
+
+  useEffect(() => {
+    let isMounted = true;
+    async function setupWalletClient() {
+      if (evmWallet && defaultChain) {
+        try {
+          const provider = await evmWallet.getEthereumProvider();
+          if (provider && isMounted) {
+            setWalletClient(
+              createWalletClient({
+                chain: defaultChain,
+                transport: custom(provider),
+              })
+            );
+          }
+        } catch (e) {
+          setWalletClient(null);
+        }
+      } else {
+        setWalletClient(null);
+      }
+    }
+    setupWalletClient();
+    return () => {
+      isMounted = false;
+    };
+  }, [evmWallet, defaultChain]);
+
+  // Optionally, expose the wallet address
+  const address = evmWallet?.address as `0x${string}` | undefined;
+
+  return { publicClient, walletClient, address, ready };
 }
