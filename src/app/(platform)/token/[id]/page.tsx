@@ -8,6 +8,8 @@ import { getTokenById } from "@/lib/mockData/tokens";
 import { TokenData } from "@/lib/types";
 import { toast } from "sonner";
 import mockTokens from "@/lib/mockData/tokens";
+import { useViemClients } from "@/lib/viemClient";
+import { useUniswapV4Hook } from "@/hooks/useContracts";
 
 // Components for the token detail page
 import TokenHeader from "./_components/tokenHeader";
@@ -66,28 +68,62 @@ const TokenDetailPage: FC = () => {
     })),
   ]);
 
+  // Contract hook for UniswapV4Hook
+  const { placeOrder } = useUniswapV4Hook();
+  const { address } = useViemClients();
+  const [openLoading, setOpenLoading] = useState(false);
+  const [openError, setOpenError] = useState<string | null>(null);
+
   // Simulate opening a new position with haptic feedback
-  const handleOpenPosition = () => {
-    // Haptic feedback for supported devices (security: safe, non-blocking)
-    if (typeof window !== "undefined" && navigator.vibrate) {
-      navigator.vibrate(50); // 50ms vibration
+  const handleOpenPosition = async ({
+    amount,
+    leverage,
+    direction,
+  }: {
+    amount: number;
+    leverage: number;
+    direction: "long" | "short";
+  }) => {
+    setOpenLoading(true);
+    setOpenError(null);
+    try {
+      if (!address) throw new Error("Wallet not connected");
+      // Call the real contract method to open a position
+      // TODO: Replace with actual PoolManager/Router call if needed
+      await placeOrder({
+        amount: BigInt(Math.floor(amount * 1_000_000)),
+        leverage,
+        direction,
+      });
+      // Haptic feedback for supported devices (security: safe, non-blocking)
+      if (typeof window !== "undefined" && navigator.vibrate) {
+        navigator.vibrate(50); // 50ms vibration
+      }
+      toast.success("Position opened successfully!");
+      setPositions((prev) => [
+        {
+          logo: "/assets/img/tokens/zora.png",
+          name: "ZORA",
+          subtitle: "Zora",
+          leverage: `${direction === "long" ? "Long" : "Short"} ${leverage}x`,
+          leverageColor:
+            direction === "long"
+              ? "bg-green-100 text-green-600"
+              : "bg-red-100 text-red-500",
+          entry: 2.99,
+          liquidation: 1.5,
+          size: `$${amount.toLocaleString()}`,
+          pnl: 0.0,
+          pnlPercent: 0.0,
+        },
+        ...prev,
+      ]);
+    } catch (e: unknown) {
+      const errMsg = e instanceof Error ? e.message : "Failed to open position";
+      setOpenError(errMsg);
+    } finally {
+      setOpenLoading(false);
     }
-    toast.success("Position opened successfully!");
-    setPositions((prev) => [
-      {
-        logo: "/assets/img/tokens/zora.png",
-        name: "ZORA",
-        subtitle: "Zora",
-        leverage: "Long 2x",
-        leverageColor: "bg-green-100 text-green-600",
-        entry: 2.99,
-        liquidation: 1.5,
-        size: "$10,000.00",
-        pnl: 0.0,
-        pnlPercent: 0.0,
-      },
-      ...prev,
-    ]);
   };
 
   // If token not found, show a not found message
@@ -188,6 +224,8 @@ const TokenDetailPage: FC = () => {
               liquidationPrice={tokenData.positionValue}
               available={tokenData.available}
               onOpenPosition={handleOpenPosition}
+              loading={openLoading}
+              error={openError}
             />
           </div>
           {/* Positions card - new, matches Figma */}

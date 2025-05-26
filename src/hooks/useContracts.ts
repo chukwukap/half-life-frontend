@@ -94,7 +94,7 @@ export function useOracleAdapter() {
 
 // Uniswap V4 Hook contract hook
 export function useUniswapV4Hook() {
-  const { publicClient, address } = useViemClients();
+  const { publicClient, walletClient, address } = useViemClients();
   const contract = getContract({
     address: uniswapV4HookAddress,
     abi: uniswapV4HookAbi as Abi,
@@ -130,11 +130,30 @@ export function useUniswapV4Hook() {
       args: [user ?? address],
     });
   };
+  // Place order (open position)
+  const placeOrder = async ({
+    amount,
+    leverage,
+    direction,
+  }: {
+    amount: bigint;
+    leverage: number;
+    direction: "long" | "short";
+  }) => {
+    if (!walletClient) throw new Error("Wallet not connected");
+    if (!walletClient.account) throw new Error("Wallet account not available");
+    // For demo, call a swap or beforeSwap (replace with actual method if needed)
+    // This is a placeholder: you may need to call a router or pool manager contract in production
+    // Here, we just call a dummy function for illustration
+    // TODO: Replace with actual contract call logic
+    throw new Error("placeOrder not implemented: wire to actual contract call");
+  };
   return {
     contract,
     readGlobalFundingRate,
     readUserPosition,
     isUserLiquidated,
+    placeOrder,
   };
 }
 

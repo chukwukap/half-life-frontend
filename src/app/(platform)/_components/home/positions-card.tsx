@@ -3,6 +3,9 @@
 import Link from "next/link";
 import { FireIcon } from "@/components/icons";
 import Image from "next/image";
+import { useUniswapV4Hook } from "@/hooks/useContracts";
+import { useViemClients } from "@/lib/viemClient";
+import { useEffect, useState } from "react";
 
 /**
  * Position information interface
@@ -136,67 +139,27 @@ const Position = ({
  * Pixel-perfect, accessible, and modular.
  */
 export const PositionsCard = () => {
-  /**
-   * Sample/mock positions for demonstration. Replace or extend this array with real data from API or state.
-   * To add a new position, simply add an object with the required fields.
-   */
-  const samplePositions: PositionProps[] = [
-    {
-      token: "CBTC",
-      tokenInfo: "Coinbase Wrapped Staked BTC",
-      strategy: "Long 7x",
-      entryPrice: "$99,960.00",
-      currentPrice: "$102,000.00",
-      liquidationPrice: "$86,700.00",
-      fundingRate: "+0.011%",
-      pnlUsd: "+5,200.00 USD",
-      pnlPercent: "+5.20%",
-      size: "$10,000",
-      logoSrc: "/assets/img/tokens/cbBTC.png",
-    },
-    {
-      token: "ZORA",
-      tokenInfo: "Zora",
-      strategy: "Long 7x",
-      entryPrice: "$0.012544",
-      currentPrice: "$0.0128",
-      liquidationPrice: "$0.010880",
-      fundingRate: "+0.011%",
-      pnlUsd: "+1,200.00 USD",
-      pnlPercent: "+3.20%",
-      size: "$2,500",
-      logoSrc: "/assets/img/tokens/zora.png",
-    },
-    // {
-    //   token: "ETH",
-    //   tokenInfo: "Ethereum (Base)",
-    //   strategy: "Long 20x",
-    //   entryPrice: "$3,058.04",
-    //   currentPrice: "$3,120.45",
-    //   liquidationPrice: "$2,652.38",
-    //   fundingRate: "+0.018%",
-    //   pnlUsd: "+2,800.00 USD",
-    //   pnlPercent: "+8.10%",
-    //   size: "$5,000",
-    //   logoSrc: "/assets/img/tokens/eth.png",
-    // },
-    // {
-    //   token: "WIF",
-    //   tokenInfo: "dogwifhat",
-    //   strategy: "Long 5x",
-    //   entryPrice: "$0.00008",
-    //   currentPrice: "$0.00009",
-    //   liquidationPrice: "$0.00007",
-    //   fundingRate: "+0.0125%",
-    //   pnlUsd: "+1,210.35 USD",
-    //   pnlPercent: "+12.10%",
-    //   size: "$1,200",
-    //   logoSrc: "/assets/img/tokens/wif.png",
-    // },
-  ];
+  // Get connected wallet address
+  const { address } = useViemClients();
+  const { readUserPosition } = useUniswapV4Hook();
+  const [position, setPosition] = useState<bigint | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  // To use real data, replace 'samplePositions' with your data source (API, context, props, etc.)
-  const positions: PositionProps[] = samplePositions;
+  // Fetch on-chain position for the user
+  useEffect(() => {
+    if (!address) return;
+    setLoading(true);
+    setError(null);
+    readUserPosition(address)
+      .then((pos) =>
+        setPosition(
+          typeof pos === "bigint" ? pos : BigInt(pos?.toString?.() ?? "0")
+        )
+      )
+      .catch(() => setError("Failed to fetch position"))
+      .finally(() => setLoading(false));
+  }, [address, readUserPosition]);
 
   // Shared header for both states
   const Header = (
@@ -214,7 +177,24 @@ export const PositionsCard = () => {
     </div>
   );
 
-  if (positions.length === 0) {
+  if (loading) {
+    return (
+      <div className="w-full flex flex-col items-center justify-center rounded-2xl p-4 border border-[#E9EAEC] bg-white">
+        {Header}
+        <div className="text-blue-500 mt-4">Loading position...</div>
+      </div>
+    );
+  }
+  if (error) {
+    return (
+      <div className="w-full flex flex-col items-center justify-center rounded-2xl p-4 border border-[#E9EAEC] bg-white">
+        {Header}
+        <div className="text-red-500 mt-4">{error}</div>
+      </div>
+    );
+  }
+  if (!position || position === 0n) {
+    // No open position
     return (
       <section className="w-full flex flex-col items-center justify-center rounded-2xl p-4 border border-[#E9EAEC] bg-white">
         {Header}
@@ -251,14 +231,15 @@ export const PositionsCard = () => {
       </section>
     );
   }
-
+  // If user has a position, display it (expand with more details as needed)
   return (
     <div className="w-full flex flex-col rounded-2xl p-4 border border-[#E9EAEC] bg-white">
       {Header}
       <div className="flex-1 w-full">
-        {positions.map((position, index) => (
-          <Position key={`${position.token}-${index}`} {...position} />
-        ))}
+        <div className="text-[#181A20] font-bold text-lg mb-2">
+          Position Size: {position.toString()}
+        </div>
+        {/* TODO: Add more details (entry price, PnL, etc.) by reading from contract or oracle */}
       </div>
     </div>
   );
