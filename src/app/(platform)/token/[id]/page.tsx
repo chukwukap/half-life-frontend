@@ -90,11 +90,8 @@ const TokenDetailPage: FC = () => {
       if (!address) throw new Error("Wallet not connected");
       // Call the real contract method to open a position
       // TODO: Replace with actual PoolManager/Router call if needed
-      await placeOrder({
-        amount: BigInt(Math.floor(amount * 1_000_000)),
-        leverage,
-        direction,
-      });
+      // Placeholder: placeOrder currently takes no arguments until contract call is implemented
+      await placeOrder();
       // Haptic feedback for supported devices (security: safe, non-blocking)
       if (typeof window !== "undefined" && navigator.vibrate) {
         navigator.vibrate(50); // 50ms vibration

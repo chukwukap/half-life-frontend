@@ -8,7 +8,7 @@ import { TokenData } from "@/lib/types";
  */
 
 /**
- * Mock token data for Avalanche C-Chain ecosystem (as of 2025)
+ * Mock token data for Avalanche C-Chain ecosystem
  * All tokens listed are native or prominent on Avalanche.
  * Data is based on public sources and may be slightly adjusted for mock/demo purposes.
  * Security Note: No sensitive or private data is included.
@@ -26,7 +26,7 @@ export const mockTokens: TokenData[] = [
     lifeIndex: 92,
     lifeIndexPercent: 92,
     iconColor: "bg-red-100",
-    iconSrc: "https://cryptologos.cc/logos/avalanche-avax-logo.png",
+    iconSrc: "/assets/img/tokens/avax.png",
     openTraders: 10200,
     funding: "0.018%",
     countdown: "12:00:00",
@@ -48,8 +48,7 @@ export const mockTokens: TokenData[] = [
     lifeIndex: 78,
     lifeIndexPercent: 78,
     iconColor: "bg-yellow-100",
-    iconSrc:
-      "https://assets.coingecko.com/coins/images/4680/large/traderjoe.png",
+    iconSrc: "/assets/img/tokens/joe.png",
     openTraders: 3200,
     funding: "0.021%",
     countdown: "09:00:00",
@@ -71,8 +70,7 @@ export const mockTokens: TokenData[] = [
     lifeIndex: 72,
     lifeIndexPercent: 72,
     iconColor: "bg-green-100",
-    iconSrc:
-      "https://assets.coingecko.com/coins/images/10618/large/pangolin.png",
+    iconSrc: "/assets/img/tokens/png.png",
     openTraders: 4100,
     funding: "0.020%",
     countdown: "08:30:00",
@@ -94,7 +92,7 @@ export const mockTokens: TokenData[] = [
     lifeIndex: 68,
     lifeIndexPercent: 68,
     iconColor: "bg-blue-100",
-    iconSrc: "https://assets.coingecko.com/coins/images/15529/large/benqi.png",
+    iconSrc: "/assets/img/tokens/qi.png",
     openTraders: 5100,
     funding: "0.025%",
     countdown: "07:50:00",
@@ -116,7 +114,7 @@ export const mockTokens: TokenData[] = [
     lifeIndex: 80,
     lifeIndexPercent: 80,
     iconColor: "bg-purple-100",
-    iconSrc: "https://assets.coingecko.com/coins/images/9566/large/time.png",
+    iconSrc: "/assets/img/tokens/time.png",
     openTraders: 4700,
     funding: "0.017%",
     countdown: "07:30:00",
@@ -138,8 +136,7 @@ export const mockTokens: TokenData[] = [
     lifeIndex: 64,
     lifeIndexPercent: 64,
     iconColor: "bg-cyan-100",
-    iconSrc:
-      "https://assets.coingecko.com/coins/images/11939/large/snowball.png",
+    iconSrc: "/assets/img/tokens/snow.png",
     openTraders: 2600,
     funding: "0.019%",
     countdown: "06:10:00",
@@ -161,8 +158,7 @@ export const mockTokens: TokenData[] = [
     lifeIndex: 60,
     lifeIndexPercent: 60,
     iconColor: "bg-orange-100",
-    iconSrc:
-      "https://assets.coingecko.com/coins/images/14683/large/lydia-finance.png",
+    iconSrc: "/assets/img/tokens/lyd.png",
     openTraders: 2100,
     funding: "0.028%",
     countdown: "05:15:00",

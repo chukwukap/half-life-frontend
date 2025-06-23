@@ -17,7 +17,7 @@ export const HeroSection = ({
     id: "avax",
     name: "AVAX",
     symbol: "AVAX",
-    iconSrc: "https://cryptologos.cc/logos/avalanche-avax-logo.png",
+    iconSrc: "/assets/img/tokens/avax.png",
     price: 39.75,
     progress: 65,
   },
