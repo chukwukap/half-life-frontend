@@ -48,7 +48,7 @@ export const mockTokens: TokenData[] = [
     lifeIndex: 78,
     lifeIndexPercent: 78,
     iconColor: "bg-yellow-100",
-    iconSrc: "https://cryptologos.cc/logos/joe-joe-logo.png",
+    iconSrc: "https://cryptologos.cc/logos/trader-joe-joe-logo.png",
     openTraders: 3200,
     funding: "0.021%",
     countdown: "09:00:00",
