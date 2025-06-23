@@ -14,11 +14,11 @@ interface HeroSectionProps {
  */
 export const HeroSection = ({
   token = {
-    id: "zora",
-    name: "ZORA",
-    symbol: "ZORA",
-    iconSrc: "/assets/img/tokens/zora.png",
-    price: 3.21,
+    id: "avax",
+    name: "AVAX",
+    symbol: "AVAX",
+    iconSrc: "https://cryptologos.cc/logos/avalanche-avax-logo.png",
+    price: 39.75,
     progress: 65,
   },
 }: HeroSectionProps) => {

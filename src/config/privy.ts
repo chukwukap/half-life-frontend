@@ -1,5 +1,5 @@
 import { PrivyClientConfig } from "@privy-io/react-auth";
-import { base, baseSepolia } from "viem/chains";
+import { avalanche, avalancheFuji } from "viem/chains";
 
 /**
  * Privy configuration object.
@@ -16,6 +16,6 @@ export const privyConfig: PrivyClientConfig = {
     createOnLogin: "all-users",
     // Removed 'noPromptOnSignature' as it is not a valid property in the current PrivyClientConfig type.
   },
-  defaultChain: base, // Use viem/chains for defaultChain
-  supportedChains: [base, baseSepolia], // Use viem/chains for supportedChains
+  defaultChain: avalanche,
+  supportedChains: [avalanche, avalancheFuji],
 };

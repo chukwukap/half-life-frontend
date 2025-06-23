@@ -34,3 +34,23 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Uniswap v4 Pool Integration
+
+After running the backend pool creation script, update the following in `src/lib/addresses.ts`:
+
+```
+export const uniswapV4PoolAddress = "<PASTE_POOL_ADDRESS_HERE>" as `0x${string}`;
+export const uniswapV4PoolKey = {
+  token0: mockUSDCAddress, // or actual token0 address
+  token1: "<PASTE_TOKEN1_ADDRESS_HERE>", // e.g., ZORALI
+  fee: 500, // example: 0.05%
+  tickSpacing: 60, // example value
+  hook: uniswapV4HookAddress,
+  poolManager: UNISWAP_V4_ADDRESSES.avalancheFuji.poolManager, // or .avalanche for mainnet
+};
+```
+
+**Security Note:** Never commit private keys or sensitive data. Only use public addresses and config.
+
+This enables the frontend to interact with the correct Uniswap v4 pool for trading and position display.
