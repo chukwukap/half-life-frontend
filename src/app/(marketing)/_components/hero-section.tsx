@@ -9,9 +9,16 @@ import Image from "next/image";
  */
 const HeroSection = () => {
   return (
-    <section className="relative flex flex-col items-center pt-16 pb-12 sm:pt-24 sm:pb-20 px-6 text-center">
-      {/* Decorative background blur (optional) */}
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_center,rgba(55,0,255,0.15),transparent_70%)]" />
+    <section className="relative flex flex-col items-center pt-24 pb-20 sm:pt-32 sm:pb-28 px-6 text-center overflow-hidden">
+      {/* Background gradient */}
+      <div className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_center,rgba(80,0,255,0.12),transparent_75%)]" />
+      {/* Subtle 3D grid overlay */}
+      <div
+        className="pointer-events-none absolute inset-x-0 top-1/4 h-[60%] -z-10 [mask-image:linear-gradient(transparent,white,transparent)]"
+        aria-hidden="true"
+      >
+        <div className="w-full h-full bg-[length:40px_40px] bg-[repeating-linear-gradient(0deg,transparent_0,transparent_39px,rgba(255,255,255,0.04)_40px),repeating-linear-gradient(90deg,transparent_0,transparent_39px,rgba(255,255,255,0.04)_40px)]" />
+      </div>
 
       {/* Early-access badge top right on desktop */}
       <div className="absolute top-6 right-6 hidden sm:block">
@@ -29,8 +36,8 @@ const HeroSection = () => {
         Not&nbsp;Hype
       </h1>
       <p className="mt-6 max-w-xl mx-auto text-lg sm:text-xl text-muted-foreground">
-        The first exchange where you can trade lifespan— not price speculation
-        driven by short-term momentum.&nbsp;
+        The first exchange where you hedge freedom—long a project&apos;s easing
+        power shortage or short its impending rug.
       </p>
 
       <Link

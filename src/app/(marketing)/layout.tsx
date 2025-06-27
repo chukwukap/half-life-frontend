@@ -21,25 +21,34 @@ export default function MarketingLayout({
         <Link href="/" className="text-xl font-bold">
           Half&nbsp;Life
         </Link>
-        <nav className="hidden sm:flex items-center gap-6 text-sm">
+        <nav className="hidden sm:flex items-center gap-8 text-sm">
           <Link
-            href="#features"
+            href="#tokens-die"
             className="hover:text-primary transition-colors"
           >
-            Features
+            Problem
           </Link>
           <Link
-            href="#security"
+            href="#how-it-works"
             className="hover:text-primary transition-colors"
           >
-            Security
+            How it works
           </Link>
-          <Link href="#faq" className="hover:text-primary transition-colors">
-            FAQ
+          <Link
+            href="#why-halflife"
+            className="hover:text-primary transition-colors"
+          >
+            Why Halflife?
+          </Link>
+          <Link
+            href="#join-alpha"
+            className="hover:text-primary transition-colors"
+          >
+            Join Alpha
           </Link>
           <Link
             href="/app"
-            className="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/90 transition-colors"
+            className="ml-4 bg-primary text-white px-5 py-2 rounded-full hover:bg-primary/90 transition-colors"
           >
             Launch App
           </Link>
