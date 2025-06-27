@@ -41,31 +41,12 @@ const HowItWorksSection = () => {
                 <div className="hidden sm:block absolute right-0 top-2 h-[calc(100%-1rem)] w-px bg-border/40" />
               )}
 
-              {/* dotted decor top */}
               <Image
-                src="/assets/img/decors/dots.svg"
-                alt=""
+                src={`/assets/img/icons/${icon}`}
+                alt={title}
                 width={120}
-                height={12}
-                className="mb-3 select-none opacity-70"
-              />
-
-              {/* icon circle */}
-              <span className="flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-3">
-                <Image
-                  src={`/assets/img/icons/${icon}`}
-                  alt={title}
-                  width={56}
-                  height={56}
-                />
-              </span>
-
-              <Image
-                src="/assets/img/decors/dots.svg"
-                alt=""
-                width={120}
-                height={12}
-                className="mt-3 select-none opacity-70"
+                height={120}
+                className="mb-6 select-none"
               />
 
               <h3 className="text-xl font-extrabold mt-6 mb-3 text-white">
