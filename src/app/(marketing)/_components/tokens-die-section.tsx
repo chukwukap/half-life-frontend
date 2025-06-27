@@ -22,7 +22,7 @@ const TokensDieSection = () => {
       {/* Feature cards grid */}
       <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
         {/* One index card */}
-        <div className="relative rounded-3xl p-10 bg-card/90 border border-border/60 backdrop-blur-xl overflow-hidden group">
+        <div className="relative rounded-3xl p-10 bg-card/90 border border-border/60 backdrop-blur-xl overflow-hidden group before:absolute before:-inset-2 before:-z-10 before:rounded-[inherit] before:bg-gradient-to-br before:from-[#5b7bff]/40 before:via-[#a873ff]/30 before:to-[#ca5dff]/40 before:blur-2xl">
           {/* subtle glow */}
           <div className="absolute inset-0 rounded-3xl pointer-events-none ring-1 ring-white/5" />
           {/* floating token widget mock */}
@@ -50,7 +50,7 @@ const TokensDieSection = () => {
         </div>
 
         {/* Lifespan Futures card */}
-        <div className="relative rounded-3xl p-10 bg-card/90 border border-border/60 backdrop-blur-xl overflow-hidden group">
+        <div className="relative rounded-3xl p-10 bg-card/90 border border-border/60 backdrop-blur-xl overflow-hidden group before:absolute before:-inset-2 before:-z-10 before:rounded-[inherit] before:bg-gradient-to-br before:from-[#5b7bff]/40 before:via-[#a873ff]/30 before:to-[#ca5dff]/40 before:blur-2xl">
           <div className="absolute inset-0 rounded-3xl pointer-events-none ring-1 ring-white/5" />
           {/* floating long/short widget */}
           <Image
