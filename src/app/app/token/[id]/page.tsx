@@ -131,7 +131,7 @@ const TokenDetailPage: FC = () => {
           Token not found.
         </div>
         <div className="text-center mt-4">
-          <Link href="/token" className="text-blue-600 hover:underline">
+          <Link href="/app/token" className="text-blue-600 hover:underline">
             Back to tokens
           </Link>
         </div>
@@ -144,7 +144,7 @@ const TokenDetailPage: FC = () => {
       {/* Back navigation */}
       <div className="mb-4 text-sm font-extrabold">
         <Link
-          href="/token"
+          href="/app/token"
           className="flex items-center text-blue-600 hover:underline text-sm"
         >
           <ArrowLeft className=" mr-2 bg-[#EBF1FF] rounded-full p-1" />

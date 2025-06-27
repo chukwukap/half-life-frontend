@@ -7,19 +7,19 @@ import { cn } from "@/lib/utils";
 const routes = [
   {
     label: "Home",
-    href: "/",
+    href: "/app",
   },
   {
     label: "Tokens",
-    href: "/token",
+    href: "/app/token",
   },
   {
     label: "Portfolio",
-    href: "/portfolio",
+    href: "/app/portfolio",
   },
   {
     label: "Leaderboard",
-    href: "/leaderboard",
+    href: "/app/leaderboard",
   },
 ];
 

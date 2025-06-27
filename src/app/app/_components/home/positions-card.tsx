@@ -42,7 +42,7 @@ export const PositionsCard = () => {
         <h3 className="font-semibold text-lg">My Positions</h3>
       </div>
       <Link
-        href="/portfolio"
+        href="/app/portfolio"
         className="text-base font-medium text-[#335CFF] hover:text-[#274FCC] bg-[#F5F8FF] px-6 py-2 rounded-full transition-colors"
       >
         See all
@@ -92,7 +92,7 @@ export const PositionsCard = () => {
         </div>
         {/* CTA Button */}
         <div className="w-full bg-[#EEF4FF] rounded-b-[32px] flex items-center justify-center py-5 px-4">
-          <Link href="/token" className="w-full">
+          <Link href="/app/token" className="w-full">
             <button
               className="w-full rounded-full bg-transparent text-[#335CFF] text-lg font-bold py-3 transition-colors hover:underline focus:underline focus:outline-none"
               type="button"

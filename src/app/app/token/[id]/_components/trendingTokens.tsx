@@ -3,7 +3,7 @@
 import React from "react";
 import { getTrendingTokens } from "@/lib/mockData/tokens";
 // Import the TokenCard component from the home directory
-import { TokenCard } from "@/app/(platform)/_components/home/token-card";
+import { TokenCard } from "@/app/app/_components/home/token-card";
 
 /**
  * TrendingTokens component displays a grid of trending tokens using the shared TokenCard component.
