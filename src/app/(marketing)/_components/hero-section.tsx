@@ -49,7 +49,7 @@ const HeroSection = () => {
 
       {/* Supported chains/wallets (placeholder icons) */}
       <div
-        className="mt-10 flex flex-wrap justify-center gap-4 w-full max-w-md"
+        className="mt-10 flex flex-wrap justify-center gap-4 w-full  max-w-md"
         aria-label="Supported partners"
       >
         {[
