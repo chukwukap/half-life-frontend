@@ -20,6 +20,16 @@ const HeroSection = () => {
         <div className="w-full h-full bg-[length:40px_40px] bg-[repeating-linear-gradient(0deg,transparent_0,transparent_39px,rgba(255,255,255,0.04)_40px),repeating-linear-gradient(90deg,transparent_0,transparent_39px,rgba(255,255,255,0.04)_40px)]" />
       </div>
 
+      {/* Early-access badge top right on desktop */}
+      <div className="absolute top-6 right-6 hidden sm:block">
+        <Link
+          href="#join-alpha"
+          className="bg-primary/10 text-primary font-medium text-sm px-4 py-1.5 rounded-full hover:bg-primary/15 transition-colors"
+        >
+          Get Early Access
+        </Link>
+      </div>
+
       {/* Heading */}
       <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight max-w-4xl mx-auto text-[#d6e0ff]">
         Trade Time,
@@ -66,7 +76,7 @@ const HeroSection = () => {
       {/* Hero dashboard preview image */}
       <div className="mt-14 w-full max-w-4xl shadow-xl rounded-2xl overflow-hidden border border-border">
         <Image
-          src="/assets/img/dashboard-image.png"
+          src="/assets/img/halflife-dashboard-preview.png"
           alt="Half Life dashboard preview"
           width={1600}
           height={900}

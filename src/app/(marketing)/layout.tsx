@@ -17,7 +17,7 @@ export default function MarketingLayout({
 }) {
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="h-20 bg-background/95 font-primary sticky top-0 z-50 border-b border-border/20">
+      <header className="py-6 bg-background/95 font-primary sticky top-0 z-50 border-b border-border/20">
         <div className="container mx-auto px-6 flex items-center justify-between relative">
           {/* Logo */}
           <Link
@@ -29,27 +29,26 @@ export default function MarketingLayout({
           </Link>
 
           {/* Centered nav */}
-          <nav className="hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center text-sm font-medium text-muted-foreground/90 whitespace-nowrap">
-            <Link
-              href="#about"
-              className="px-4 hover:text-primary transition-colors"
-            >
-              About
-            </Link>
-            <span className="opacity-40 select-none">·</span>
-            <Link
-              href="#features"
-              className="px-4 hover:text-primary transition-colors"
-            >
-              Features
-            </Link>
-            <span className="opacity-40 select-none">·</span>
-            <Link
-              href="#how-it-works"
-              className="px-4 hover:text-primary transition-colors"
-            >
-              How it works
-            </Link>
+          <nav className="hidden lg:block absolute left-1/2 -translate-x-1/2">
+            <ul className="flex space-x-10 text-sm font-medium text-muted-foreground/80">
+              {[
+                { id: "about", label: "About" },
+                { id: "features", label: "Features" },
+                { id: "how-it-works", label: "How it works" },
+              ].map((item) => (
+                <li
+                  key={item.id}
+                  className="relative first:pl-0 pl-6 before:absolute before:left-2 before:top-1/2 before:-translate-y-1/2 before:w-[3px] before:h-[3px] before:rounded-full before:bg-muted-foreground/40 first:before:hidden"
+                >
+                  <Link
+                    href={`#${item.id}`}
+                    className="hover:text-primary transition-colors"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </nav>
 
           {/* CTA */}
