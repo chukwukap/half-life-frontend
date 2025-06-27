@@ -30,19 +30,19 @@ const HeroSection = () => {
         </Link>
       </div>
 
-      <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight tracking-tight max-w-3xl mx-auto text-foreground">
+      <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight max-w-4xl mx-auto text-[#d6e0ff]">
         Trade Time,
         <br className="hidden md:block" />
         Not&nbsp;Hype
       </h1>
-      <p className="mt-6 max-w-xl mx-auto text-lg sm:text-xl text-muted-foreground">
+      <p className="mt-8 max-w-2xl mx-auto text-base sm:text-lg lg:text-xl text-muted-foreground/80">
         The first exchange where you hedge freedom—long a project&apos;s easing
         power shortage or short its impending rug.
       </p>
 
       <Link
         href="#join-alpha"
-        className="mt-8 inline-block bg-primary text-primary-foreground font-semibold rounded-full px-8 py-3 shadow-lg hover:bg-primary/90 transition-colors"
+        className="mt-10 inline-flex items-center justify-center bg-primary hover:bg-primary/90 transition-colors text-primary-foreground font-semibold rounded-full px-12 py-4 shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
       >
         Get Early Access
       </Link>
@@ -73,7 +73,7 @@ const HeroSection = () => {
       {/* Hero dashboard preview image */}
       <div className="mt-14 w-full max-w-4xl shadow-xl rounded-2xl overflow-hidden border border-border">
         <Image
-          src="/assets/img/dashboard-image.png"
+          src="/assets/img/halflife-dashboard-preview.png"
           alt="Half Life dashboard preview"
           width={1600}
           height={900}
