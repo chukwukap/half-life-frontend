@@ -20,16 +20,6 @@ const HeroSection = () => {
         <div className="w-full h-full bg-[length:40px_40px] bg-[repeating-linear-gradient(0deg,transparent_0,transparent_39px,rgba(255,255,255,0.04)_40px),repeating-linear-gradient(90deg,transparent_0,transparent_39px,rgba(255,255,255,0.04)_40px)]" />
       </div>
 
-      {/* Early-access badge top right on desktop */}
-      <div className="absolute top-6 right-6 hidden sm:block">
-        <Link
-          href="#join-alpha"
-          className="bg-primary/10 text-primary font-medium text-sm px-4 py-1.5 rounded-full hover:bg-primary/15 transition-colors"
-        >
-          Get Early Access
-        </Link>
-      </div>
-
       {/* Heading */}
       <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight max-w-4xl mx-auto text-[#d6e0ff]">
         Trade Time,
@@ -49,6 +39,38 @@ const HeroSection = () => {
       >
         Get Early Access
       </Link>
+
+      {/* Chain icons cluster */}
+      <div className="mt-20 flex flex-col items-center">
+        <div className="flex items-center justify-center">
+          {[
+            "solana-logo.png",
+            "arbitrum-logo.png",
+            "base-logo.png",
+            "optimism-logo.png",
+          ].map((logo, idx) => (
+            <span
+              key={logo}
+              className={`w-14 h-14 rounded-full bg-background/70 border border-border flex items-center justify-center shadow-inner ${
+                idx !== 0 ? "-ml-4" : ""
+              }`}
+            >
+              <Image
+                src={`/assets/img/logos/${logo}`}
+                alt={logo.replace(/\-logo\.png$/, "")}
+                width={32}
+                height={32}
+              />
+            </span>
+          ))}
+        </div>
+        <p className="mt-6 max-w-3xl text-sm sm:text-base text-muted-foreground/70 text-center">
+          Loved by traders from Solana, Base, Ethereum, Arbitrum&nbsp;—
+          Optimism,
+          <br className="hidden sm:block" /> inspired by the wallets and apps
+          you already use.
+        </p>
+      </div>
 
       {/* Supported chains/wallets (placeholder icons) */}
       <div
