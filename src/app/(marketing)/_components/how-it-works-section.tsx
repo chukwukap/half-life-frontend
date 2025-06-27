@@ -1,22 +1,22 @@
-import { Clock, Cast, DollarSign } from "lucide-react";
+import Image from "next/image";
 
 const steps = [
   {
     title: "Listen",
     description:
       "Index all lifespan on-chain events; Half Life crunches it every 5s",
-    icon: Clock,
+    icon: "how-it-works-listen.png",
   },
   {
     title: "Publish",
     description:
       "Scores are Chainlink-compatible oracles and your orders in 100ms",
-    icon: Cast,
+    icon: "how-it-works-publish.png",
   },
   {
     title: "Trade",
     description: "Create delta-neutral through options market liquidity",
-    icon: DollarSign,
+    icon: "how-it-works-trade.png",
   },
 ];
 
@@ -30,14 +30,48 @@ const HowItWorksSection = () => {
         <h2 className="text-3xl sm:text-4xl font-extrabold mb-12">
           How It Works
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
-          {steps.map(({ title, description, icon: Icon }) => (
-            <div key={title} className="flex flex-col items-center text-center">
-              <span className="flex items-center justify-center w-14 h-14 rounded-full bg-primary/10 mb-4">
-                <Icon className="text-primary w-6 h-6" />
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-12">
+          {steps.map(({ title, description, icon }, idx) => (
+            <div
+              key={title}
+              className="relative flex flex-col items-center text-center px-4"
+            >
+              {/* vertical divider on desktop except last */}
+              {idx < steps.length - 1 && (
+                <div className="hidden sm:block absolute right-0 top-2 h-[calc(100%-1rem)] w-px bg-border/40" />
+              )}
+
+              {/* dotted decor top */}
+              <Image
+                src="/assets/img/decors/dots.svg"
+                alt=""
+                width={120}
+                height={12}
+                className="mb-3 select-none opacity-70"
+              />
+
+              {/* icon circle */}
+              <span className="flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-3">
+                <Image
+                  src={`/assets/img/icons/${icon}`}
+                  alt={title}
+                  width={56}
+                  height={56}
+                />
               </span>
-              <h3 className="text-lg font-bold mb-2">{title}</h3>
-              <p className="text-muted-foreground text-sm max-w-[220px]">
+
+              <Image
+                src="/assets/img/decors/dots.svg"
+                alt=""
+                width={120}
+                height={12}
+                className="mt-3 select-none opacity-70"
+              />
+
+              <h3 className="text-xl font-extrabold mt-6 mb-3 text-white">
+                {title}
+              </h3>
+              <p className="text-muted-foreground text-base max-w-[260px]">
                 {description}
               </p>
             </div>
