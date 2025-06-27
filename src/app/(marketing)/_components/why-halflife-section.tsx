@@ -33,7 +33,7 @@ const WhyHalfLifeSection = () => {
         </div>
 
         {/* gradient card */}
-        <div className="relative rounded-3xl overflow-hidden shadow-lg ring-1 ring-white/10 bg-gradient-to-br from-[#1b1d30] via-[#1c2038] to-[#181a29]">
+        <div className="relative rounded-[40px] overflow-hidden shadow-[0_25px_80px_rgba(0,0,0,0.45)] ring-1 ring-white/10 bg-gradient-to-br from-[#1b1d30] via-[#1c2038] to-[#181a29] w-full">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(91,123,255,0.25),transparent_60%)]" />
 
           <table className="w-full text-left relative z-10 divide-y divide-white/10">
@@ -57,13 +57,29 @@ const WhyHalfLifeSection = () => {
               </tr>
             </thead>
             <tbody>
-              {rows.map(([feature, half, typical]) => (
-                <tr key={feature} className="divide-x divide-white/10">
-                  <td className="py-8 px-8 font-semibold text-white/80 w-1/3">
+              {rows.map(([feature, half, typical], i) => (
+                <tr key={feature} className="">
+                  <td
+                    className={`py-10 px-10 font-semibold text-white/80 w-1/3 border-white/10 ${
+                      i !== rows.length - 1 ? "border-b" : ""
+                    } border-r`}
+                  >
                     {feature}
                   </td>
-                  <td className="py-8 px-8 text-white/90 w-1/3">{half}</td>
-                  <td className="py-8 px-8 text-white/60 w-1/3">{typical}</td>
+                  <td
+                    className={`py-10 px-10 text-white/90 w-1/3 border-white/10 ${
+                      i !== rows.length - 1 ? "border-b" : ""
+                    } border-r`}
+                  >
+                    {half}
+                  </td>
+                  <td
+                    className={`py-10 px-10 text-white/60 w-1/3 border-white/10 ${
+                      i !== rows.length - 1 ? "border-b" : ""
+                    }`}
+                  >
+                    {typical}
+                  </td>
                 </tr>
               ))}
             </tbody>
