@@ -2,7 +2,7 @@ const rows = [
   ["Transaction Fees", "0.05%", "Up to 1%+"],
   ["Oracle Technology", "Multi-layer AI oracles", "Price feeds only"],
   ["Key Management", "Non-custodial MPC", "Single private key"],
-  ["Listing Speed", "< 2 mins", "3–7 days"],
+  ["Listing Speed", "< 2 mins", "3-7 days"],
   ["Time Index Liquidity", "Yes", "No"],
 ];
 
