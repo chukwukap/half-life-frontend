@@ -15,8 +15,11 @@ interface TokenTradeWidgetProps {
 const TokenTradeWidget: React.FC<TokenTradeWidgetProps> = ({ token }) => {
   const { name, logo, score, scoreColor = "bg-[#E6ECFF]" } = token;
   return (
-    <div className="w-[380px] rounded-[28px] bg-background/95 border border-border/40 px-6 py-4 flex items-center justify-between shadow-lg">
-      <div className="flex items-center gap-3">
+    <div className="w-[480px] h-[110px] px-8 flex items-center justify-between rounded-[32px] bg-[#0b0e13] shadow-[0_4px_24px_rgba(0,0,0,0.25),0_1px_0_rgba(255,255,255,0.04)_inset] relative overflow-visible">
+      {/* stacked shadow mimic */}
+      <div className="absolute left-0 right-0 -bottom-4 h-3 bg-black/10 rounded-[32px] blur-md" />
+      <div className="absolute left-0 right-0 -bottom-7 h-2 bg-black/20 rounded-[32px] blur-lg" />
+      <div className="flex items-center gap-4">
         <Image
           src={`/assets/img/tokens/${logo}`}
           alt={name}
@@ -24,15 +27,17 @@ const TokenTradeWidget: React.FC<TokenTradeWidgetProps> = ({ token }) => {
           height={40}
           className="rounded-full"
         />
-        <span className="font-extrabold text-base text-foreground">{name}</span>
+        <span className="font-extrabold text-xl text-white tracking-wide uppercase">
+          {name}
+        </span>
       </div>
       {/* lifespan score pill */}
       <div
-        className={`flex items-center gap-1 ${scoreColor} px-4 py-1 rounded-full text-primary font-medium text-sm`}
+        className={`flex items-center gap-2 ${scoreColor} px-6 py-2 rounded-full text-primary font-semibold text-base`}
       >
         <svg
-          width="16"
-          height="16"
+          width="18"
+          height="18"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -46,7 +51,7 @@ const TokenTradeWidget: React.FC<TokenTradeWidgetProps> = ({ token }) => {
         {score}
         <sup className="text-primary ml-0.5">A</sup>
       </div>
-      <button className="ml-6 bg-primary text-white rounded-full px-8 py-2 font-semibold text-sm hover:bg-primary/90 transition-colors">
+      <button className="ml-8 bg-primary text-white rounded-full px-12 py-4 font-semibold text-lg hover:bg-primary/90 transition-colors">
         Trade
       </button>
     </div>
