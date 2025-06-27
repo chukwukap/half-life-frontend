@@ -1,4 +1,5 @@
 import Image from "next/image";
+import LongShortWidget from "./long-short-widget";
 
 const TokensDieSection = () => {
   return (
@@ -14,7 +15,7 @@ const TokensDieSection = () => {
           Tokens die young
         </h2>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          We index on-chain mortality so you can short the hype – or jump on the
+          We index on-chain mortality so you can short the hype or jump on the
           next survivor.
         </p>
       </div>
@@ -27,7 +28,7 @@ const TokensDieSection = () => {
           <div className="absolute inset-0 rounded-3xl pointer-events-none ring-1 ring-white/5" />
           {/* floating token widget mock */}
           <Image
-            src="/assets/img/mock-zora-widget.png"
+            src="/assets/img/trade-widget-1.png"
             alt="ZORA widget"
             width={500}
             height={140}
@@ -41,7 +42,7 @@ const TokensDieSection = () => {
             single 0-100 Lifespan Score.
           </p>
           <Image
-            src="/assets/img/one-index-mock.png"
+            src="/assets/img/trade-widget-2.png"
             alt="One index mock"
             width={640}
             height={360}
@@ -52,14 +53,11 @@ const TokensDieSection = () => {
         {/* Lifespan Futures card */}
         <div className="relative rounded-3xl p-10 bg-card/90 border border-border/60 backdrop-blur-xl overflow-hidden group before:absolute before:-inset-2 before:-z-10 before:rounded-[inherit] before:bg-gradient-to-br before:from-[#5b7bff]/40 before:via-[#a873ff]/30 before:to-[#ca5dff]/40 before:blur-2xl">
           <div className="absolute inset-0 rounded-3xl pointer-events-none ring-1 ring-white/5" />
-          {/* floating long/short widget */}
-          <Image
-            src="/assets/img/mock-long-short-widget.png"
-            alt="Long/short widget"
-            width={500}
-            height={160}
-            className="absolute -top-10 right-4 w-[360px] group-hover:-translate-y-1 transition-transform"
-          />
+          {/* floating trade widgets */}
+          <div className="absolute -top-10 right-4 flex flex-col gap-4">
+            <LongShortWidget direction="long" entry={98} liquidation={66} />
+            <LongShortWidget direction="short" entry={45} liquidation={19} />
+          </div>
           <h3 className="mt-40 md:mt-56 text-2xl font-extrabold mb-4 text-foreground">
             Perpetual Lifespan Futures
           </h3>
@@ -69,7 +67,7 @@ const TokensDieSection = () => {
             already love.
           </p>
           <Image
-            src="/assets/img/lifespan-futures-mock.png"
+            src="/assets/img/lifespan-futures-mock-2.png"
             alt="Lifespan futures mock"
             width={640}
             height={360}
