@@ -57,7 +57,7 @@ const HeroSection = () => {
           "lens-logo.png",
           "phantom-logo.png",
           "nansen-logo.png",
-          "infiniX-logo.png",
+          "infinex-logo.png",
         ].map((logo) => (
           <Image
             key={logo}
