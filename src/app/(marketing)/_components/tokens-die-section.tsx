@@ -1,5 +1,6 @@
 import Image from "next/image";
 import LongShortWidget from "./long-short-widget";
+import TokenTradeWidget from "./token-trade-widget";
 
 const TokensDieSection = () => {
   return (
@@ -48,6 +49,20 @@ const TokensDieSection = () => {
             height={360}
             className="rounded-lg border border-border shadow-lg"
           />
+          {/* floating token trade widgets */}
+          <div className="absolute -top-10 -left-8 flex flex-col gap-4">
+            <TokenTradeWidget
+              token={{ name: "ZORA", logo: "zora.png", score: 20 }}
+            />
+            <TokenTradeWidget
+              token={{
+                name: "MONAD",
+                logo: "monad.png",
+                score: 198,
+                scoreColor: "bg-[#CFF9E0]",
+              }}
+            />
+          </div>
         </div>
 
         {/* Lifespan Futures card */}
