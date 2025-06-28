@@ -9,7 +9,7 @@ const TokensDieSection = () => {
       id="tokens-die"
     >
       <div className="max-w-5xl mx-auto text-center">
-        <span className="inline-block uppercase text-sm font-semibold tracking-widest text-primary mb-4">
+        <span className="inline-block uppercase text-sm font-semibold tracking-widest text-[#8EC1FF] mb-4 bg-white/10 rounded-full p-2 border border-white/10">
           The Problem
         </span>
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6">
