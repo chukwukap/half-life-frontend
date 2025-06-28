@@ -20,8 +20,29 @@ const rows = [
 
 const WhyHalfLifeSection = () => {
   return (
-    <section className="py-28 px-6 bg-background" id="why-halflife">
-      <div className="max-w-6xl mx-auto">
+    <section
+      id="why-halflife"
+      className="
+        flex justify-center items-center
+        pt-24 p-12
+        bg-[#A2C7FF03]
+        rounded-3xl
+        w-full
+        max-w-5xl
+        min-w-0
+        mx-auto
+        my-0
+        "
+      style={{
+        // Multiple inset box-shadows for depth and subtle highlight
+        boxShadow: `
+          0px -16px 64px 0px #74B0FD14 inset,
+          0px 3px 12px 0px #D4E8FF14 inset,
+          0px 0.5px 0.5px 0px #D4E8FF1F inset
+        `,
+      }}
+    >
+      <div className="w-full h-full flex flex-col">
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-12 gap-6">
           <h2 className="text-4xl md:text-5xl font-extrabold text-white">
             Why Halflife?
@@ -44,7 +65,7 @@ const WhyHalfLifeSection = () => {
                 </th>
                 <th className="py-6 px-8 font-bold text-white flex items-center gap-2">
                   <Image
-                    src="/assets/img/logo-mini.png"
+                    src="/logo.svg"
                     alt="Halflife"
                     width={24}
                     height={24}
