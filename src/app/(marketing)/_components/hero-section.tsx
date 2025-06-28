@@ -9,7 +9,7 @@ import Image from "next/image";
  */
 const HeroSection = () => {
   return (
-    <section className="relative flex flex-col items-center pt-24 pb-20 sm:pt-32 sm:pb-28 px-6 text-center overflow-hidden">
+    <section className="relative flex flex-col items-center pt-24 pb-20 sm:pt-24 sm:pb-28 px-6 text-center overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_center,rgba(80,0,255,0.12),transparent_75%)]" />
       {/* Subtle 3D grid overlay */}
@@ -42,7 +42,7 @@ const HeroSection = () => {
 
       {/* Chain icons cluster */}
       <div className="mt-20 flex flex-col items-center">
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center bg-white/10 rounded-full p-2">
           {[
             "solana-logo.png",
             "arbitrum-logo.png",
@@ -65,8 +65,7 @@ const HeroSection = () => {
           ))}
         </div>
         <p className="mt-6 max-w-3xl text-sm sm:text-base text-muted-foreground/70 text-center">
-          Loved by traders from Solana, Base, Ethereum, Arbitrum&nbsp;—
-          Optimism,
+          Loved by traders from Solana, Base, Ethereum, Arbitrum → Optimism,
           <br className="hidden sm:block" /> inspired by the wallets and apps
           you already use.
         </p>
@@ -98,7 +97,7 @@ const HeroSection = () => {
       {/* Hero dashboard preview image */}
       <div className="mt-14 w-full max-w-4xl shadow-xl rounded-2xl overflow-hidden border border-border">
         <Image
-          src="/assets/img/halflife-dashboard-preview.png"
+          src="/assets/img/dash.png"
           alt="Half Life dashboard preview"
           width={1600}
           height={900}
