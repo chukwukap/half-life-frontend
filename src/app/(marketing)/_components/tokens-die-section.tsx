@@ -22,33 +22,20 @@ const TokensDieSection = () => {
 
       {/* Feature cards grid */}
       <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-10 max-w-6xl mx-auto">
-        {/* 
-          Card: One Index, One Click
-          Custom styles applied as per design requirements:
-          - width: 552px
-          - height: 581px
-          - border-radius: 32px
-          - gap: 40px
-          - padding: 32px
-          - background: #A2C7FF03
-          - Multiple inset box-shadows for depth and subtle highlight
-        */}
         <div
-          className="relative flex flex-col justify-end"
-          style={{
-            width: 552,
-            height: 581,
-            borderRadius: 32,
-            gap: 40,
-            padding: 32,
-            background: "#A2C7FF03",
-            boxShadow: `
-              0px -16px 64px 0px #74B0FD14 inset,
-              0px 3px 12px 0px #D4E8FF14 inset,
-              0px 0.5px 0.5px 0px #D4E8FF1F inset
-            `,
-            overflow: "visible",
-          }}
+          className="
+            relative 
+            flex flex-col
+            justify-between
+            w-4/5 
+            h-[30rem]
+            rounded-3xl         
+            gap-10              
+            p-8                 
+            bg-blue-100/5
+            overflow-visible
+            shadow-[0px_-16px_64px_0px_#74B0FD14_inset,0px_3px_12px_0px_#D4E8FF14_inset,0px_0.5px_0.5px_0px_#D4E8FF1F_inset]
+          "
         >
           {/* Subtle glassy overlay for visual depth */}
           <div
@@ -59,28 +46,43 @@ const TokensDieSection = () => {
             }}
           />
           {/* Floating token widget mockups */}
-          <div className="absolute -top-8 -left-8 z-20">
+
+          <div
+            className="flex flex-col gap-4 rounded-xl"
+            style={{
+              backgroundImage: "url('/assets/img/net.png')",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              minHeight: 220,
+              overflow: "hidden",
+            }}
+            aria-label="Token widget mockups with network background"
+          >
             <Image
               src="/assets/img/trade-widget-1.png"
               alt="ZORA widget"
               width={320}
               height={90}
-              className="drop-shadow-xl rounded-xl"
+              className="drop-shadow-xl  rounded-xl absolute top-20 z-10"
+              style={{
+                transform: "translateX(-30%)",
+              }}
               priority
             />
-            <div className="mt-4 ml-12">
-              <Image
-                src="/assets/img/trade-widget-2.png"
-                alt="MONAD widget"
-                width={220}
-                height={60}
-                className="drop-shadow-xl rounded-xl"
-                priority
-              />
-            </div>
+            <Image
+              src="/assets/img/trade-widget-2.png"
+              alt="MONAD widget"
+              width={320}
+              height={90}
+              className="drop-shadow-xl  rounded-xl absolute top-40  z-10"
+              style={{
+                transform: "translateX(50%)",
+              }}
+              priority
+            />
           </div>
           {/* Card content */}
-          <div className="flex flex-col h-full justify-end pt-48">
+          <div className="flex flex-col justify-end border border-blue-500">
             <h3 className="text-2xl font-extrabold mb-3 text-white text-left">
               One Index, One Click
             </h3>
@@ -102,21 +104,19 @@ const TokensDieSection = () => {
         </div>
 
         <div
-          className="relative flex flex-col justify-end"
-          style={{
-            width: 552,
-            height: 581,
-            borderRadius: 32,
-            gap: 40,
-            padding: 32,
-            background: "#A2C7FF03",
-            boxShadow: `
-              0px -16px 64px 0px #74B0FD14 inset,
-              0px 3px 12px 0px #D4E8FF14 inset,
-              0px 0.5px 0.5px 0px #D4E8FF1F inset
-            `,
-            overflow: "visible",
-          }}
+          className="
+            relative
+            flex flex-col
+            justify-between
+            w-4/5
+            h-[30rem]
+            rounded-3xl
+            gap-10
+            p-8
+            bg-blue-100/5
+            overflow-visible
+            shadow-[0px_-16px_64px_0px_#74B0FD14_inset,0px_3px_12px_0px_#D4E8FF14_inset,0px_0.5px_0.5px_0px_#D4E8FF1F_inset]
+          "
         >
           {/* Subtle glassy overlay for visual depth */}
           <div
@@ -126,29 +126,43 @@ const TokensDieSection = () => {
               boxShadow: "0 0 0 1px rgba(255,255,255,0.05) inset",
             }}
           />
-          {/* Floating lifespan futures widgets */}
-          <div className="absolute -top-8 right-0 z-20 flex flex-col items-end gap-4">
+          {/* Floating lifespan futures widget mockups with network background */}
+          <div
+            className="flex flex-col gap-4 rounded-xl"
+            style={{
+              backgroundImage: "url('/assets/img/net.png')",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              minHeight: 220,
+              overflow: "hidden",
+            }}
+            aria-label="Lifespan futures widget mockups with network background"
+          >
             <Image
               src="/assets/img/lifespan-futures-mock-1.png"
               alt="Lifespan futures widget 1"
               width={320}
               height={90}
-              className="drop-shadow-xl rounded-xl"
+              className="drop-shadow-xl rounded-xl absolute top-10 z-10"
+              style={{
+                transform: "translateX(-10%)",
+              }}
               priority
             />
-            <div className="mt-4 mr-8">
-              <Image
-                src="/assets/img/lifespan-futures-mock-2.png"
-                alt="Lifespan futures widget 2"
-                width={220}
-                height={60}
-                className="drop-shadow-xl rounded-xl"
-                priority
-              />
-            </div>
+            <Image
+              src="/assets/img/lifespan-futures-mock-2.png"
+              alt="Lifespan futures widget 2"
+              width={320}
+              height={90}
+              className="drop-shadow-xl rounded-xl absolute top-30 z-10"
+              style={{
+                transform: "translateX(25%)",
+              }}
+              priority
+            />
           </div>
           {/* Card content */}
-          <div className="flex flex-col h-full justify-end pt-48">
+          <div className="flex flex-col justify-end border border-blue-500">
             <h3 className="text-2xl font-extrabold mb-3 text-white text-left">
               Perpetual Lifespan Futures
             </h3>
