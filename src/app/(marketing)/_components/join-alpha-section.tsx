@@ -63,10 +63,6 @@ const JoinAlphaSection = () => {
           <h2 className="text-3xl sm:text-4xl font-extrabold mb-6">
             Join the Alpha
           </h2>
-          <p className="text-muted-foreground mb-8">
-            Be among the first to access Halflife and start trading project
-            lifespans before everyone else.
-          </p>
 
           {submitted ? (
             <p className="text-success font-semibold">
