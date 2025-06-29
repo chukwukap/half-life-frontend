@@ -36,6 +36,8 @@ const JoinAlphaSection = () => {
     }
   };
 
+  const isDisabled = email.trim().length === 0;
+
   return (
     <section
       className="pt-0 px-6 bg-background/95 border-t border-border"
@@ -109,7 +111,7 @@ const JoinAlphaSection = () => {
               <button
                 type="submit"
                 className="bg-primary text-primary-foreground px-8 py-3 rounded-full font-medium hover:bg-primary/90 transition-colors disabled:opacity-60"
-                disabled={!email.length}
+                disabled={isDisabled}
               >
                 Get Early Access
               </button>
