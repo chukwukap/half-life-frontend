@@ -181,7 +181,7 @@ const TokensDieSection = () => {
               <p className="text-muted-foreground mb-8 max-w-md text-left">
                 Go long if you believe a project is gaining traction, or short
                 if you believe it&apos;s dying—using familiar perpetual
-                mechanics without waiting for spot liquidity.
+                mechanics without waiting for spot listings.
               </p>
               <div className="w-full flex justify-center">
                 <Image
