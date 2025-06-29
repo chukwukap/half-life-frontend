@@ -22,14 +22,15 @@ const HeroSection = () => {
 
       {/* Heading */}
       <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight max-w-4xl mx-auto text-[#d6e0ff]">
-        Trade Time,
+        Trade Survival,
         <br className="hidden md:block" />
-        Not&nbsp;Hype
+        Not Just Price.
       </h1>
       {/* Sub-headline */}
       <p className="mt-8 max-w-2xl mx-auto text-base sm:text-lg lg:text-xl text-muted-foreground/80">
-        The first exchange where you hedge freedom—long a project&apos;s easing
-        power shortage or short its impending rug.
+        The first exchange where you trade a project&apos;s{" "}
+        <em>real traction</em>
+        —long if you believe it will last, short if you believe it will fade.
       </p>
 
       {/* CTA */}
@@ -65,9 +66,9 @@ const HeroSection = () => {
           ))}
         </div>
         <p className="mt-6 max-w-3xl text-sm sm:text-base text-muted-foreground/70 text-center">
-          Loved by traders from Solana, Base, Ethereum, Arbitrum → Optimism,
-          <br className="hidden sm:block" /> inspired by the wallets and apps
-          you already use.
+          Loved by traders across Solana, Base and Ethereum.
+          <br className="hidden sm:block" /> Trusted by Phantom, Lens, Ethos,
+          Nansen & Infinex.
         </p>
       </div>
 
