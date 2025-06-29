@@ -109,9 +109,8 @@ const HeroSection = () => {
             max-w-6xl
             rounded-3xl
             overflow-hidden
-            border border-border
             shadow-2xl
-            bg-gradient-to-br from-background via-blue-100/10 to-background
+
             transition-transform
             hover:scale-[1.025]
             focus-within:ring-2 focus-within:ring-primary
@@ -120,7 +119,7 @@ const HeroSection = () => {
           aria-label="UmbraSwap dashboard preview"
         >
           {/* Decorative blurred glow behind the dashboard image */}
-          <div
+          {/* <div
             className="absolute -inset-6 z-0 pointer-events-none"
             aria-hidden="true"
             style={{
@@ -128,7 +127,7 @@ const HeroSection = () => {
               background:
                 "radial-gradient(ellipse at 60% 40%, rgba(80,0,255,0.13) 0%, transparent 80%)",
             }}
-          />
+          /> */}
           <Image
             src="/assets/img/dash.png"
             alt="UmbraSwap dashboard preview"
