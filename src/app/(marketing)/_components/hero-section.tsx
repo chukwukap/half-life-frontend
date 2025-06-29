@@ -96,15 +96,48 @@ const HeroSection = () => {
       </div> */}
 
       {/* Hero dashboard preview image */}
-      <div className="mt-14 w-full max-w-4xl shadow-xl rounded-2xl overflow-hidden border border-border">
-        <Image
-          src="/assets/img/dash.png"
-          alt="Half Life dashboard preview"
-          width={1600}
-          height={900}
-          className="w-full h-auto"
-          priority
-        />
+      {/* 
+        Hero dashboard preview: Responsive, visually prominent, and accessible.
+        Uses a smart layout with a subtle background, border, and shadow for depth.
+        Now even larger for maximum visual impact on all screens.
+      */}
+      <div className="relative mt-16 w-full flex justify-center">
+        <div
+          className="
+            relative
+            w-full
+            max-w-6xl
+            rounded-3xl
+            overflow-hidden
+            border border-border
+            shadow-2xl
+            bg-gradient-to-br from-background via-blue-100/10 to-background
+            transition-transform
+            hover:scale-[1.025]
+            focus-within:ring-2 focus-within:ring-primary
+          "
+          tabIndex={0}
+          aria-label="UmbraSwap dashboard preview"
+        >
+          {/* Decorative blurred glow behind the dashboard image */}
+          <div
+            className="absolute -inset-6 z-0 pointer-events-none"
+            aria-hidden="true"
+            style={{
+              filter: "blur(48px)",
+              background:
+                "radial-gradient(ellipse at 60% 40%, rgba(80,0,255,0.13) 0%, transparent 80%)",
+            }}
+          />
+          <Image
+            src="/assets/img/dash.png"
+            alt="UmbraSwap dashboard preview"
+            width={2200}
+            height={1200}
+            className="relative z-10 w-full h-auto object-cover"
+            priority
+          />
+        </div>
       </div>
     </section>
   );
