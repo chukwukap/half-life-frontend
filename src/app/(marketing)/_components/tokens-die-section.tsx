@@ -47,6 +47,10 @@ const TokensDieSection = () => {
           />
           {/* Floating token widget mockups */}
 
+          {/* 
+            Floating token widget mockups with a semi-transparent border overlay.
+            Security: No user input is used in style values.
+          */}
           <div
             className="flex flex-col gap-4 rounded-xl"
             style={{
@@ -55,6 +59,8 @@ const TokensDieSection = () => {
               backgroundPosition: "center",
               minHeight: 220,
               overflow: "hidden",
+              border: "0.65px solid #C0D5FF3D", // semi-transparent border
+              backgroundColor: "rgba(192, 213, 255, 0.10)", // subtle transparent blue overlay
             }}
             aria-label="Token widget mockups with network background"
           >
@@ -63,7 +69,7 @@ const TokensDieSection = () => {
               alt="ZORA widget"
               width={320}
               height={90}
-              className="drop-shadow-xl  rounded-xl absolute top-20 z-10"
+              className="drop-shadow-xl rounded-xl absolute top-20 z-10"
               style={{
                 transform: "translateX(-30%)",
               }}
@@ -74,7 +80,7 @@ const TokensDieSection = () => {
               alt="MONAD widget"
               width={320}
               height={90}
-              className="drop-shadow-xl  rounded-xl absolute top-40  z-10"
+              className="drop-shadow-xl rounded-xl absolute top-40 z-10"
               style={{
                 transform: "translateX(50%)",
               }}
@@ -82,7 +88,7 @@ const TokensDieSection = () => {
             />
           </div>
           {/* Card content */}
-          <div className="flex flex-col justify-end border border-blue-500">
+          <div className="flex flex-col justify-end">
             <h3 className="text-2xl font-extrabold mb-3 text-white text-left">
               One Index, One Click
             </h3>
