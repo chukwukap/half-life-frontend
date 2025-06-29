@@ -78,7 +78,7 @@ const TokensDieSection = () => {
               height={90}
               className="drop-shadow-xl rounded-xl absolute top-[30%] z-10"
               style={{
-                transform: "translateX(50%)",
+                transform: "translateX(80%)",
               }}
               priority
             />
@@ -90,7 +90,7 @@ const TokensDieSection = () => {
             </h3>
             <p className="text-muted-foreground mb-8 max-w-md text-left">
               We combine holder growth, on-chain activity, real volume, and
-              social traction into a single 0–100 Lifespan Score for every
+              social traction into a single 0-100 Lifespan Score for every
               project.
             </p>
             <div className="w-full flex justify-center">
@@ -161,7 +161,7 @@ const TokensDieSection = () => {
               height={90}
               className="drop-shadow-xl rounded-xl absolute top-[30%]"
               style={{
-                transform: "translateX(25%)",
+                transform: "translateX(60%)",
               }}
               priority
             />
