@@ -3,7 +3,7 @@ import Image from "next/image";
 const TokensDieSection = () => {
   return (
     <section
-      className="bg-background/95 border-t border-border py-20 px-6"
+      className="bg-background/95 border-t border-border py-20 px-6 overflow-x-hidden overflow-y-visible"
       id="tokens-die"
     >
       {/* Section header */}
@@ -27,7 +27,7 @@ const TokensDieSection = () => {
             relative 
             flex flex-col
             justify-between
-            w-4/5 
+            w-full 
             h-[30rem]
             rounded-3xl         
             gap-10              
@@ -85,7 +85,7 @@ const TokensDieSection = () => {
           </div>
           {/* Card content */}
           <div className="flex flex-col justify-end">
-            <h3 className="mt-40 md:mt-56 text-2xl font-extrabold mb-4 text-foreground">
+            <h3 className="pt-4 text-2xl font-extrabold mb-4 text-foreground">
               One Metric, One Click
             </h3>
             <p className="text-muted-foreground mb-8 max-w-md text-left">
@@ -111,7 +111,7 @@ const TokensDieSection = () => {
             relative
             flex flex-col
             justify-between
-            w-4/5
+            w-full
             h-[30rem]
             rounded-3xl
             gap-10
@@ -168,7 +168,7 @@ const TokensDieSection = () => {
           </div>
           {/* Card content */}
           <div className="flex flex-col justify-end">
-            <h3 className="mt-40 md:mt-56 text-2xl font-extrabold mb-4 text-foreground">
+            <h3 className="pt-4 text-2xl font-extrabold mb-4 text-foreground">
               Perpetual Lifespan Futures
             </h3>
             <p className="text-muted-foreground mb-8 max-w-md text-left">
