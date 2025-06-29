@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import { Logo } from "../_components/logo";
 
 export const metadata: Metadata = {
   title: {
@@ -20,13 +21,7 @@ export default function MarketingLayout({
       <header className="py-6 bg-background/95 font-primary sticky top-0 z-50 border-b border-border/20">
         <div className="container mx-auto px-6 flex items-center justify-between relative">
           {/* Logo */}
-          <Link
-            href="/"
-            className="flex items-center gap-2 text-xl font-bold whitespace-nowrap"
-          >
-            <span className="text-primary">λ</span>
-            <span className="text-foreground">halflife</span>
-          </Link>
+          <Logo />
 
           {/* Centered nav */}
           <nav className="hidden lg:block absolute left-1/2 -translate-x-1/2">

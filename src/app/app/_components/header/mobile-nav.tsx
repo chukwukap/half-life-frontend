@@ -3,7 +3,7 @@
 import { Menu } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { NavItems } from "./nav-items";
-import { Logo } from "./logo";
+import { Logo } from "../../../_components/logo";
 
 export const MobileNav = () => {
   return (

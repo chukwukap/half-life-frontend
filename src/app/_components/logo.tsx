@@ -8,9 +8,9 @@ interface LogoProps {
 
 export const Logo = ({ className }: LogoProps) => {
   return (
-    <Link href="/" className={cn("flex items-center", className)}>
+    <Link href="/" className={cn("", className)}>
       <Image
-        src="/logo-named.svg"
+        src="/logo-named.png"
         alt="Halflife Logo"
         width={127}
         height={31}

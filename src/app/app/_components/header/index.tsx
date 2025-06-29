@@ -1,6 +1,6 @@
 "use client";
 
-import { Logo } from "./logo";
+import { Logo } from "../../../_components/logo";
 import { MobileNav } from "./mobile-nav";
 import { NavItems } from "./nav-items";
 import { UserNav } from "./user-nav";
