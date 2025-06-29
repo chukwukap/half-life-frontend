@@ -162,7 +162,7 @@ const TokensDieSection = () => {
             />
           </div>
           {/* Card content */}
-          <div className="flex flex-col justify-end border border-blue-500">
+          <div className="flex flex-col justify-end">
             <h3 className="text-2xl font-extrabold mb-3 text-white text-left">
               Perpetual Lifespan Futures
             </h3>
