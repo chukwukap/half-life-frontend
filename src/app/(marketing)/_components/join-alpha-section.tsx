@@ -30,7 +30,6 @@ const JoinAlphaSection = () => {
       setSubmitted(true);
       setEmail("");
     } catch (err) {
-      // eslint-disable-next-line no-console
       console.error("Subscribe error", err);
       setErrorMsg("Network error. Please try again later.");
     }

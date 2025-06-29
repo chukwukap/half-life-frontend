@@ -8,7 +8,6 @@ const supabaseUrl = process.env.SUPABASE_URL!;
 const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
 
 if (!supabaseUrl || !serviceRoleKey) {
-  // eslint-disable-next-line no-console
   console.warn(
     "Supabase environment variables are missing. Alpha sign-ups will fail until they are provided."
   );
