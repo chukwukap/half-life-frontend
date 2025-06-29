@@ -47,10 +47,6 @@ const TokensDieSection = () => {
           />
           {/* Floating token widget mockups */}
 
-          {/* 
-            Floating token widget mockups with a semi-transparent border overlay.
-            Security: No user input is used in style values.
-          */}
           <div
             className="flex flex-col gap-4 rounded-xl"
             style={{
@@ -59,8 +55,8 @@ const TokensDieSection = () => {
               backgroundPosition: "center",
               minHeight: 220,
               overflow: "hidden",
-              border: "0.65px solid #C0D5FF3D", // semi-transparent border
-              backgroundColor: "rgba(192, 213, 255, 0.10)", // subtle transparent blue overlay
+
+              backgroundColor: "rgba(192, 213, 255, 0.10)",
             }}
             aria-label="Token widget mockups with network background"
           >
@@ -69,7 +65,7 @@ const TokensDieSection = () => {
               alt="ZORA widget"
               width={320}
               height={90}
-              className="drop-shadow-xl rounded-xl absolute top-20 z-10"
+              className="drop-shadow-xl rounded-xl absolute top-[10%] z-10"
               style={{
                 transform: "translateX(-30%)",
               }}
@@ -80,7 +76,7 @@ const TokensDieSection = () => {
               alt="MONAD widget"
               width={320}
               height={90}
-              className="drop-shadow-xl rounded-xl absolute top-40 z-10"
+              className="drop-shadow-xl rounded-xl absolute top-[30%] z-10"
               style={{
                 transform: "translateX(50%)",
               }}
@@ -133,6 +129,7 @@ const TokensDieSection = () => {
             }}
           />
           {/* Floating lifespan futures widget mockups with network background */}
+
           <div
             className="flex flex-col gap-4 rounded-xl"
             style={{
@@ -141,6 +138,7 @@ const TokensDieSection = () => {
               backgroundPosition: "center",
               minHeight: 220,
               overflow: "hidden",
+              backgroundColor: "rgba(192, 213, 255, 0.10)",
             }}
             aria-label="Lifespan futures widget mockups with network background"
           >
@@ -149,7 +147,7 @@ const TokensDieSection = () => {
               alt="Lifespan futures widget 1"
               width={320}
               height={90}
-              className="drop-shadow-xl rounded-xl absolute top-10 z-10"
+              className="drop-shadow-xl rounded-xl absolute top-[8%] z-10"
               style={{
                 transform: "translateX(-8%)",
               }}
@@ -160,7 +158,7 @@ const TokensDieSection = () => {
               alt="Lifespan futures widget 2"
               width={320}
               height={90}
-              className="drop-shadow-xl rounded-xl absolute top-30 "
+              className="drop-shadow-xl rounded-xl absolute top-[30%]"
               style={{
                 transform: "translateX(25%)",
               }}
