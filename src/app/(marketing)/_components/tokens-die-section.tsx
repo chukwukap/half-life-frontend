@@ -12,7 +12,7 @@ const TokensDieSection = () => {
           The Problem
         </span>
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6 text-white">
-          Most Crypto Startups Die
+          Most Startups Die
         </h2>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
           90% of crypto startups flatline within&nbsp;6&nbsp;months, yet the
@@ -92,11 +92,11 @@ const TokensDieSection = () => {
             {/* Card content */}
             <div className="flex flex-col justify-end">
               <h3 className="pt-4 text-2xl font-extrabold mb-4 text-foreground">
-                Discover Startup Life&nbsp;Indexes
+                Discover Life&nbsp;Indexes
               </h3>
               <p className="text-muted-foreground mb-8 max-w-md text-left">
                 You trade Life Indexes&nbsp;&mdash; synthetic assets that track
-                a project&apos;s chance of survival in&nbsp;real&nbsp;time.
+                a startup&apos;s chance of survival in&nbsp;real&nbsp;time.
               </p>
               <div className="w-full flex justify-center">
                 <Image

@@ -22,14 +22,14 @@ const HeroSection = () => {
 
       {/* Heading */}
       <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight max-w-4xl mx-auto text-[#d6e0ff]">
-        Discover &amp; Trade
+        Discover and Trade
         <br className="hidden md:block" />
         Crypto&nbsp;Startups
       </h1>
       {/* Sub-headline */}
       <p className="mt-8 max-w-2xl mx-auto text-base sm:text-lg lg:text-xl text-muted-foreground/80">
-        Long or short startups <em>in&nbsp;real&nbsp;time</em>&mdash;right
-        before they list on spot.
+        The first trading app where you can trade startups. Long and short the
+        survival of startups <em>in&nbsp;real&nbsp;time</em>.
       </p>
 
       {/* CTA */}
@@ -66,8 +66,6 @@ const HeroSection = () => {
         </div> */}
         <p className="mt-6 max-w-3xl text-sm sm:text-base text-muted-foreground/70 text-center">
           Loved by traders across Solana, Base and Ethereum.
-          <br className="hidden sm:block" /> Trusted by Phantom, Lens, Ethos,
-          Nansen & Infinex.
         </p>
       </div>
 
