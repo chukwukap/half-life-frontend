@@ -3,11 +3,35 @@ import { useState } from "react";
 const JoinAlphaSection = () => {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: integrate with backend/mail service. For now, simulate success.
-    setSubmitted(true);
+
+    setErrorMsg(null);
+
+    try {
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        setErrorMsg(data.error ?? "Something went wrong.");
+        return;
+      }
+
+      setSubmitted(true);
+      setEmail("");
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error("Subscribe error", err);
+      setErrorMsg("Network error. Please try again later.");
+    }
   };
 
   return (
@@ -48,7 +72,7 @@ const JoinAlphaSection = () => {
           ) : (
             <form
               onSubmit={handleSubmit}
-              className="flex flex-col  gap-4 border border-width-1 py-12 px-6 rounded-2xl shadow-[0px_0px_167px_0px_#335CFF1F]"
+              className="flex flex-col gap-4 border border-width-1 py-12 px-6 rounded-2xl shadow-[0px_0px_167px_0px_#335CFF1F]"
             >
               <div className="relative flex-1">
                 <input
@@ -74,9 +98,16 @@ const JoinAlphaSection = () => {
                   </svg>
                 </div>
               </div>
+              {errorMsg && (
+                <p className="text-destructive text-sm font-medium text-center">
+                  {errorMsg}
+                </p>
+              )}
+
               <button
                 type="submit"
-                className="bg-primary text-primary-foreground px-8 py-3 rounded-full font-medium hover:bg-primary/90 transition-colors"
+                className="bg-primary text-primary-foreground px-8 py-3 rounded-full font-medium hover:bg-primary/90 transition-colors disabled:opacity-60"
+                disabled={!email.length}
               >
                 Get Early Access
               </button>
