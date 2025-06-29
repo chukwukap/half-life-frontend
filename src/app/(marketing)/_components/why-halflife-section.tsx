@@ -31,7 +31,8 @@ const WhyHalfLifeSection = () => {
         max-w-5xl
         min-w-0
         mx-auto
-        my-0
+        my-12
+        mb-24
         "
       style={{
         // Multiple inset box-shadows for depth and subtle highlight
@@ -54,7 +55,7 @@ const WhyHalfLifeSection = () => {
         </div>
 
         {/* gradient card */}
-        <div className="relative rounded-[40px] overflow-hidden shadow-[0_25px_80px_rgba(0,0,0,0.45)] bg-gradient-to-br from-[#1b1d30] via-[#1c2038] to-[#181a29] w-full before:absolute before:inset-0 before:rounded-[40px] before:ring-1 before:ring-white/10 before:pointer-events-none before:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.05)]">
+        <div className="relative rounded-3xl overflow-hidden  bg-gradient-to-br from-[#1b1d30] via-[#1c2038] to-[#181a29] w-full before:absolute before:inset-0 before:rounded-3xl before:ring-1 before:ring-white/10 before:pointer-events-none before:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.05)]">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(91,123,255,0.25),transparent_60%)]" />
 
           <table className="w-full text-left relative z-10 divide-y divide-white/10">
