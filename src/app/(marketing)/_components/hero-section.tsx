@@ -43,7 +43,7 @@ const HeroSection = () => {
 
       {/* Chain icons cluster */}
       <div className="mt-20 flex flex-col items-center">
-        {/* <div className="flex items-center justify-center bg-white/10 rounded-full p-2">
+        <div className="flex items-center justify-center bg-white/10 rounded-full p-2">
           {[
             "solana-logo.png",
             "arbitrum-logo.png",
@@ -64,7 +64,7 @@ const HeroSection = () => {
               />
             </span>
           ))}
-        </div> */}
+        </div>
         <p className="mt-6 max-w-3xl text-sm sm:text-base text-muted-foreground/70 text-center">
           Loved by traders across Solana, Base and Ethereum.
           <br className="hidden sm:block" /> Trusted by Phantom, Lens, Ethos,
@@ -73,7 +73,7 @@ const HeroSection = () => {
       </div>
 
       {/* Supported chains/wallets (placeholder icons) */}
-      <div
+      {/* <div
         className="mt-14 w-full max-w-5xl mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-x-10 gap-y-8 place-items-center"
         aria-label="Supported partners"
       >
@@ -93,7 +93,7 @@ const HeroSection = () => {
             className="object-contain grayscale hover:grayscale-0 transition-all"
           />
         ))}
-      </div>
+      </div> */}
 
       {/* Hero dashboard preview image */}
       <div className="mt-14 w-full max-w-4xl shadow-xl rounded-2xl overflow-hidden border border-border">
