@@ -145,7 +145,7 @@ const TokensDieSection = () => {
               height={90}
               className="drop-shadow-xl rounded-xl absolute top-10 z-10"
               style={{
-                transform: "translateX(-10%)",
+                transform: "translateX(-8%)",
               }}
               priority
             />
@@ -154,7 +154,7 @@ const TokensDieSection = () => {
               alt="Lifespan futures widget 2"
               width={320}
               height={90}
-              className="drop-shadow-xl rounded-xl absolute top-30 z-10"
+              className="drop-shadow-xl rounded-xl absolute top-30 "
               style={{
                 transform: "translateX(25%)",
               }}
