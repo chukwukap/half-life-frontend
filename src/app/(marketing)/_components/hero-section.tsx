@@ -43,7 +43,7 @@ const HeroSection = () => {
 
       {/* Chain icons cluster */}
       <div className="mt-20 flex flex-col items-center">
-        <div className="flex items-center justify-center bg-white/10 rounded-full p-2">
+        {/* <div className="flex items-center justify-center bg-white/10 rounded-full p-2">
           {[
             "solana-logo.png",
             "arbitrum-logo.png",
@@ -64,7 +64,7 @@ const HeroSection = () => {
               />
             </span>
           ))}
-        </div>
+        </div> */}
         <p className="mt-6 max-w-3xl text-sm sm:text-base text-muted-foreground/70 text-center">
           Loved by traders across Solana, Base and Ethereum.
           <br className="hidden sm:block" /> Trusted by Phantom, Lens, Ethos,
