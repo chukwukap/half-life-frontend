@@ -12,11 +12,12 @@ const TokensDieSection = () => {
           The Problem
         </span>
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6 text-white">
-          Tokens die young
+          Most Crypto Startups Die
         </h2>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          97% of tokens flatline within a year, yet the only &quot;hedge&quot;
-          is dumping spot or hoping a perp exists.
+          90% of crypto startups flatline within&nbsp;6&nbsp;months, yet the
+          only way to speculate is dumping on spot or hoping a perp exists.
+          We&apos;re changing that.
         </p>
       </div>
 
@@ -91,12 +92,11 @@ const TokensDieSection = () => {
             {/* Card content */}
             <div className="flex flex-col justify-end">
               <h3 className="pt-4 text-2xl font-extrabold mb-4 text-foreground">
-                One Metric, One Click
+                Discover Startup Life&nbsp;Indexes
               </h3>
               <p className="text-muted-foreground mb-8 max-w-md text-left">
-                We combine holder growth, on-chain activity, real volume, and
-                social traction into a single 0-100 Lifespan Score for every
-                project.
+                You trade Life Indexes&nbsp;&mdash; synthetic assets that track
+                a project&apos;s chance of survival in&nbsp;real&nbsp;time.
               </p>
               <div className="w-full flex justify-center">
                 <Image
@@ -176,12 +176,12 @@ const TokensDieSection = () => {
             {/* Card content */}
             <div className="flex flex-col justify-end">
               <h3 className="pt-4 text-2xl font-extrabold mb-4 text-foreground">
-                Perpetual Lifespan Futures
+                Perps on Crypto Startups
               </h3>
               <p className="text-muted-foreground mb-8 max-w-md text-left">
                 Go long if you believe a project is gaining traction, or short
                 if you believe it&apos;s dying—using familiar perpetual
-                mechanics without waiting for spot liquidity or oracle setups.
+                mechanics without waiting for spot liquidity.
               </p>
               <div className="w-full flex justify-center">
                 <Image

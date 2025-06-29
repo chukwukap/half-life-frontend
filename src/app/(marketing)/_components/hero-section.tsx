@@ -22,15 +22,14 @@ const HeroSection = () => {
 
       {/* Heading */}
       <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight max-w-4xl mx-auto text-[#d6e0ff]">
-        Trade Survival,
+        Discover &amp; Trade
         <br className="hidden md:block" />
-        Not Just Price.
+        Crypto&nbsp;Startups
       </h1>
       {/* Sub-headline */}
       <p className="mt-8 max-w-2xl mx-auto text-base sm:text-lg lg:text-xl text-muted-foreground/80">
-        The first exchange where you trade a project&apos;s{" "}
-        <em>real traction</em>
-        —long if you believe it will last, short if you believe it will fade.
+        Long or short startups <em>in&nbsp;real&nbsp;time</em>&mdash;right
+        before they list on spot.
       </p>
 
       {/* CTA */}
